@@ -1,0 +1,60 @@
+name: smartsocket
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  http:
+  material_design_icons_flutter:
+  latlng:
+  flutter_map:
+  geolocator:
+  flutter_svg:
+  argon_buttons_flutter_fix:
+  pin_code_fields:
+  linked_scroll_controller:
+  intl:
+  web_smooth_scroll:
+  fl_chart:
+  url_strategy:
+  get: ^5.0.0-beta.52
+
+  flutter:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+    - assets/Logos/
+    - assets/ProductImages/
+    -
+  fonts:
+    - family: Questrial
+      fonts:
+        - asset: assets/fonts/Questrial-Regular.ttf
+    - family: MontserratExtraBold
+      fonts:
+        - asset: assets/fonts/Montserrat-ExtraBold.ttf
+    - family: MontserratBold
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+    - family: MontserratLight
+      fonts:
+        - asset: assets/fonts/Montserrat-Light.ttf
+    - family: MontserratRegular
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
