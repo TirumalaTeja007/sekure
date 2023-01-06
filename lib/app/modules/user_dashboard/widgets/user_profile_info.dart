@@ -31,7 +31,7 @@ class UserProfileInfo extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
             image: const DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage("assets/images/About Us.png"))),
+                image: AssetImage("assets/images/aboutUs.png"))),
       ),
       Expanded(
         child: Column(

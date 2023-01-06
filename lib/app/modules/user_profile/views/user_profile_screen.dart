@@ -4,7 +4,7 @@ import 'package:smartsocket/app/modules/user_dashboard/widgets/user_profile_info
 import 'package:smartsocket/app/modules/user_profile/controller/user_profile_controller.dart';
 import 'package:smartsocket/app/widgets/efi_http_error_message_widget.dart';
 import 'package:smartsocket/app/widgets/session_chart_widget.dart';
-import 'package:smartsocket/app/widgets/user_wallet_balance_widget.dart';
+import 'package:smartsocket/app/modules/user_profile/widgets/user_wallet_balance_widget.dart';
 import 'package:smartsocket/utils/responsive.dart';
 
 class UserProfileScreen extends GetView<UserProfileController> {

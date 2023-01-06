@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:smartsocket/constants/color_constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
 
-import '../controllers/splash_service.dart';
+import '../controllers/splash_controller.dart';
 
-class SplashView extends GetView<SplashService> {
+class SplashView extends GetView<GetxController> {
   const SplashView({super.key});
 
   @override
@@ -23,7 +23,7 @@ class SplashView extends GetView<SplashService> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset("assets/Ax_logo.png",
+                  Image.asset("assets/logo/axonify_logo.png",
                       width: ResponsiveWidget.isLargeScreen(context)
                           ? 350
                           : ResponsiveWidget.isMediumScreen(context)

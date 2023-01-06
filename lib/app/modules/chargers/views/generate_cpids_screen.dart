@@ -1,8 +1,8 @@
-import 'package:argon_buttons_flutter_fix/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/chargers/controllers/chargers_controller.dart';
+import 'package:smartsocket/app/widgets/argon_button_widget.dart';
 import 'package:smartsocket/constants/color_constants.dart';
 import 'package:smartsocket/constants/constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
@@ -146,7 +146,7 @@ class GenerateCPIDScreen extends GetView<ChargersController> {
   Widget _addCPIDButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: ArgonButton(
+      child: ArgonButtonWidget(
           height: 50,
           width: 150,
           minWidth: 150,

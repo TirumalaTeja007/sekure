@@ -31,7 +31,7 @@ class SessionInformationScreen extends GetView<SessionInformationController> {
             Padding(
               padding: const EdgeInsets.only(right: 30.0),
               child: Image.asset(
-                "assets/Ax_logo.png",
+                "assets/logo/axonify_logo.png",
                 height: ResponsiveWidget.isSmallScreen(context) ? 25 : 45,
                 color: kPrimaryTextColor,
               ),

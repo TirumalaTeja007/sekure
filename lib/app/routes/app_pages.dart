@@ -1,9 +1,20 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/chargers/bindings/chargers_binding.dart';
 import 'package:smartsocket/app/modules/chargers/views/chargers_reports_screen.dart';
 import 'package:smartsocket/app/modules/chargers/views/generate_cpids_screen.dart';
+import 'package:smartsocket/app/modules/contact_us/binding/contactus_binding.dart';
+import 'package:smartsocket/app/modules/contact_us/view/contactus_view.dart';
+import 'package:smartsocket/app/modules/dashboard/bindings/dashboard_binding.dart';
+import 'package:smartsocket/app/modules/dashboardOverview/views/dashboard_overview.dart';
+import 'package:smartsocket/app/modules/home/binding/home_binding.dart';
+import 'package:smartsocket/app/modules/home/views/home_view.dart';
+import 'package:smartsocket/app/modules/services/binding/services_binding.dart';
+import 'package:smartsocket/app/modules/services/view/services_view.dart';
 import 'package:smartsocket/app/modules/session_information/binding/session_information_binding.dart';
 import 'package:smartsocket/app/modules/session_information/views/session_information_screen.dart';
+import 'package:smartsocket/app/modules/splash/controllers/splash_controller.dart';
 import 'package:smartsocket/app/modules/tariff_management/bindings/tariff_management_binding.dart';
 import 'package:smartsocket/app/modules/tariff_management/views/tariff_management_screen.dart';
 import 'package:smartsocket/app/modules/tickets_management/bindings/tickets_management_binding.dart';
@@ -19,15 +30,24 @@ import 'package:smartsocket/app/modules/users_management/views/add_a_user_screen
 import 'package:smartsocket/app/modules/users_management/views/end_users_screen.dart';
 import 'package:smartsocket/app/modules/users_management/bindings/users_management_binding.dart';
 import '../middleware/auth_middleware.dart';
-import '../modules/dashboard/bindings/dashboard_binding.dart';
+import '../modules/aboutus/binding/aboutus_binding.dart';
+import '../modules/aboutus/view/aboutus_view.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
-import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
+import '../modules/dashboardOverview/bindings/dashboard_overview_binding.dart';
+import '../modules/home/views/widgets/home_page.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/policy_pages/binding/policy_page_binding.dart';
+import '../modules/policy_pages/view/terms_and_conditions.dart';
+import '../modules/policy_pages/view/refund_policy_view.dart';
+import '../modules/policy_pages/view/shipping_policy.dart';
+import '../modules/policy_pages/view/privacypolicy_view.dart';
 import '../modules/root/bindings/root_binding.dart';
 import '../modules/root/views/root_view.dart';
+import '../modules/splash/binding/splash_binding.dart';
+import '../modules/splash/views/splash_view.dart';
 import '../modules/user_account_settings/bindings/user_account_settings_binding.dart';
+
 part 'app_routes.dart';
 
 class AppPages {
@@ -44,6 +64,57 @@ class AppPages {
       preventDuplicates: true,
       children: [
         GetPage(
+          preventDuplicates: true,
+          name: _Paths.home,
+          page: () => const HomeView(),
+          bindings: [HomeBinding()],
+          children: [
+            GetPage(
+              name: _Paths.index,
+              page: () => const HomeIndexPage(),
+            ),
+            GetPage(
+              name: _Paths.services,
+              page: () => const ServicesView(),
+              bindings: [ServicesPageBinding()],
+            ),
+            GetPage(
+              name: _Paths.shippingPolicy,
+              page: () => const ShippingPolicyView(),
+              bindings: [PolicyPageBinding()],
+            ),
+            GetPage(
+              name: _Paths.termsAndConditions,
+              page: () => const TermsAndConditionsView(),
+              bindings: [PolicyPageBinding()],
+            ),
+            GetPage(
+              name: _Paths.refundPolicy,
+              page: () => const RefundPolicyView(),
+              bindings: [PolicyPageBinding()],
+            ),
+            GetPage(
+              name: _Paths.privacyPolicy,
+              page: () => const PrivacyPolicyView(),
+              bindings: [PolicyPageBinding()],
+            ),
+            GetPage(
+              name: _Paths.aboutUs,
+              page: () => AboutUsView(),
+              bindings: [AboutUsBinding()],
+            ),
+            GetPage(
+              name: _Paths.contactUs,
+              page: () => ContactUsView(),
+              bindings: [ContactUsBinding()],
+            ),
+          ],
+        ),
+        GetPage(
+            name: _Paths.dashboardSplash,
+            page: () => const SplashView(),
+            bindings: [DashboardSplashBinding()]),
+        GetPage(
           middlewares: [EnsureNotAuthedMiddleware()],
           name: _Paths.login,
           page: () => LoginView(),
@@ -51,15 +122,15 @@ class AppPages {
         ),
         GetPage(
           preventDuplicates: true,
-          name: _Paths.home,
-          page: () => const HomeView(),
-          binding: HomeBinding(),
+          name: _Paths.dashboard,
+          page: () => const DashboardView(),
+          binding: DashboardBinding(),
           middlewares: [EnsureAuthMiddleware()],
           children: [
             GetPage(
-              name: _Paths.dashboard,
-              page: () => const DashboardView(),
-              binding: DashboardBinding(),
+              name: _Paths.dashboardOverview,
+              page: () => const DashboardOverview(),
+              binding: DashboardOverviewBinding(),
             ),
             GetPage(
               name: _Paths.generateCPIDs,
@@ -104,7 +175,7 @@ class AppPages {
             page: () => const UserDashboardScreen(),
             binding: UserDashboardBinding(),
             middlewares: [
-              EnsureNotAuthedMiddleware(),
+              EnsureAuthMiddleware(),
             ],
             title: null,
             children: [

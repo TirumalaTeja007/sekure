@@ -37,40 +37,33 @@ class LoginController extends GetxController {
   authenticate(BuildContext context, GlobalKey<FormState> formKey,
       Map<String, dynamic> payload) async {
     FocusScope.of(context).unfocus();
-    if (formKey.currentState!.validate()) {
-      switch (loginScreenIndex.value) {
-        case 0:
-          final response = await callPostRequest(
-              routeID: "/Login",
-              api: authenticateUrl,
-              payload: payload,
-              header: {'Content-Type': 'application/json'});
 
-          if (response.runtimeType != String) {
-            if (response.statusCode == 200) {
-              _token.value = jsonDecode(response.body)["jwtToken"];
+    final response = await callPostRequest(
+        routeID: "/Login",
+        api: "https://ninedots.axonifytech.com/apple/api/user/login",
+        payload: payload,
+        header: {'Content-Type': 'application/json'});
 
-              IdRepository().saveUserData(
-                  jsonEncode({"isLoggedIn": true, "token": _token.value}));
+    if (response.runtimeType != String) {
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body)["data"];
 
-              AuthService.to.login();
+        data["isLoggedIn"] = true;
 
-              final thenTo = context.params['then'];
+        IdRepository().saveUserData(jsonEncode(data));
 
-              Get.offNamed(thenTo ?? Routes.home);
-            } else {
-              return "Exception";
-            }
-          } else {
-            return "Exception";
-          }
-          break;
-        case 1:
-          break;
+        AuthService.to.login();
+
+        final thenTo = context.params['then'];
+
+        Get.offNamed(thenTo ?? Routes.dashboard);
+      } else {
+        return "Exception";
       }
+    } else {
+      return "Exception";
     }
   }
-
 
   signup(GlobalKey<FormState> formKey, Map<String, String> payload) async {
     FocusScope.of(Get.key.currentContext!).unfocus();

@@ -16,13 +16,13 @@ dependencies:
   flutter_map:
   geolocator:
   flutter_svg:
-  argon_buttons_flutter_fix:
   pin_code_fields:
   linked_scroll_controller:
   intl:
   web_smooth_scroll:
   fl_chart:
   url_strategy:
+  bouncing_widget: 
   get: ^5.0.0-beta.52
 
   flutter:
@@ -37,11 +37,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
+    - assets/logo/
+    - assets/svg/
     - assets/images/
-    - assets/Logos/
-    - assets/ProductImages/
-    -
+    - assets/clientele_logos/
+
   fonts:
     - family: Questrial
       fonts:

@@ -1,7 +1,8 @@
-import 'package:argon_buttons_flutter_fix/argon_buttons_flutter.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartsocket/app/widgets/argon_button_widget.dart';
 import 'package:smartsocket/constants/color_constants.dart';
 
 import '../../../../services/auth_service.dart';
@@ -20,121 +21,127 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(screenSize.height * 0.4),
-          child: Center(
-            child: SizedBox(
-              width: 300,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset("assets/Ax_logo.png", height: 70),
-                  SizedBox(height: screenSize.height * 0.025),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Text("Log in",
-                          style: TextStyle(
-                              fontFamily: 'MontserratBold',
-                              color: kPrimaryTextColorShade,
-                              fontSize: 28)),
-                    ],
-                  ),
-                ],
+    return WillPopScope(
+      onWillPop: () {
+        Get.toNamed(Routes.home);
+        return Future.value(true);
+      },
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(screenSize.height * 0.4),
+            child: Center(
+              child: SizedBox(
+                width: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/logo/axonify_logo.png", height: 70),
+                    SizedBox(height: screenSize.height * 0.025),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Text("Log in",
+                            style: TextStyle(
+                                fontFamily: 'MontserratBold',
+                                color: kPrimaryTextColorShade,
+                                fontSize: 28)),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: screenSize.height * 0.05),
-                  _textFieldWidget(
-                      context,
-                      fieldType: "Username",
-                      screenSize,
-                      textController: username),
-                  SizedBox(height: screenSize.height * 0.01),
-                  _textFieldWidget(
-                      context,
-                      fieldType: "Password",
-                      screenSize,
-                      textController: password),
-                  SizedBox(height: screenSize.height * 0.02),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ArgonButton(
-                          height: 50,
-                          width: 150,
-                          minWidth: 150,
-                          borderRadius: 8.0,
-                          color: Colors.green.shade800,
-                          roundLoadingShape: false,
-                          splashColor: Colors.grey,
-                          onTap: (startLoader, stopLoader, btnState) async {
-                            if (btnState == ButtonState.Idle &&
-                                _formKey.currentState!.validate()) {
-                              startLoader();
-                              Map<String, dynamic> payload = {};
-                              payload["password"] = password.text;
-                              payload["userName"] = username.text;
-                              print(payload);
-                              await controller.authenticate(
-                                  context, _formKey, payload);
-                              stopLoader();
-                            }
-                          },
-                          loader: const CupertinoActivityIndicator(),
-                          child: const Text("Login",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
+          body: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: screenSize.height * 0.05),
+                    _textFieldWidget(
+                        context,
+                        fieldType: "Username",
+                        screenSize,
+                        textController: username),
+                    SizedBox(height: screenSize.height * 0.01),
+                    _textFieldWidget(
+                        context,
+                        fieldType: "Password",
+                        screenSize,
+                        textController: password),
+                    SizedBox(height: screenSize.height * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ArgonButtonWidget(
+                            height: 50,
+                            width: 150,
+                            minWidth: 150,
+                            borderRadius: 8.0,
+                            color: Colors.green.shade800,
+                            roundLoadingShape: false,
+                            splashColor: Colors.grey,
+                            onTap: (startLoader, stopLoader, btnState) async {
+                              if (btnState == ButtonState.Idle &&
+                                  _formKey.currentState!.validate()) {
+                                startLoader();
+                                Map<String, dynamic> payload = {};
+                                payload["password"] = password.text;
+                                payload["mobileNumber"] = username.text;
+                                print(payload);
+                                await controller.authenticate(
+                                    context, _formKey, payload);
+                                stopLoader();
+                              }
+                            },
+                            loader: const CupertinoActivityIndicator(),
+                            child: const Text("Login",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontFamily: 'MontserratRegular',
+                                    color: Colors.white,
+                                    fontSize: 18))),
+                      ],
+                    ),
+                    SizedBox(height: screenSize.height * 0.035),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Need an account?",
+                            style: TextStyle(
+                              color: kPrimaryTextColor,
+                              fontFamily: 'MontserratRegular',
+                            )),
+                        InkWell(
+                            onTap: () async {},
+                            child: const Text(" Signup",
+                                style: TextStyle(
+                                  color: Colors.green,
                                   fontFamily: 'MontserratRegular',
-                                  color: Colors.white,
-                                  fontSize: 18))),
-                    ],
-                  ),
-                  SizedBox(height: screenSize.height * 0.035),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Need an account?",
-                          style: TextStyle(
-                            color: kPrimaryTextColor,
-                            fontFamily: 'MontserratRegular',
-                          )),
-                      InkWell(
-                          onTap: () async {},
-                          child: const Text(" Signup",
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontFamily: 'MontserratRegular',
-                              ))),
-                    ],
-                  ),
-                  SizedBox(height: screenSize.height * 0.02),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                          onTap: () async {},
-                          child: const Text("Forgot password?",
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontFamily: 'MontserratRegular',
-                              ))),
-                    ],
-                  ),
-                ],
+                                ))),
+                      ],
+                    ),
+                    SizedBox(height: screenSize.height * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                            onTap: () async {},
+                            child: const Text("Forgot password?",
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontFamily: 'MontserratRegular',
+                                ))),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

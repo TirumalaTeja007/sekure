@@ -113,7 +113,7 @@ class UserDashboardDrawer extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 controller.idRepo.invalidateAllData();
-                delegate.toNamed(Routes.home);
+                delegate.toNamed(Routes.dashboard);
               },
               child: const CircleAvatar(
                 radius: 20,

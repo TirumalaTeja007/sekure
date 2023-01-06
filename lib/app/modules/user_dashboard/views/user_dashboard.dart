@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/user_dashboard/widgets/user_dashboard_drawer.dart';
 import 'package:smartsocket/app/modules/user_dashboard/widgets/user_profile_info.dart';
-import 'package:smartsocket/app/widgets/topbar.dart';
+import 'package:smartsocket/app/modules/dashboard/widgets/topbar.dart';
 import 'package:smartsocket/utils/responsive.dart';
 import '../../../../constants/color_constants.dart';
 import '../../../routes/app_pages.dart';
@@ -82,7 +82,7 @@ class UserDashboardScreen extends GetView<UserDashboardController> {
                           Padding(
                             padding: const EdgeInsets.only(right: 30.0),
                             child: Image.asset(
-                              "assets/Ax_logo.png",
+                              "assets/logo/axonify_logo.png",
                               height: ResponsiveWidget.isSmallScreen(context)
                                   ? 25
                                   : 45,

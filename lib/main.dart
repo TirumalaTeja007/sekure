@@ -1,9 +1,10 @@
 import 'package:smartsocket/app/modules/splash/views/splash_view.dart';
 import 'package:smartsocket/constants/color_constants.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 import 'package:smartsocket/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'app/modules/splash/controllers/splash_service.dart';
+import 'app/modules/splash/controllers/splash_controller.dart';
 import 'app/routes/app_pages.dart';
 
 void main() {
@@ -13,23 +14,13 @@ void main() {
       title: 'Smart Socket',
       supportedLocales: const [Locale('en', 'US')],
       binds: [
-        Bind.put(SplashService()),
+        // Bind.put(SplashService()),
         Bind.put(AuthService()),
+        Bind.put(AppStateService()),
       ],
       // initialRoute: AppPages.initial,
-      builder: (context, child) {
-        return FutureBuilder<void>(
-          key: const ValueKey('initFuture'),
-          future: Get.find<SplashService>().init(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return child ?? const SizedBox.shrink();
-            }
-            return const SplashView();
-          },
-        );
-      },
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         fontFamily: 'MontserratRegular',
         appBarTheme: const AppBarTheme(
             elevation: 0,
