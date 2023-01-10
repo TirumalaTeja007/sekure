@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/widgets/bottom_bar.dart';
 import 'package:smartsocket/utils/scroll_behaviour.dart';
-import '../../../../../constants/color_constants.dart';
-import '../../../../../utils/responsive.dart';
+import '../../../../constants/color_constants.dart';
+import '../../../../utils/responsive.dart';
 import '../../../widgets/dot.dart';
 import '../controller/policy_page_controller.dart';
 

@@ -4,8 +4,8 @@ import 'package:smartsocket/app/modules/policy_pages/controller/policy_page_cont
 import 'package:smartsocket/app/widgets/bottom_bar.dart';
 import 'package:smartsocket/app/widgets/dot.dart';
 import 'package:smartsocket/utils/scroll_behaviour.dart';
-import '../../../../../constants/color_constants.dart';
-import '../../../../../utils/responsive.dart';
+import '../../../../constants/color_constants.dart';
+import '../../../../utils/responsive.dart';
 
 class RefundPolicyView extends GetView<PolicyPageController> {
   const RefundPolicyView({super.key});

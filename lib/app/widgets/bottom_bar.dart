@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/routes/app_pages.dart';
 import 'package:smartsocket/services/app_state_service.dart';
-import '../../../../../constants/color_constants.dart';
+import '../../constants/color_constants.dart';
 import 'bottom_bar_column.dart';
 
 class BottomBar extends StatelessWidget {
@@ -130,7 +130,7 @@ class BottomBar extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'MontserratLight',
                       color: Colors.white60,
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
                   ),
                 ),

@@ -23,13 +23,13 @@ class TopBarContents extends StatelessWidget {
       child: Container(
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 15),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image.asset('assets/logo/axonify_logo.png',
-                  width: 250, height: 80, color: Colors.blue.shade800),
+              Image.asset('assets/logo/ax_logo2.png',
+                  width: 200, height: 45, color: Colors.blue.shade800),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -49,8 +49,9 @@ class TopBarContents extends StatelessWidget {
                           Text(
                             'HOME',
                             style: TextStyle(
-                                fontFamily: 'MontserratBold',
-                                fontSize: 14,
+                                fontFamily: 'Questrial',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
                                 color:
                                     index == 0 ? Colors.black : Colors.black45),
                           ),
@@ -86,8 +87,9 @@ class TopBarContents extends StatelessWidget {
                           Text(
                             'SERVICES',
                             style: TextStyle(
-                                fontFamily: 'MontserratBold',
-                                fontSize: 14,
+                                fontFamily: 'Questrial',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
                                 color:
                                     index == 1 ? Colors.black : Colors.black45),
                           ),
@@ -115,7 +117,8 @@ class TopBarContents extends StatelessWidget {
                           ? homeController.isHovering[2] = true
                           : homeController.isHovering[2] = false;
                     },
-                    onTap: () => delegate.toNamed(Routes.aboutUs),
+                    onTap: () =>
+                        delegate.toNamed(Routes.aboutUs),
                     child: Obx(
                       () => Column(
                         mainAxisSize: MainAxisSize.min,
@@ -123,8 +126,9 @@ class TopBarContents extends StatelessWidget {
                           Text(
                             'ABOUT US',
                             style: TextStyle(
-                                fontFamily: 'MontserratBold',
-                                fontSize: 14,
+                                fontFamily: 'Questrial',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
                                 color:
                                     index == 2 ? Colors.black : Colors.black45),
                           ),
@@ -160,8 +164,9 @@ class TopBarContents extends StatelessWidget {
                           Text(
                             'CONTACT US',
                             style: TextStyle(
-                                fontFamily: 'MontserratBold',
-                                fontSize: 14,
+                                fontFamily: 'Questrial',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
                                 color:
                                     index == 3 ? Colors.black : Colors.black45),
                           ),
@@ -184,10 +189,9 @@ class TopBarContents extends StatelessWidget {
                   SizedBox(width: screenSize.width / 25),
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8.0),
-                        border: Border.all(color: kGreen)),
-                    padding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(8.0)),
+                    padding: const EdgeInsets.fromLTRB(10, 13, 10, 6),
                     child: InkWell(
                       hoverColor: Colors.white,
                       onHover: (value) {
@@ -203,9 +207,10 @@ class TopBarContents extends StatelessWidget {
                             const Text(
                               'LOGIN/REGISTER',
                               style: TextStyle(
-                                  fontFamily: 'MontserratBold',
-                                  fontSize: 14,
-                                  color: kGreen),
+                                  fontFamily: 'Questrial',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: Colors.white),
                             ),
                             const SizedBox(height: 5),
                             Visibility(

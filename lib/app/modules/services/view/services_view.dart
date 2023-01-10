@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/widgets/bottom_bar.dart';
 import 'package:smartsocket/app/widgets/under_maintenance.dart';
-import '../../../../../constants/color_constants.dart';
-import '../../../../../utils/responsive.dart';
+import '../../../../constants/color_constants.dart';
+import '../../../../utils/responsive.dart';
 import '../controller/services_controller.dart';
 
 class ServicesView extends GetView<ServicesController> {

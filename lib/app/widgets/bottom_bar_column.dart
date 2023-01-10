@@ -38,10 +38,10 @@ class BottomBarColumn extends StatelessWidget {
         children: [
           Text(
             heading,
-            style: const TextStyle(
-                fontFamily: 'MontserratBold',
+            style: TextStyle(
+                fontFamily: 'MontserratMedium',
                 color: Colors.white,
-                fontSize: 20),
+                fontSize: isSmallScreen ? 16 : 18),
           ),
           const SizedBox(height: 15),
           BouncingWidget(
@@ -54,13 +54,13 @@ class BottomBarColumn extends StatelessWidget {
                 isSmallScreen
                     ? const SizedBox.shrink()
                     : Icon(Icons.arrow_forward_ios_rounded,
-                        size: 16, color: Colors.blue.shade800),
+                        size: 14, color: Colors.blue.shade800),
                 Text(
                   s1,
                   style: const TextStyle(
                       fontFamily: 'MontserratLight',
                       color: Colors.white60,
-                      fontSize: 16),
+                      fontSize: 14),
                 ),
               ],
             ),
@@ -77,13 +77,13 @@ class BottomBarColumn extends StatelessWidget {
                       isSmallScreen
                           ? const SizedBox.shrink()
                           : Icon(Icons.arrow_forward_ios_outlined,
-                              size: 16, color: Colors.blue.shade800),
+                              size: 14, color: Colors.blue.shade800),
                       Text(
                         s2,
                         style: const TextStyle(
                             fontFamily: 'MontserratLight',
                             color: Colors.white60,
-                            fontSize: 16),
+                            fontSize: 14),
                       ),
                     ],
                   ),
@@ -101,13 +101,13 @@ class BottomBarColumn extends StatelessWidget {
                       isSmallScreen
                           ? const SizedBox.shrink()
                           : Icon(Icons.arrow_forward_ios_outlined,
-                              size: 16, color: Colors.blue.shade800),
+                              size: 14, color: Colors.blue.shade800),
                       Text(
                         s3,
                         style: const TextStyle(
                             fontFamily: 'MontserratLight',
                             color: Colors.white60,
-                            fontSize: 16),
+                            fontSize: 14),
                       ),
                     ],
                   ),
@@ -125,18 +125,18 @@ class BottomBarColumn extends StatelessWidget {
                       isSmallScreen
                           ? const SizedBox.shrink()
                           : Icon(Icons.arrow_forward_ios_outlined,
-                              size: 16, color: Colors.blue.shade800),
+                              size: 14, color: Colors.blue.shade800),
                       Text(
                         s4,
                         style: const TextStyle(
                             fontFamily: 'MontserratLight',
                             color: Colors.white60,
-                            fontSize: 16),
+                            fontSize: 14),
                       ),
                     ],
                   ),
                 )
-              : SizedBox(height: isSmallScreen ? 0 : 16),
+              : SizedBox(height: isSmallScreen ? 0 : 14),
         ],
       ),
     );

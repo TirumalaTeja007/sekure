@@ -7,6 +7,7 @@ import 'package:smartsocket/constants/color_constants.dart';
 import 'package:smartsocket/services/app_state_service.dart';
 import '../../../../utils/responsive.dart';
 import '../../../../utils/scroll_behaviour.dart';
+import '../../../widgets/bottom_bar.dart';
 import '../controller/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -71,7 +72,7 @@ class HomeView extends GetView<HomeController> {
                 scrollbars: false,
                 dragDevices: MyCustomScrollBehavior().dragDevices,
                 overscroll: true,
-                physics: BouncingScrollPhysics()),
+                physics: const BouncingScrollPhysics()),
             child: ListView(
               controller: controller.scrollController,
               scrollDirection: Axis.vertical,
