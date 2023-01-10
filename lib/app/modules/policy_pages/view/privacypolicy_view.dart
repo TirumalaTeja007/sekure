@@ -14,6 +14,11 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
     final width = screenSize.width < 850
         ? screenSize.width * 0.78
         : screenSize.width * 0.4;
+    double textSize = ResponsiveWidget.isLargeScreen(context)
+        ? 16
+        : ResponsiveWidget.isMediumScreen(context)
+            ? 14
+            : 12;
     return SizedBox(
       width: width,
       child: Column(
@@ -21,12 +26,12 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
         children: [
           SizedBox(
             width: width,
-            child: const Text(
+            child: Text(
               "PRIVACY POLICY",
               style: TextStyle(
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
-                  fontSize: 30),
+                  fontSize: screenSize.width * 0.032),
             ),
           ),
           Container(
@@ -36,17 +41,17 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
                 color: Colors.black26, borderRadius: BorderRadius.circular(4)),
             margin: const EdgeInsets.symmetric(vertical: 10),
           ),
-          const Text(
+          Text(
             "Effective date: 2022-11-28",
             style: TextStyle(
                 fontFamily: 'MontserratRegular',
                 color: Colors.black,
-                fontSize: 16),
+                fontSize: textSize),
           ),
           const SizedBox(height: 20),
           SizedBox(
             width: width,
-            child: const Text(
+            child: Text(
               "Axonify Tech Systems (“us”, “we”, or “our”) operates ninedots.axonifytech.com (hereinafter referred to as “Service”)."
               "\n\nOur Privacy Policy governs your visit to ninedots.axonifytech.com, and explains how we collect, safeguard and disclose information that results from your use of our Service."
               "\n\nWe use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions."
@@ -54,7 +59,7 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
               style: TextStyle(
                   fontFamily: 'MontserratRegular',
                   color: Colors.black,
-                  fontSize: 16),
+                  fontSize: textSize),
             ),
           ),
         ],
@@ -63,6 +68,11 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
   }
 
   Widget bulletPoints(BuildContext context, String content) {
+    double textSize = ResponsiveWidget.isLargeScreen(context)
+        ? 16
+        : ResponsiveWidget.isMediumScreen(context)
+            ? 14
+            : 12;
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Row(
@@ -75,10 +85,10 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
             width: MediaQuery.of(Get.key.currentContext!).size.width * 0.7 - 20,
             child: Text(
               content,
-              style: const TextStyle(
+              style: TextStyle(
                   fontFamily: 'MontserratRegular',
                   color: Colors.black,
-                  fontSize: 16),
+                  fontSize: textSize),
             ),
           ),
         ],
@@ -94,6 +104,11 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
         ? screenSize.width * 0.11
         : screenSize.width * 0.075;
 
+    double textSize = ResponsiveWidget.isLargeScreen(context)
+        ? 16
+        : ResponsiveWidget.isMediumScreen(context)
+            ? 14
+            : 12;
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
           scrollbars: false, dragDevices: MyCustomScrollBehavior().dragDevices),
@@ -150,11 +165,11 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("DEFINITIONS",
+                Text("DEFINITIONS",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 bulletPoints(context,
                     "SERVICE means the ninedots.axonifytech.com website operated by Axonify Tech Systems."),
                 bulletPoints(context,
@@ -171,31 +186,31 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
                     "DATA SUBJECT is any living individual who is the subject of Personal Data."),
                 bulletPoints(context,
                     "THE USER is the individual using our Service. The User corresponds to the Data Subject, who is the subject of Personal Data."),
-                SizedBox(height: screenSize.height / 16),
-                const Text("INFORMATION COLLECTION AND USE",
+                SizedBox(height: screenSize.height / textSize),
+                Text("INFORMATION COLLECTION AND USE",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe collect several different types of information for various purposes to provide and improve our Service to you.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("TYPES OF DATA COLLECTED",
+                Text("TYPES OF DATA COLLECTED",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 const SizedBox(height: 15),
-                const Text("Personal Data",
+                Text("Personal Data",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWhile using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (“Personal Data”). Personally identifiable information may include, but is not limited to:"
                     "\n\n0.1. Email address"
                     "\n\n0.2. First name and last name"
@@ -206,40 +221,40 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 24),
-                const Text("Usage Data",
+                Text("Usage Data",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWhile using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (“Personal Data”). Personally identifiable information may include, but is not limited to: \n\nThis Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data."
                     "\n\nWhen you access Service with a device, this Usage Data may include information such as the type of device you use, your device unique ID, the IP address of your device, your device operating system, the type of Internet browser you use, unique device identifiers and other diagnostic data.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 24),
-                const Text("Location Data",
+                Text("Location Data",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe may use and store information about your location if you give us permission to do so (“Location Data”). We use this data to provide features of our Service, to improve and customize our Service."
                     "\n\nYou can enable or disable location services when you use our Service at any time by way of your device settings.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 24),
-                const Text("Tracking Cookies Data",
+                Text("Tracking Cookies Data",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe use cookies and similar tracking technologies to track the activity on our Service and we hold certain information."
                     "\n\nCookies are files with a small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device. Other tracking technologies are also used such as beacons, tags and scripts to collect and track information and to improve and analyze our Service."
                     "\n\nYou can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service."
@@ -251,26 +266,26 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 24),
-                const Text("Other Data",
+                Text("Other Data",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWhile using our Service, we may also collect the following information: sex, age, date of birth, citizenship, registration at place of residence and actual address, telephone number (work, mobile) and other data.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("USE OF DATA",
+                Text("USE OF DATA",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nAxonify Tech Systems uses the collected data for various purposes:"
                     "\n\n0.1. to provide and maintain our Service;"
                     "\n\n0.2. to notify you about changes to our Service;"
@@ -288,27 +303,27 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("RETENTION OF DATA",
+                Text("RETENTION OF DATA",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe will retain your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies."
                     "\n\nWe will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period, except when this data is used to strengthen the security or to improve the functionality of our Service, or we are legally obligated to retain this data for longer time periods.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("TRANSFER OF DATA",
+                Text("TRANSFER OF DATA",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nYour information, including Personal Data, may be transferred to - and maintained on - computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction."
                     "\n\nIf you are located outside India and choose to provide information to us, please note that we transfer the data, including Personal Data, to India and process it there."
                     "\n\nYour consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer."
@@ -316,14 +331,14 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("DISCLOSURE OF DATA",
+                Text("DISCLOSURE OF DATA",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe may disclose personal information that we collect, or you provide:"
                     "\n\n0.1. Disclosure for Law Enforcement - Under certain circumstances, we may be required to disclose your Personal Data if required to do so by law or in response to valid requests by public authorities."
                     "\n\n0.2. Business Transaction - If we or our subsidiaries are involved in a merger, acquisition or asset sale, your Personal Data may be transferred."
@@ -338,120 +353,120 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("SECURITY OF DATA",
+                Text("SECURITY OF DATA",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nThe security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("SERVICE PROVIDERS",
+                Text("SERVICE PROVIDERS",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe may employ third party companies and individuals to facilitate our Service (“Service Providers”), provide Service on our behalf, perform Service-related services or assist us in analysing how our Service is used."
                     "\n\nThese third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("ANALYTICS",
+                Text("ANALYTICS",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe may use third-party Service Providers to monitor and analyze the use of our Service.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("CI/CD TOOLS",
+                Text("CI/CD TOOLS",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe may use third-party Service Providers to automate the development process of our Service.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("BEHAVIORAL REMARKETING",
+                Text("BEHAVIORAL REMARKETING",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe may use remarketing services to advertise on third party websites to you after you visited our Service. We and our third-party vendors use cookies to inform, optimise and serve ads based on your past visits to our Service.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("PAYMENTS",
+                Text("PAYMENTS",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe may provide paid services within Service. In that case, we use third-party services for payment processing (e.g. razorpay)."
                     "\n\nWe will not store or collect your payment card details. That information is provided directly to our third-party payment processors whose use of your personal information is governed by their Privacy Policy. These payment processors adhere to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, Mastercard, American Express and Discover. PCI-DSS requirements help ensure the secure handling of payment information.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("CHILDREN'S PRIVACY",
+                Text("CHILDREN'S PRIVACY",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nOur Services are not intended for use by children under the age of 18 (“Child” or “Children”)."
                     "\n\nWe do not knowingly collect personally identifiable information from Children under 18. If you become aware that a Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from Children without verification of parental consent, we take steps to remove that information from our servers.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("CHANGES TO THIS PRIVACY POLICY",
+                Text("CHANGES TO THIS PRIVACY POLICY",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nWe may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page."
                     "\n\nWe will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update “effective date” at the top of this Privacy Policy."
                     "\n\nYou are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
                 SizedBox(height: screenSize.height / 16),
-                const Text("CONTACT US",
+                Text("CONTACT US",
                     style: TextStyle(
                         fontFamily: 'MontserratBold',
                         color: Colors.black,
-                        fontSize: 16)),
-                const Text(
+                        fontSize: textSize)),
+                Text(
                     "\nIf you have any questions about this Privacy Policy, please contact us by email: info@axonifytech.com.",
                     style: TextStyle(
                         fontFamily: 'MontserratRegular',
                         color: Colors.black,
-                        fontSize: 16)),
+                        fontSize: textSize)),
               ],
             ),
           ),

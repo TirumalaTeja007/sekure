@@ -21,9 +21,8 @@ class CommercialChargersInfo extends StatelessWidget {
     Widget _image = ClipRRect(
       borderRadius: BorderRadius.circular(16.0),
       child: Image.asset(
-        height: width * 1.1,
         width: width,
-        fit: BoxFit.fill,
+        fit: BoxFit.contain,
         filterQuality: FilterQuality.high,
         'assets/images/ss_product_image.png',
       ),
@@ -41,46 +40,32 @@ class CommercialChargersInfo extends StatelessWidget {
                   fontFamily: 'Questrial',
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
-                  fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
+                  fontSize: ResponsiveWidget.isSmallScreen(context)
+                      ? 12
+                      : ResponsiveWidget.isMediumScreen(context)
+                          ? 14
+                          : 16),
             ),
           ),
           const SizedBox(height: 10),
           SizedBox(
             width: width,
-            child: Row(
-              children: [
-                Text(
-                  "Commercial ",
-                  style: TextStyle(
-                      fontFamily: 'MontserratBold',
-                      color: Colors.green,
-                      fontSize:
-                          ResponsiveWidget.isSmallScreen(context) ? 20 : 36),
-                ),
-                Text(
-                  "Charging ",
-                  style: TextStyle(
-                      fontFamily: 'MontserratBold',
-                      color: Colors.black,
-                      fontSize:
-                          ResponsiveWidget.isSmallScreen(context) ? 20 : 36),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: width,
-            child: Row(
-              children: [
-                Text(
-                  "Simplified!",
-                  style: TextStyle(
-                      fontFamily: 'MontserratBold',
-                      color: Colors.black,
-                      fontSize:
-                          ResponsiveWidget.isSmallScreen(context) ? 20 : 36),
-                ),
-              ],
+            child: RichText(
+              text: TextSpan(
+                text: 'Commercial ',
+                style: TextStyle(
+                    fontFamily: 'MontserratBold',
+                    color: Colors.green,
+                    fontSize: screenSize.height * 0.032),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: 'Charging Simplified! ',
+                      style: TextStyle(
+                          fontFamily: 'MontserratBold',
+                          fontSize: screenSize.height * 0.032,
+                          color: kPrimaryTextColor)),
+                ],
+              ),
             ),
           ),
           SizedBox(
@@ -102,16 +87,16 @@ class CommercialChargersInfo extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   height: 1.4,
                   fontSize: ResponsiveWidget.isSmallScreen(context)
-                      ? 14
+                      ? 12
                       : ResponsiveWidget.isMediumScreen(context)
-                          ? 16
-                          : 18),
+                          ? 14
+                          : 16),
             ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
+                backgroundColor: kBgColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0))),
             onPressed: () {},
@@ -123,8 +108,11 @@ class CommercialChargersInfo extends StatelessWidget {
                 style: TextStyle(
                     fontFamily: 'Questrial',
                     color: Colors.white,
-                    fontSize:
-                        ResponsiveWidget.isSmallScreen(context) ? 12 : 14),
+                    fontSize: ResponsiveWidget.isSmallScreen(context)
+                        ? 12
+                        : ResponsiveWidget.isMediumScreen(context)
+                            ? 14
+                            : 16),
               ),
             ),
           )
@@ -135,15 +123,15 @@ class CommercialChargersInfo extends StatelessWidget {
         width: screenSize.width,
         child: Padding(
           padding: EdgeInsets.fromLTRB(
-              horizontalPadding, 0, horizontalPadding, screenSize.height / 12),
+              horizontalPadding, 0, horizontalPadding, screenSize.height / 8),
           child: screenSize.width > 800
               ? Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    _text,
+                    _image,
                     SizedBox(width: screenSize.width * 0.05),
-                    _image
+                    _text,
                   ],
                 )
               : Column(

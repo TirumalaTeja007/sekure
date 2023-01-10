@@ -30,7 +30,7 @@ class BottomBarColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
+      padding: const EdgeInsets.only(bottom: 30.0),
       child: Column(
         crossAxisAlignment: isSmallScreen
             ? CrossAxisAlignment.center
@@ -57,10 +57,10 @@ class BottomBarColumn extends StatelessWidget {
                         size: 14, color: Colors.blue.shade800),
                 Text(
                   s1,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontFamily: 'MontserratLight',
                       color: Colors.white60,
-                      fontSize: 14),
+                      fontSize: isSmallScreen ? 14 : 16),
                 ),
               ],
             ),
@@ -80,10 +80,10 @@ class BottomBarColumn extends StatelessWidget {
                               size: 14, color: Colors.blue.shade800),
                       Text(
                         s2,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontFamily: 'MontserratLight',
                             color: Colors.white60,
-                            fontSize: 14),
+                            fontSize: isSmallScreen ? 14 : 16),
                       ),
                     ],
                   ),
@@ -104,10 +104,10 @@ class BottomBarColumn extends StatelessWidget {
                               size: 14, color: Colors.blue.shade800),
                       Text(
                         s3,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontFamily: 'MontserratLight',
                             color: Colors.white60,
-                            fontSize: 14),
+                            fontSize: isSmallScreen ? 14 : 16),
                       ),
                     ],
                   ),
@@ -128,10 +128,10 @@ class BottomBarColumn extends StatelessWidget {
                               size: 14, color: Colors.blue.shade800),
                       Text(
                         s4,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontFamily: 'MontserratLight',
                             color: Colors.white60,
-                            fontSize: 14),
+                            fontSize: isSmallScreen ? 14 : 16),
                       ),
                     ],
                   ),

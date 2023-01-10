@@ -10,6 +10,7 @@ class AboutUsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    print(screenSize);
     double horizontalPadding = ResponsiveWidget.isLargeScreen(context)
         ? screenSize.width * 0.11
         : screenSize.width * 0.075;
@@ -18,53 +19,44 @@ class AboutUsWidget extends StatelessWidget {
         : screenSize.width > 800
             ? screenSize.width * 0.4
             : screenSize.width * 0.7;
-    Widget _image = Container(
-        height: width,
+    Widget image = ClipRRect(
+      borderRadius: BorderRadius.circular(16.0),
+      child: Image.asset(
         width: width,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            image: const DecorationImage(
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.high,
-                image: AssetImage(
-                  'assets/images/AboutUs1.png',
-                ))));
-    Widget _text = SizedBox(
+        fit: BoxFit.cover,
+        filterQuality: FilterQuality.low,
+        'assets/images/team.jpg',
+      ),
+    );
+    Widget text = SizedBox(
       width: width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: width,
-            child: Text(
-              "We Create Designs \nand Technology for ",
-              style: TextStyle(
-                  fontFamily: 'MontserratBold',
-                  color: Colors.black,
-                  fontSize: ResponsiveWidget.isSmallScreen(context) ? 20 : 36),
-            ),
-          ),
-          SizedBox(
-            width: width,
-            child: Row(
-              children: [
-                Text(
-                  "EV ",
-                  style: TextStyle(
-                      fontFamily: 'MontserratBold',
-                      color: Colors.green,
-                      fontSize:
-                          ResponsiveWidget.isSmallScreen(context) ? 20 : 36),
-                ),
-                Text(
-                  "Charging Systems ",
-                  style: TextStyle(
-                      fontFamily: 'MontserratBold',
-                      color: Colors.black,
-                      fontSize:
-                          ResponsiveWidget.isSmallScreen(context) ? 20 : 36),
-                ),
-              ],
+            child: RichText(
+              text: TextSpan(
+                text: 'We Create Designs and Technology for ',
+                style: TextStyle(
+                    fontFamily: 'MontserratBold',
+                    color: Colors.black,
+                    fontSize: screenSize.height * 0.032),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: 'EV Charging',
+                      style: TextStyle(
+                          fontFamily: 'MontserratBold',
+                          fontSize: screenSize.height * 0.032,
+                          color: kGreen)),
+                  TextSpan(
+                      text: ' Systems.',
+                      style: TextStyle(
+                          fontFamily: 'MontserratBold',
+                          fontSize: screenSize.height * 0.032,
+                          color: kPrimaryTextColor)),
+                ],
+              ),
             ),
           ),
           SizedBox(
@@ -84,11 +76,11 @@ class AboutUsWidget extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                   height: 1.4,
-                  fontSize: ResponsiveWidget.isSmallScreen(context)
-                      ? 14
+                  fontSize: ResponsiveWidget.isLargeScreen(context)
+                      ? 16
                       : ResponsiveWidget.isMediumScreen(context)
-                          ? 16
-                          : 18),
+                      ? 14
+                      : 12),
             ),
           ),
         ],
@@ -98,7 +90,7 @@ class AboutUsWidget extends StatelessWidget {
         width: screenSize.width,
         child: Padding(
           padding: EdgeInsets.fromLTRB(
-              horizontalPadding, 0, horizontalPadding, screenSize.height / 12),
+              horizontalPadding, 0, horizontalPadding, screenSize.height / 8),
           child: Column(
             children: [
               screenSize.width > 800
@@ -106,18 +98,18 @@ class AboutUsWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        _image,
+                        text,
                         SizedBox(width: screenSize.width * 0.05),
-                        _text
+                        image
                       ],
                     )
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        _text,
+                        text,
                         SizedBox(height: screenSize.height * 0.05),
-                        _image,
+                        image,
                       ],
                     ),
             ],

@@ -5,6 +5,7 @@ import 'package:smartsocket/app/modules/about_us/about-us_view.dart';
 import 'package:smartsocket/app/modules/chargers/bindings/chargers_binding.dart';
 import 'package:smartsocket/app/modules/chargers/views/chargers_reports_screen.dart';
 import 'package:smartsocket/app/modules/chargers/views/generate_cpids_screen.dart';
+import 'package:smartsocket/app/modules/contact_us/bindings/contact_us_binding.dart';
 import 'package:smartsocket/app/modules/contact_us/contact_us_view.dart';
 import 'package:smartsocket/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:smartsocket/app/modules/dashboardOverview/views/dashboard_overview.dart';
@@ -84,6 +85,7 @@ class AppPages {
             GetPage(
               name: _Paths.contactUs,
               page: () => ContactUsView(),
+              bindings: [ContactUsBinding()],
             ),
             GetPage(
               name: _Paths.shippingPolicy,

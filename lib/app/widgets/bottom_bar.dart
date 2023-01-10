@@ -84,8 +84,8 @@ class BottomBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+                  padding: EdgeInsets.fromLTRB(
+                      10, screenSize.height / 10, 10, screenSize.height / 20),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

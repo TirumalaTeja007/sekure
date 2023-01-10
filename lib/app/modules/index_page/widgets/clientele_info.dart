@@ -17,7 +17,7 @@ class ClienteleInfo extends StatelessWidget {
               horizontal: ResponsiveWidget.isLargeScreen(context)
                   ? screenSize.width * 0.11
                   : screenSize.width * 0.075,
-              vertical: screenSize.height / 12),
+              vertical: screenSize.height / 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
