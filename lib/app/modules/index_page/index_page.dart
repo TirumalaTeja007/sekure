@@ -97,12 +97,15 @@ class _IndexPageViewState extends State<IndexPageView> {
                         style: TextStyle(
                             fontFamily: 'MontserratBold',
                             color: Colors.white,
-                            fontSize: ResponsiveWidget.isSmallScreen(context)
-                                ? 22
-                                : 36),
+                            fontSize: ResponsiveWidget.isLargeScreen(context)
+                                ? 32
+                                : ResponsiveWidget.isMediumScreen(context)
+                                    ? 28
+                                    : 22),
                       ),
                       const SizedBox(height: 25),
-                      const TalkToAnExpertWidget(Colors.white, kPrimaryTextColor)
+                      const TalkToAnExpertWidget(
+                          Colors.white, kPrimaryTextColor)
                     ],
                   ),
                 )
@@ -111,7 +114,9 @@ class _IndexPageViewState extends State<IndexPageView> {
           ),
           const ClienteleInfo(),
           AboutUsWidget(),
-          CommercialChargersInfo(),
+          CommercialChargersInfo(
+            showButton: true,
+          ),
           Container(
             color: kGrey,
             padding: EdgeInsets.symmetric(
@@ -129,19 +134,33 @@ class _IndexPageViewState extends State<IndexPageView> {
                       style: TextStyle(
                           fontFamily: 'MontserratBold',
                           color: kPrimaryTextColor,
-                          fontSize: screenSize.height * 0.032),
+                          fontSize: ResponsiveWidget.isLargeScreen(context)
+                              ? 32
+                              : ResponsiveWidget.isMediumScreen(context)
+                                  ? 28
+                                  : 22),
                       children: <TextSpan>[
                         TextSpan(
                             text: " EV Charging Solution ",
                             style: TextStyle(
                                 fontFamily: 'MontserratBold',
-                                fontSize: screenSize.height * 0.032,
+                                fontSize: ResponsiveWidget.isLargeScreen(
+                                        context)
+                                    ? 32
+                                    : ResponsiveWidget.isMediumScreen(context)
+                                        ? 28
+                                        : 22,
                                 color: kGreen)),
                         TextSpan(
                             text: "you're looking for? ",
                             style: TextStyle(
                                 fontFamily: 'MontserratBold',
-                                fontSize: screenSize.height * 0.032,
+                                fontSize: ResponsiveWidget.isLargeScreen(
+                                        context)
+                                    ? 32
+                                    : ResponsiveWidget.isMediumScreen(context)
+                                        ? 28
+                                        : 22,
                                 color: kPrimaryTextColor)),
                       ],
                     ),
@@ -155,13 +174,11 @@ class _IndexPageViewState extends State<IndexPageView> {
                     "discuss the right solution for your charging needs.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontFamily: 'Questrial',
+                        fontFamily: 'MontserratRegular',
                         color: kPrimaryTextColor,
                         fontSize: ResponsiveWidget.isSmallScreen(context)
                             ? 14
-                            : ResponsiveWidget.isMediumScreen(context)
-                                ? 16
-                                : 18),
+                            : 16),
                   ),
                 ),
                 const SizedBox(height: 30),

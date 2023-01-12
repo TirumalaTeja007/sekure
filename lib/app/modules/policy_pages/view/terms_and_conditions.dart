@@ -21,12 +21,16 @@ class TermsAndConditionsView extends GetView<PolicyPageController> {
         children: [
           SizedBox(
             width: width,
-            child: const Text(
+            child: Text(
               "TERMS AND CONDITIONS",
               style: TextStyle(
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
-                  fontSize: 30),
+                  fontSize: ResponsiveWidget.isLargeScreen(context)
+                      ? 32
+                      : ResponsiveWidget.isMediumScreen(context)
+                          ? 26
+                          : 22),
             ),
           ),
           Container(
@@ -72,8 +76,7 @@ class TermsAndConditionsView extends GetView<PolicyPageController> {
 
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
-          scrollbars: true,
-          dragDevices: MyCustomScrollBehavior().dragDevices),
+          scrollbars: true, dragDevices: MyCustomScrollBehavior().dragDevices),
       child: ListView(
         controller: controller.scrollController,
         scrollDirection: Axis.vertical,

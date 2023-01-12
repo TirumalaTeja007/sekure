@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/users_management/controllers/users_management_controller.dart';
 import 'package:smartsocket/app/widgets/argon_button_widget.dart';
-import 'package:smartsocket/constants/constants.dart';
-import 'package:smartsocket/utils/responsive.dart';
 import 'package:smartsocket/app/widgets/subheadings.dart';
 import 'package:smartsocket/constants/color_constants.dart';
+import 'package:smartsocket/constants/constants.dart';
+import 'package:smartsocket/utils/responsive.dart';
+
 class AddANewUser extends GetView<UsersManagementController> {
   AddANewUser({Key? key}) : super(key: key);
 
@@ -233,7 +234,8 @@ class AddANewUser extends GetView<UsersManagementController> {
                   focusedBorder: outlineBorder(),
                   labelText: fieldType,
                   labelStyle: const TextStyle(
-                      fontFamily: 'MontserratRegular', color: kPrimaryTextColorShade),
+                      fontFamily: 'MontserratRegular',
+                      color: kPrimaryTextColorShade),
                   errorStyle: const TextStyle(height: 1),
                   floatingLabelBehavior: fieldType == "Select duration"
                       ? FloatingLabelBehavior.always

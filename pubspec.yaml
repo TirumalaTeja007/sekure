@@ -24,6 +24,8 @@ dependencies:
   url_strategy:
   bouncing_widget: 
   get: ^5.0.0-beta.52
+  carousel_slider:
+  expansion_tile_card:
 
   flutter:
     sdk: flutter

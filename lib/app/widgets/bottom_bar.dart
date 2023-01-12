@@ -16,7 +16,7 @@ class BottomBar extends StatelessWidget {
           heading: 'Get Started',
           s1: 'Home',
           s2: 'About Us',
-          s3: 'Partners With Us',
+          s3: '',
           s4: '',
           isSmallScreen: screenSize.width < 800,
           s1OnTap: () {
@@ -30,19 +30,15 @@ class BottomBar extends StatelessWidget {
       BottomBarColumn(
           heading: 'EV Charging Solutions',
           s1: 'Commercial',
-          s2: 'Highways',
-          s3: 'Bus Depots',
+          s2: '',
+          s3: '',
           s4: '',
           isSmallScreen: screenSize.width < 800,
           s1OnTap: () {
             AppStateService.to.delegate.toNamed(Routes.services);
           },
-          s2OnTap: () {
-            AppStateService.to.delegate.toNamed(Routes.services);
-          },
-          s3OnTap: () {
-            AppStateService.to.delegate.toNamed(Routes.services);
-          },
+          s2OnTap: () {},
+          s3OnTap: () {},
           s4OnTap: () {}),
       BottomBarColumn(
           heading: 'Legal Pages',
@@ -99,7 +95,7 @@ class BottomBar extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                   child: const Text(
-                    '© 2022 Copyright by Axonify Tech Systems. All Rights Reserved.',
+                    '© 2023 Copyright by Axonify Tech Systems. All Rights Reserved.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'MontserratLight',
@@ -125,12 +121,12 @@ class BottomBar extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
                   child: const Text(
-                    '© 2022 Copyright by Axonify Tech Systems. All Rights Reserved.',
+                    '© 2023 Copyright by Axonify Tech Systems. All Rights Reserved.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'MontserratLight',
                       color: Colors.white60,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ),
                 ),

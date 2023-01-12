@@ -19,6 +19,8 @@ abstract class Routes {
   static const settings = _Paths.settings;
   static const products = _Paths.dashboard + _Paths.products;
   static const login = _Paths.login;
+  static const signup = _Paths.signup;
+  static const forgotPassword = _Paths.forgotPassword;
   static const dashboardOverview = _Paths.dashboard + _Paths.dashboardOverview;
   static const generateCPIDs = _Paths.dashboard + _Paths.generateCPIDs;
   static const chargersReports = _Paths.dashboard + _Paths.chargersReports;
@@ -66,6 +68,8 @@ abstract class _Paths {
   static const settings = '/settings';
   static const productDetails = '/:productId';
   static const login = '/login';
+  static const signup = '/signup';
+  static const forgotPassword = '/forgotPassword';
   static const dashboard = '/dashboard';
   static const dashboardOverview = '/dashboardOverview';
   static const dashboardSplash = '/dashboardSplash';

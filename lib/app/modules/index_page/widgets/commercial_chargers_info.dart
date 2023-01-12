@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/widgets/bottom_bar.dart';
 import '../../../../constants/color_constants.dart';
+import '../../../../services/app_state_service.dart';
 import '../../../../utils/responsive.dart';
+import '../../../routes/app_pages.dart';
 
 class CommercialChargersInfo extends StatelessWidget {
-  CommercialChargersInfo({super.key});
+  CommercialChargersInfo({super.key, required this.showButton});
+
+  final bool showButton;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +44,7 @@ class CommercialChargersInfo extends StatelessWidget {
                   fontFamily: 'Questrial',
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
-                  fontSize: ResponsiveWidget.isSmallScreen(context)
-                      ? 12
-                      : ResponsiveWidget.isMediumScreen(context)
-                          ? 14
-                          : 16),
+                  fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
             ),
           ),
           const SizedBox(height: 10),
@@ -56,13 +56,21 @@ class CommercialChargersInfo extends StatelessWidget {
                 style: TextStyle(
                     fontFamily: 'MontserratBold',
                     color: Colors.green,
-                    fontSize: screenSize.height * 0.032),
+                    fontSize: ResponsiveWidget.isLargeScreen(context)
+                        ? 32
+                        : ResponsiveWidget.isMediumScreen(context)
+                            ? 28
+                            : 22),
                 children: <TextSpan>[
                   TextSpan(
                       text: 'Charging Simplified! ',
                       style: TextStyle(
                           fontFamily: 'MontserratBold',
-                          fontSize: screenSize.height * 0.032,
+                          fontSize: ResponsiveWidget.isLargeScreen(context)
+                              ? 32
+                              : ResponsiveWidget.isMediumScreen(context)
+                                  ? 28
+                                  : 22,
                           color: kPrimaryTextColor)),
                 ],
               ),
@@ -82,40 +90,37 @@ class CommercialChargersInfo extends StatelessWidget {
               "office, and outdoor parking areas and comes with safe"
               "payment gateway options.",
               style: TextStyle(
-                  fontFamily: 'Questrial',
+                  fontFamily: 'MontserratRegular',
                   color: Colors.black,
-                  fontWeight: FontWeight.w500,
                   height: 1.4,
-                  fontSize: ResponsiveWidget.isSmallScreen(context)
-                      ? 12
-                      : ResponsiveWidget.isMediumScreen(context)
-                          ? 14
-                          : 16),
+                  fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
             ),
           ),
           const SizedBox(height: 20),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: kBgColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0))),
-            onPressed: () {},
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
-              child: Text(
-                "Learn more...",
-                style: TextStyle(
-                    fontFamily: 'Questrial',
-                    color: Colors.white,
-                    fontSize: ResponsiveWidget.isSmallScreen(context)
-                        ? 12
-                        : ResponsiveWidget.isMediumScreen(context)
-                            ? 14
-                            : 16),
-              ),
-            ),
-          )
+          showButton
+              ? ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: kBgColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0))),
+                  onPressed: () =>
+                      AppStateService.to.delegate.toNamed(Routes.services),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 15),
+                    child: Text(
+                      "Learn more...",
+                      style: TextStyle(
+                          fontFamily: 'MontserratRegular',
+                          color: Colors.white,
+                          height: 1.4,
+                          fontSize: ResponsiveWidget.isSmallScreen(context)
+                              ? 14
+                              : 16),
+                    ),
+                  ),
+                )
+              : const SizedBox()
         ],
       ),
     );

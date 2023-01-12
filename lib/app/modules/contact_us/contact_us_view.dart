@@ -23,89 +23,52 @@ class ContactUsView extends GetView<ContactUsController> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    double horizontalPadding = ResponsiveWidget.isLargeScreen(context)
-        ? screenSize.width * 0.11
-        : screenSize.width * 0.075;
     double width = ResponsiveWidget.isLargeScreen(context)
-        ? 525
+        ? 575
         : ResponsiveWidget.isMediumScreen(context)
-            ? 425
-            : 325;
-    double bodyTextSize = ResponsiveWidget.isSmallScreen(context)
-        ? 12
-        : ResponsiveWidget.isMediumScreen(context)
-            ? 14
-            : 16;
-    Widget map = ClipRRect(
-      borderRadius: BorderRadius.circular(16.0),
-      child: SizedBox(
-        height: width,
-        width: width,
-        child: FlutterMap(
-          mapController: controller.mapController,
-          options: MapOptions(
-            keepAlive: true,
-            absorbPanEventsOnScrollables: false,
-            minZoom: 5,
-            maxZoom: 18,
-            zoom: 12.5,
-            center: LatLng(17.424295091783424, 78.43016496891815),
-          ),
-          children: [
-            TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
-            MarkerLayer(
-              markers: [
-                Marker(
-                  height: 18,
-                  width: 18,
-                  rotate: true,
-                  rotateAlignment: Alignment.bottomCenter,
-                  point: LatLng(17.424295091783424, 78.43016496891815),
-                  builder: (_) {
-                    return const Icon(Icons.location_on_rounded,
-                        color: Colors.red, size: 12);
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+            ? 475
+            : screenSize.width * 0.8;
+    double bodyTextSize = 14;
     List<Widget> contactInfo = [
       SizedBox(
-        width: (width + 100) * 0.3,
+        width: ResponsiveWidget.isSmallScreen(context)
+            ? width
+            : (width + 100) * 0.3,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Icon(Icons.call, color: kGreen),
-            const SizedBox(height: 10),
+            SizedBox(height: ResponsiveWidget.isSmallScreen(context) ? 0 : 10),
             Text(
               "\n+91 8069033833",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: 'Questrial',
+                  fontFamily: 'MontserratRegular',
                   color: Colors.black,
                   fontSize: bodyTextSize),
             ),
           ],
         ),
       ),
+      SizedBox(height: ResponsiveWidget.isSmallScreen(context) ? 25 : 5),
       SizedBox(
-        width: (width + 100) * 0.3,
+        width: ResponsiveWidget.isSmallScreen(context)
+            ? width
+            : (width + 100) * 0.3,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Icon(Icons.email, color: kGreen),
-            const SizedBox(height: 10),
+            SizedBox(height: ResponsiveWidget.isSmallScreen(context) ? 0 : 10),
             SizedBox(
-              width: (width + 100) * 0.3,
+              width: ResponsiveWidget.isSmallScreen(context)
+                  ? width
+                  : (width + 100) * 0.3,
               child: Text(
                 "\ninfo@axonifytech.com \nsales@axonifytech.com",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontFamily: 'Questrial',
+                    fontFamily: 'MontserratRegular',
                     color: Colors.black,
                     fontSize: bodyTextSize),
               ),
@@ -113,15 +76,20 @@ class ContactUsView extends GetView<ContactUsController> {
           ],
         ),
       ),
+      SizedBox(height: ResponsiveWidget.isSmallScreen(context) ? 25 : 5),
       SizedBox(
-        width: (width + 100) * 0.3,
+        width: ResponsiveWidget.isSmallScreen(context)
+            ? width
+            : (width + 100) * 0.3,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Icon(Icons.location_on_rounded, color: kGreen),
-            const SizedBox(height: 10),
+            SizedBox(height: ResponsiveWidget.isSmallScreen(context) ? 0 : 10),
             SizedBox(
-              width: (width + 100) * 0.3,
+              width: ResponsiveWidget.isSmallScreen(context)
+                  ? width
+                  : (width + 100) * 0.3,
               child: Text(
                 "\n2nd Floor, Unit No. B-23, Phase – II, "
                 "Technocrats Industrial Estate, "
@@ -129,7 +97,7 @@ class ContactUsView extends GetView<ContactUsController> {
                 "Telangana, India",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontFamily: 'Questrial',
+                    fontFamily: 'MontserratRegular',
                     color: Colors.black,
                     fontSize: bodyTextSize),
               ),
@@ -138,8 +106,10 @@ class ContactUsView extends GetView<ContactUsController> {
         ),
       ),
     ];
+
     return ListView(
       shrinkWrap: true,
+      physics: const ClampingScrollPhysics(),
       children: [
         SizedBox(height: MediaQuery.of(context).size.height / 16),
         SizedBox(
@@ -151,7 +121,11 @@ class ContactUsView extends GetView<ContactUsController> {
               style: TextStyle(
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
-                  fontSize: screenSize.height * 0.032),
+                  fontSize: ResponsiveWidget.isLargeScreen(context)
+                      ? 32
+                      : ResponsiveWidget.isMediumScreen(context)
+                          ? 28
+                          : 22),
             ),
           ),
         ),
@@ -162,7 +136,7 @@ class ContactUsView extends GetView<ContactUsController> {
             "Any question or remarks? Just write us a message",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontFamily: 'Questrial',
+                fontFamily: 'MontserratRegular',
                 color: kPrimaryTextColorShade,
                 fontSize: bodyTextSize),
           ),
@@ -171,14 +145,25 @@ class ContactUsView extends GetView<ContactUsController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: width + 100,
+              width: width + screenSize.width * 0.1,
               padding: EdgeInsets.fromLTRB(
-                  0, screenSize.height / 12, 0, screenSize.height / 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: contactInfo,
-              ),
+                  0,
+                  ResponsiveWidget.isSmallScreen(context)
+                      ? screenSize.height / 20
+                      : screenSize.height / 12,
+                  0,
+                  screenSize.height / 20),
+              child: ResponsiveWidget.isSmallScreen(context)
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: contactInfo,
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: contactInfo,
+                    ),
             ),
           ],
         ),
@@ -186,8 +171,8 @@ class ContactUsView extends GetView<ContactUsController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: width + 100,
-              padding: const EdgeInsets.all(50),
+              width: width + screenSize.width * 0.1,
+              padding: EdgeInsets.all(screenSize.width * 0.05),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12.0),
@@ -208,7 +193,11 @@ class ContactUsView extends GetView<ContactUsController> {
                           style: TextStyle(
                               fontFamily: 'MontserratBold',
                               color: Colors.black,
-                              fontSize: screenSize.height * 0.024),
+                              fontSize: ResponsiveWidget.isLargeScreen(context)
+                                  ? 24
+                                  : ResponsiveWidget.isMediumScreen(context)
+                                      ? 20
+                                      : 18),
                         ),
                       ),
                     ),
@@ -223,7 +212,7 @@ class ContactUsView extends GetView<ContactUsController> {
                         "in touch with you within 24 hrs.",
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                            fontFamily: 'Questrial',
+                            fontFamily: 'MontserratRegular',
                             color: kPrimaryTextColorShade,
                             fontSize: bodyTextSize),
                       ),
@@ -295,12 +284,9 @@ class ContactUsView extends GetView<ContactUsController> {
                         child: Text("Send Message",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontFamily: 'Questrial',
+                                fontFamily: 'MontserratRegular',
                                 color: Colors.white,
-                                fontSize:
-                                    ResponsiveWidget.isLargeScreen(context)
-                                        ? 16
-                                        : 14))),
+                                fontSize: bodyTextSize))),
                   ),
                 ],
               ),
@@ -337,12 +323,12 @@ class ContactUsView extends GetView<ContactUsController> {
               onFieldSubmitted: (value) => textController.text = value,
               textAlign: TextAlign.start,
               enableInteractiveSelection: true,
-              maxLines: fieldType.contains("help") ? 8 : 1,
+              maxLines: fieldType.contains("help") ? 10 : 1,
               textAlignVertical: TextAlignVertical.center,
               style: const TextStyle(
                   color: kPrimaryTextColor,
                   fontSize: 14,
-                  fontFamily: 'Questrial'),
+                  fontFamily: 'MontserratRegular'),
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   counterText: "",
@@ -357,7 +343,8 @@ class ContactUsView extends GetView<ContactUsController> {
                   focusedBorder: outlineBorder(),
                   labelText: fieldType,
                   labelStyle: const TextStyle(
-                      fontFamily: 'Questrial', color: kPrimaryTextColorShade),
+                      fontFamily: 'MontserratRegular',
+                      color: kPrimaryTextColorShade),
                   errorStyle: const TextStyle(height: 1),
                   floatingLabelBehavior: FloatingLabelBehavior.auto),
               keyboardType: TextInputType.text,

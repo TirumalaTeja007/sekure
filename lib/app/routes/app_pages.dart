@@ -18,6 +18,7 @@ import 'package:smartsocket/app/modules/session_information/binding/session_info
 import 'package:smartsocket/app/modules/session_information/views/session_information_screen.dart';
 import 'package:smartsocket/app/modules/sessions_management/bindings/session_management_binding.dart';
 import 'package:smartsocket/app/modules/sessions_management/views/session_management_screen.dart';
+import 'package:smartsocket/app/modules/signup/bindings/user_signup_binding.dart';
 import 'package:smartsocket/app/modules/tariff_management/bindings/tariff_management_binding.dart';
 import 'package:smartsocket/app/modules/tariff_management/views/tariff_management_screen.dart';
 import 'package:smartsocket/app/modules/tickets_management/bindings/tickets_management_binding.dart';
@@ -34,6 +35,8 @@ import 'package:smartsocket/app/widgets/bottom_bar.dart';
 import '../middleware/auth_middleware.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/dashboardOverview/bindings/dashboard_overview_binding.dart';
+import '../modules/forgot_password/bindings/forgot_password_binding.dart';
+import '../modules/forgot_password/view/forgot_password_view.dart';
 import '../modules/index_page/index_page.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
@@ -44,6 +47,7 @@ import '../modules/policy_pages/view/shipping_policy.dart';
 import '../modules/policy_pages/view/terms_and_conditions.dart';
 import '../modules/root/bindings/root_binding.dart';
 import '../modules/root/views/root_view.dart';
+import '../modules/signup/view/signup_screen.dart';
 import '../modules/splash/binding/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/user_account_settings/bindings/user_account_settings_binding.dart';
@@ -118,6 +122,18 @@ class AppPages {
           name: _Paths.login,
           page: () => LoginView(),
           bindings: [LoginBinding()],
+        ),
+        GetPage(
+          middlewares: [EnsureNotAuthedMiddleware()],
+          name: _Paths.signup,
+          page: () => SignupView(),
+          bindings: [UserSignupBinding()],
+        ),
+        GetPage(
+          middlewares: [EnsureNotAuthedMiddleware()],
+          name: _Paths.forgotPassword,
+          page: () => ForgotPasswordView(),
+          bindings: [ForgotPasswordBinding()],
         ),
         GetPage(
           preventDuplicates: true,

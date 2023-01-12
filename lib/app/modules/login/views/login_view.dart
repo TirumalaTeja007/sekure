@@ -1,9 +1,11 @@
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/widgets/argon_button_widget.dart';
 import 'package:smartsocket/constants/color_constants.dart';
+import 'package:smartsocket/utils/responsive.dart';
 
 import '../../../../services/auth_service.dart';
 import '../../../routes/app_pages.dart';
@@ -29,117 +31,127 @@ class LoginView extends GetView<LoginController> {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(screenSize.height * 0.4),
-            child: Center(
-              child: SizedBox(
-                width: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset("assets/logo/axonify_logo.png", height: 70),
-                    SizedBox(height: screenSize.height * 0.025),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Text("Log in",
-                            style: TextStyle(
-                                fontFamily: 'MontserratBold',
-                                color: kPrimaryTextColorShade,
-                                fontSize: 28)),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
           body: SingleChildScrollView(
             child: Form(
               key: _formKey,
               child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: screenSize.height * 0.05),
-                    _textFieldWidget(
-                        context,
-                        fieldType: "Username",
-                        screenSize,
-                        textController: username),
-                    SizedBox(height: screenSize.height * 0.01),
-                    _textFieldWidget(
-                        context,
-                        fieldType: "Password",
-                        screenSize,
-                        textController: password),
-                    SizedBox(height: screenSize.height * 0.02),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ArgonButtonWidget(
-                            height: 50,
-                            width: 150,
-                            minWidth: 150,
-                            borderRadius: 8.0,
-                            color: Colors.green.shade800,
-                            roundLoadingShape: false,
-                            splashColor: Colors.grey,
-                            onTap: (startLoader, stopLoader, btnState) async {
-                              if (btnState == ButtonState.Idle &&
-                                  _formKey.currentState!.validate()) {
-                                startLoader();
-                                Map<String, dynamic> payload = {};
-                                payload["password"] = password.text;
-                                payload["mobileNumber"] = username.text;
-                                print(payload);
-                                await controller.authenticate(
-                                    context, _formKey, payload);
-                                stopLoader();
-                              }
-                            },
-                            loader: const CupertinoActivityIndicator(),
-                            child: const Text("Login",
-                                textAlign: TextAlign.center,
+                    const SizedBox(height: 55),
+                    Image.asset("assets/logo/ax_logo2.png",
+                        color: Colors.blue.shade800, height: 45),
+                    const SizedBox(height: 40),
+                    Container(
+                      width: ResponsiveWidget.isSmallScreen(context)
+                          ? screenSize.width * 0.9
+                          : 500,
+                      padding: const EdgeInsets.all(50),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                          boxShadow: const [
+                            BoxShadow(color: Colors.black12, blurRadius: 4.0)
+                          ]),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: ResponsiveWidget.isSmallScreen(context)
+                                    ? screenSize.width * 0.05
+                                    : 50),
+                            child: Text("Log in",
                                 style: TextStyle(
+                                    fontFamily: 'MontserratMedium',
+                                    color: kPrimaryTextColor,
+                                    fontSize:
+                                        ResponsiveWidget.isSmallScreen(context)
+                                            ? 22
+                                            : 28)),
+                          ),
+                          const SizedBox(height: 30),
+                          _textFieldWidget(
+                              context,
+                              fieldType: "Username",
+                              screenSize,
+                              textController: username),
+                          _textFieldWidget(
+                              context,
+                              fieldType: "Password",
+                              screenSize,
+                              textController: password),
+                          const SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ArgonButtonWidget(
+                                  height: 50,
+                                  width: 175,
+                                  minWidth: 175,
+                                  borderRadius: 8.0,
+                                  color: Colors.green.shade800,
+                                  roundLoadingShape: false,
+                                  splashColor: Colors.grey,
+                                  onTap: (startLoader, stopLoader,
+                                      btnState) async {
+                                    if (btnState == ButtonState.Idle &&
+                                        _formKey.currentState!.validate()) {
+                                      startLoader();
+                                      Map<String, dynamic> payload = {};
+                                      payload["password"] = password.text;
+                                      payload["mobileNumber"] = username.text;
+                                      await controller.authenticate(
+                                          context, _formKey, payload);
+                                      stopLoader();
+                                    }
+                                  },
+                                  loader: const CupertinoActivityIndicator(),
+                                  child: const Text("Login",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: 'MontserratRegular',
+                                          color: Colors.white,
+                                          fontSize: 18))),
+                            ],
+                          ),
+                          const SizedBox(height: 25),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("Need an account?",
+                                  style: TextStyle(
+                                    color: kPrimaryTextColor,
                                     fontFamily: 'MontserratRegular',
-                                    color: Colors.white,
-                                    fontSize: 18))),
-                      ],
+                                  )),
+                              InkWell(
+                                  onTap: () => Get.toNamed(Routes.signup),
+                                  child: Text(" Signup",
+                                      style: TextStyle(
+                                        color: Colors.green.shade800,
+                                        fontFamily: 'MontserratRegular',
+                                      ))),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                  onTap: () =>
+                                      Get.toNamed(Routes.forgotPassword),
+                                  child: Text("Forgot password?",
+                                      style: TextStyle(
+                                        color: Colors.green.shade800,
+                                        fontFamily: 'MontserratRegular',
+                                      ))),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(height: screenSize.height * 0.035),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Need an account?",
-                            style: TextStyle(
-                              color: kPrimaryTextColor,
-                              fontFamily: 'MontserratRegular',
-                            )),
-                        InkWell(
-                            onTap: () async {},
-                            child: const Text(" Signup",
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontFamily: 'MontserratRegular',
-                                ))),
-                      ],
-                    ),
-                    SizedBox(height: screenSize.height * 0.02),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                            onTap: () async {},
-                            child: const Text("Forgot password?",
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontFamily: 'MontserratRegular',
-                                ))),
-                      ],
-                    ),
+                    const SizedBox(height: 40),
                   ],
                 ),
               ),
@@ -154,14 +166,14 @@ class LoginView extends GetView<LoginController> {
       {required String fieldType,
       required TextEditingController textController}) {
     return Padding(
-      padding: EdgeInsets.only(bottom: screenSize.height * 0.02),
+      padding: const EdgeInsets.only(bottom: 30),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Obx(
             () => SizedBox(
-              width: 300,
+              width: screenSize.width < 350 ? screenSize.width * 0.7 : 300,
               child: TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 readOnly: false,
@@ -234,7 +246,7 @@ class LoginView extends GetView<LoginController> {
 
   OutlineInputBorder outlineBorder() {
     return OutlineInputBorder(
-        borderSide: const BorderSide(color: kPrimaryTextColor),
+        borderSide: const BorderSide(color: kPrimaryTextColorShade),
         borderRadius: BorderRadius.circular(8.0));
   }
 }

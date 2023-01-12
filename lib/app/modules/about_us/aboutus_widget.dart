@@ -41,19 +41,31 @@ class AboutUsWidget extends StatelessWidget {
                 style: TextStyle(
                     fontFamily: 'MontserratBold',
                     color: Colors.black,
-                    fontSize: screenSize.height * 0.032),
+                    fontSize: ResponsiveWidget.isLargeScreen(context)
+                        ? 32
+                        : ResponsiveWidget.isMediumScreen(context)
+                            ? 28
+                            : 22),
                 children: <TextSpan>[
                   TextSpan(
                       text: 'EV Charging',
                       style: TextStyle(
                           fontFamily: 'MontserratBold',
-                          fontSize: screenSize.height * 0.032,
+                          fontSize: ResponsiveWidget.isLargeScreen(context)
+                              ? 32
+                              : ResponsiveWidget.isMediumScreen(context)
+                                  ? 28
+                                  : 22,
                           color: kGreen)),
                   TextSpan(
                       text: ' Systems.',
                       style: TextStyle(
                           fontFamily: 'MontserratBold',
-                          fontSize: screenSize.height * 0.032,
+                          fontSize: ResponsiveWidget.isLargeScreen(context)
+                              ? 32
+                              : ResponsiveWidget.isMediumScreen(context)
+                                  ? 28
+                                  : 22,
                           color: kPrimaryTextColor)),
                 ],
               ),
@@ -72,15 +84,12 @@ class AboutUsWidget extends StatelessWidget {
               " systems, and is controlled by a single app for a "
               "seamless user experience.",
               style: TextStyle(
-                  fontFamily: 'Questrial',
+                  fontFamily: 'MontserratRegular',
                   color: Colors.black,
-                  fontWeight: FontWeight.w500,
                   height: 1.4,
-                  fontSize: ResponsiveWidget.isLargeScreen(context)
-                      ? 16
-                      : ResponsiveWidget.isMediumScreen(context)
+                  fontSize: ResponsiveWidget.isSmallScreen(context)
                       ? 14
-                      : 12),
+                      : 16),
             ),
           ),
         ],

@@ -21,12 +21,16 @@ class ShippingPolicyView extends GetView<PolicyPageController> {
         children: [
           SizedBox(
             width: width,
-            child: const Text(
+            child: Text(
               "SHIPPING POLICY",
               style: TextStyle(
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
-                  fontSize: 30),
+                  fontSize: ResponsiveWidget.isLargeScreen(context)
+                      ? 32
+                      : ResponsiveWidget.isMediumScreen(context)
+                      ? 26
+                      : 22),
             ),
           ),
           Container(

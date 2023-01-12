@@ -27,11 +27,15 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
           SizedBox(
             width: width,
             child: Text(
-              "PRIVACY POLICY",
+              "Privacy Policy",
               style: TextStyle(
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
-                  fontSize: screenSize.width * 0.032),
+                  fontSize: ResponsiveWidget.isLargeScreen(context)
+                      ? 32
+                      : ResponsiveWidget.isMediumScreen(context)
+                          ? 26
+                          : 22),
             ),
           ),
           Container(
@@ -42,7 +46,7 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
             margin: const EdgeInsets.symmetric(vertical: 10),
           ),
           Text(
-            "Effective date: 2022-11-28",
+            "\nEffective date: 2022-11-28",
             style: TextStyle(
                 fontFamily: 'MontserratRegular',
                 color: Colors.black,
@@ -104,11 +108,7 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
         ? screenSize.width * 0.11
         : screenSize.width * 0.075;
 
-    double textSize = ResponsiveWidget.isLargeScreen(context)
-        ? 16
-        : ResponsiveWidget.isMediumScreen(context)
-            ? 14
-            : 12;
+    double textSize = ResponsiveWidget.isSmallScreen(context) ? 14 : 16;
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(
           scrollbars: false, dragDevices: MyCustomScrollBehavior().dragDevices),

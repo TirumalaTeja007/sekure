@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:smartsocket/services/auth_service.dart';
+
 const String secret = "5c55QGEdvE6HXoM4MFL72G5S";
 
 const String key = "rzp_live_GU39x6rnevKg3d";
@@ -13,6 +15,8 @@ const String ordersRootUrl = "https://api.razorpay.com/v1/orders";
 const String paymentRootUrl = "https://api.razorpay.com/v1/payments";
 
 const String rootUrl = "http://3.108.130.244:80/webapis";
+
+const String userControllerUrl = "$rootUrl/api";
 
 const String authenticateUrl = "$rootUrl/authenticate";
 
@@ -109,9 +113,10 @@ const String getAllDevicesConfig = "$deviceManagementRootUrl/deviceConfig";
 
 Map<String, String> basicHeader = {'Content-Type': 'application/json; charset=UTF-8'};
 
-Map<String, String> authHeader(String token) {
-  return {'Content-Type': 'application/json', 'Authorization': 'Bearer $token'};
-}
+Map<String, String> authHeader() => {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ${AuthService.to.authToken}'
+};
 
 Map<String, String> ordersHeader = {
   'Content-Type': 'application/json; charset=UTF-8',
