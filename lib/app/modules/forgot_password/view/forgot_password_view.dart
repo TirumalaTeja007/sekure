@@ -59,7 +59,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                                 left: ResponsiveWidget.isSmallScreen(context)
                                     ? screenSize.width * 0.05
                                     : 50),
-                            child: Text("Forgot Password",
+                            child: Text("Forgot Password ",
                                 style: TextStyle(
                                     fontFamily: 'MontserratMedium',
                                     color: kPrimaryTextColor,
