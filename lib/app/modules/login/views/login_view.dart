@@ -101,9 +101,8 @@ class LoginView extends GetView<LoginController> {
                                       startLoader();
                                       Map<String, dynamic> payload = {};
                                       payload["password"] = password.text;
-                                      payload["mobileNumber"] = username.text;
-                                      await controller.authenticate(
-                                          context, _formKey, payload);
+                                      payload["username"] = username.text;
+                                      await controller.login(payload);
                                       stopLoader();
                                     }
                                   },

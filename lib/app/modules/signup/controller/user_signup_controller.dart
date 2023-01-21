@@ -23,21 +23,16 @@ class UserSignupController extends GetxController {
   addAUser(Map payload) async {
     dynamic errorMessage = "";
 
-    errorMessage = await AuthService.to.authenticate();
+    errorMessage = await AuthService.to.authenticate({"userName": "teja96", "password": "123456"});
 
     if (AuthService.to.authToken.isNotEmpty && errorMessage.isEmpty) {
       await GetConnect()
-          .post("https://ninedots.axonifytech.com/apple/api/user", payload,
-          headers: basicHeader)
+          .post("$userControllerUrl/registeruser", payload,
+          headers: authHeader())
           .then((response) async {
         print(response.body);
-        if (!response.hasError) {
-          if (response.body["status"] == "true") {
-            payload["id"] = response.body["data"];
+        if (!response.hasError && response.body["status"] == "true") {
             Get.toNamed(Routes.login);
-          } else {
-            errorMessage = response;
-          }
         } else {
           errorMessage = response;
         }

@@ -48,7 +48,7 @@ callAlertDialog(String title, String message, String middleText) {
                 primary: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 animationDuration: const Duration(seconds: 1)),
-            onPressed: () => Get.back(),
+            onPressed: () => Navigator.of(Get.key.currentContext!).pop(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [

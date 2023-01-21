@@ -44,39 +44,16 @@ class LoginController extends GetxController {
   }
 
   login(args) async {
-    await _findUserByMobileNumber(args["phoneNumber"]);
-  }
-
-  _findUserByMobileNumber(String phoneNumber) async {
     dynamic errorMessage = "";
 
-    bool recordFound = false;
-
-    errorMessage = await AuthService.to.authenticate();
+    errorMessage = await AuthService.to.authenticate(args);
 
     if (AuthService.to.authToken.isNotEmpty && errorMessage.isEmpty) {
       await GetConnect()
-          .get("$userControllerUrl/getallUsers", headers: authHeader())
+          .post("$userControllerUrl/login", args, headers: authHeader())
           .then((response) async {
-        if (!response.hasError) {
-          if (response.body["status"] == "true") {
-            List data = response.body["data"];
-            for (var i in data) {
-              if (i["phoneNumber"] == phoneNumber.toString()) {
-                i["isLoggedIn"] = true;
-
-                await IdRepository().saveUserData(jsonEncode(i));
-
-                AuthService.to.login();
-
-                Get.offNamed(Routes.dashboard);
-              }
-            }
-          } else {
-            if (response.body["message"] != "No User Details found") {
-              errorMessage = response;
-            }
-          }
+        if (!response.hasError && response.body["status"] == "true") {
+          errorMessage = await _fetchUserInfoByUsername(args);
         } else {
           errorMessage = response;
         }
@@ -84,7 +61,34 @@ class LoginController extends GetxController {
     }
 
     if (errorMessage != "") httpException(errorMessage);
+  }
 
-    return {"recordFound": recordFound, "error": errorMessage};
+  _fetchUserInfoByUsername(args) async {
+    dynamic errorMessage = "";
+
+    errorMessage = await AuthService.to.authenticate(args);
+
+    if (AuthService.to.authToken.isNotEmpty && errorMessage.isEmpty) {
+      await GetConnect()
+          .get("$userControllerUrl/${args["userName"]}", headers: authHeader())
+          .then((response) async {
+        if (!response.hasError && response.body["status"] == "true") {
+            Map data = response.body["data"];
+
+            data["isLoggedIn"] = true;
+
+            await IdRepository().saveUserData(jsonEncode(data));
+
+            AuthService.to.login();
+
+            Get.offNamed(Routes.dashboard);
+
+        } else {
+          errorMessage = response;
+        }
+      });
+    }
+
+    return errorMessage;
   }
 }

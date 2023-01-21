@@ -20,11 +20,11 @@ class AuthService extends GetxService {
     isLoggedIn.value = false;
   }
 
-  authenticate() async {
+  authenticate(args) async {
     dynamic errorMessage = "";
     if (authToken.isEmpty) {
       await GetConnect()
-          .post(authenticateUrl, {"username": "ohm", "password": "ohm"},
+          .post(authenticateUrl, {"username": args["userName"], "password": args["password"]},
           headers: basicHeader)
           .then((response) {
         if (!response.hasError) {

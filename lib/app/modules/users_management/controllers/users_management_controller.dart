@@ -53,7 +53,7 @@ class UsersManagementController extends GetxController {
   addAUser(Map payload) async {
     dynamic errorMessage = "";
 
-    errorMessage = await AuthService.to.authenticate();
+    errorMessage = await AuthService.to.authenticate({"userName": "teja96", "password": "123456"});
 
     if (AuthService.to.authToken.isNotEmpty && errorMessage.isEmpty) {
       await GetConnect()

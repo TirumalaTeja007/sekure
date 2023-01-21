@@ -14,7 +14,7 @@ const String ordersRootUrl = "https://api.razorpay.com/v1/orders";
 
 const String paymentRootUrl = "https://api.razorpay.com/v1/payments";
 
-const String rootUrl = "http://3.108.130.244:80/webapis";
+const String rootUrl = "http://3.108.130.244/smartsocketapis";
 
 const String userControllerUrl = "$rootUrl/api";
 
