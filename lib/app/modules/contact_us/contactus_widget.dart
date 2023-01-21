@@ -36,16 +36,19 @@ class ContactUsWidget extends StatelessWidget {
             ? 16
             : 18;
     Widget image = Container(
-        height: width,
-        width: width,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            image: const DecorationImage(
-                fit: BoxFit.cover,
-                filterQuality: FilterQuality.high,
-                image: AssetImage(
-                  'assets/images/axonify_map_view.png',
-                ))));
+      height: width,
+      width: width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0),
+        image: const DecorationImage(
+          fit: BoxFit.cover,
+          filterQuality: FilterQuality.high,
+          image: AssetImage(
+            'assets/images/axonify_map_view.png',
+          ),
+        ),
+      ),
+    );
     Widget forms = SizedBox(
       width: width,
       child: Column(
@@ -83,7 +86,7 @@ class ContactUsWidget extends StatelessWidget {
             "Please fill out the form below and our team will get "
             "in touch with you within 24 hrs.",
             style: TextStyle(
-                fontFamily: 'Questrial',
+                fontFamily: 'MontserratRegular',
                 color: kPrimaryTextColor,
                 fontSize: ResponsiveWidget.isSmallScreen(context)
                     ? 14
@@ -190,7 +193,7 @@ class ContactUsWidget extends StatelessWidget {
                 Text(
                   "\n+91 8069033833\n\n",
                   style: TextStyle(
-                      fontFamily: 'Questrial',
+                      fontFamily: 'MontserratRegular',
                       color: Colors.black,
                       fontSize: bodyTextSize),
                 ),
@@ -224,7 +227,7 @@ class ContactUsWidget extends StatelessWidget {
                   child: Text(
                     "\ninfo@axonifytech.com \nsales@axonifytech.com\n\n",
                     style: TextStyle(
-                        fontFamily: 'Questrial',
+                        fontFamily: 'MontserratRegular',
                         color: Colors.black,
                         fontSize: bodyTextSize),
                   ),
@@ -262,7 +265,7 @@ class ContactUsWidget extends StatelessWidget {
                     "Balanagar, Hyderabad – 500037, "
                     "Telangana, India\n\n",
                     style: TextStyle(
-                        fontFamily: 'Questrial',
+                        fontFamily: 'MontserratRegular',
                         color: Colors.black,
                         fontSize: bodyTextSize),
                   ),

@@ -100,6 +100,7 @@ class RefundPolicyView extends GetView<PolicyPageController> {
   }
 
   Widget pointer(BuildContext context, Size screenSize) {
+    double textSize = ResponsiveWidget.isSmallScreen(context) ? 14 : 16;
     return Container(
       width: screenSize.width,
       padding: EdgeInsets.symmetric(
@@ -107,13 +108,13 @@ class RefundPolicyView extends GetView<PolicyPageController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
               "If the standard time-frame as mentioned in the below table has "
               "expired and you have still not received the refund,",
               style: TextStyle(
                   fontFamily: 'MontserratRegular',
                   color: Colors.black,
-                  fontSize: 16)),
+                  fontSize: textSize)),
           const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -122,12 +123,12 @@ class RefundPolicyView extends GetView<PolicyPageController> {
               const Dot(color: Colors.black, size: 8),
               SizedBox(
                 width: screenSize.width * 0.7 - 15,
-                child: const Text(
+                child: Text(
                   " For payments made via bank- Please contact your, credit or debit card issuer or your bank for more information. Refunds will not be processed in cash.",
                   style: TextStyle(
                       fontFamily: 'MontserratRegular',
                       color: Colors.black,
-                      fontSize: 16),
+                      fontSize: textSize),
                 ),
               ),
             ],
@@ -140,12 +141,12 @@ class RefundPolicyView extends GetView<PolicyPageController> {
               const Dot(color: Colors.black, size: 8),
               SizedBox(
                 width: screenSize.width * 0.7 - 15,
-                child: const Text(
+                child: Text(
                   " For payments related to Wallet- Raise a ticket by contacting the customer support team for Smart Socket App.  ",
                   style: TextStyle(
                       fontFamily: 'MontserratRegular',
                       color: Colors.black,
-                      fontSize: 16),
+                      fontSize: textSize),
                 ),
               ),
             ],
@@ -159,6 +160,7 @@ class RefundPolicyView extends GetView<PolicyPageController> {
     final width = !ResponsiveWidget.isLargeScreen(context)
         ? screenSize.width * 0.78
         : screenSize.width * 0.4;
+    double textSize = ResponsiveWidget.isSmallScreen(context) ? 14 : 16;
     return SizedBox(
       width: width,
       child: Column(
@@ -167,28 +169,28 @@ class RefundPolicyView extends GetView<PolicyPageController> {
           SizedBox(
             width: width,
             child: Text(
-              "REFUND POLICY",
+              "Refund Policy",
               style: TextStyle(
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
                   fontSize: ResponsiveWidget.isLargeScreen(context)
                       ? 32
                       : ResponsiveWidget.isMediumScreen(context)
-                      ? 26
-                      : 22),
+                          ? 26
+                          : 22),
             ),
           ),
           Container(
-            width: 250,
+            width: 175,
             height: 5,
             decoration: BoxDecoration(
                 color: Colors.black26, borderRadius: BorderRadius.circular(4)),
-            margin: const EdgeInsets.symmetric(vertical: 20),
+            margin: const EdgeInsets.symmetric(vertical: 10),
           ),
           SizedBox(
             width: width,
-            child: const Text(
-              "Refund are reversal transactions wherein complete or partial "
+            child: Text(
+              "\nRefund are reversal transactions wherein complete or partial "
               "money is moved back to customer's source account (account "
               "from which actual payment was made). A refund can only be"
               " created for a successful or settled transaction. Use case "
@@ -196,7 +198,7 @@ class RefundPolicyView extends GetView<PolicyPageController> {
               style: TextStyle(
                   fontFamily: 'MontserratRegular',
                   color: Colors.black,
-                  fontSize: 16),
+                  fontSize: textSize),
             ),
           ),
           const SizedBox(height: 15),
@@ -207,7 +209,7 @@ class RefundPolicyView extends GetView<PolicyPageController> {
               const Dot(color: Colors.black, size: 8),
               SizedBox(
                 width: (width) - 15,
-                child: const Text(
+                child: Text(
                   " Mismatch in transaction status between Smart Socket and "
                   "merchant, wherein transaction is in failed state at merchant's "
                   "end but is successful at Smart Socket's end or vice-versa. "
@@ -216,7 +218,7 @@ class RefundPolicyView extends GetView<PolicyPageController> {
                   style: TextStyle(
                       fontFamily: 'MontserratRegular',
                       color: Colors.black,
-                      fontSize: 16),
+                      fontSize: textSize),
                 ),
               ),
             ],
@@ -229,7 +231,7 @@ class RefundPolicyView extends GetView<PolicyPageController> {
               const Dot(color: Colors.black, size: 8),
               SizedBox(
                 width: (width) - 15,
-                child: const Text(
+                child: Text(
                   " Customer initiated refund - More than required amount is "
                   "debited from customer’s wallet for a charging session. Refund"
                   " for payment made via wallet is always credited back in the "
@@ -237,7 +239,7 @@ class RefundPolicyView extends GetView<PolicyPageController> {
                   style: TextStyle(
                       fontFamily: 'MontserratRegular',
                       color: Colors.black,
-                      fontSize: 16),
+                      fontSize: textSize),
                 ),
               ),
             ],
@@ -251,6 +253,7 @@ class RefundPolicyView extends GetView<PolicyPageController> {
     final width = !ResponsiveWidget.isLargeScreen(context)
         ? screenSize.width * 0.78
         : screenSize.width * 0.4;
+    double textSize = ResponsiveWidget.isSmallScreen(context) ? 14 : 16;
     return SizedBox(
       width: width,
       child: Column(
@@ -258,12 +261,16 @@ class RefundPolicyView extends GetView<PolicyPageController> {
         children: [
           SizedBox(
             width: width,
-            child: const Text(
+            child: Text(
               "The refund time period for different modes of payments is provided below",
               style: TextStyle(
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
-                  fontSize: 30),
+                  fontSize: ResponsiveWidget.isLargeScreen(context)
+                      ? 32
+                      : ResponsiveWidget.isMediumScreen(context)
+                          ? 26
+                          : 22),
             ),
           ),
           Container(
@@ -282,122 +289,123 @@ class RefundPolicyView extends GetView<PolicyPageController> {
                 color: Colors.black, style: BorderStyle.solid, width: 2),
             children: [
               TableRow(children: [
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text('Available Refund Method',
                         style: TextStyle(
-                            fontSize: 20.0, fontFamily: 'MontserratBold')),
+                            fontSize: textSize, fontFamily: 'MontserratBold')),
                   )
                 ]),
-                Column(children: const [
+                Column(children: [
                   Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Text('Refund Time-Frame',
                           style: TextStyle(
-                              fontSize: 20.0, fontFamily: 'MontserratBold')))
+                              fontSize: textSize,
+                              fontFamily: 'MontserratBold')))
                 ]),
               ]),
               TableRow(children: [
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const  EdgeInsets.all(10.0),
                     child: Text(
                       'Credit Card/ Debit Card',
                       style: TextStyle(
                           fontFamily: 'MontserratRegular',
                           color: Colors.black,
-                          fontSize: 14),
+                          fontSize: textSize),
                     ),
                   )
                 ]),
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       '3-5 Business Days',
                       style: TextStyle(
                           fontFamily: 'MontserratRegular',
                           color: Colors.black,
-                          fontSize: 14),
+                          fontSize: textSize),
                     ),
                   )
                 ]),
               ]),
               TableRow(children: [
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       'Net Banking Account (Credited to Bank Account',
                       style: TextStyle(
                           fontFamily: 'MontserratRegular',
                           color: Colors.black,
-                          fontSize: 14),
+                          fontSize: textSize),
                     ),
                   )
                 ]),
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       '3-5 Business Days',
                       style: TextStyle(
                           fontFamily: 'MontserratRegular',
                           color: Colors.black,
-                          fontSize: 14),
+                          fontSize: textSize),
                     ),
                   )
                 ]),
               ]),
               TableRow(children: [
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       'UPI Linked Bank Account',
                       style: TextStyle(
                           fontFamily: 'MontserratRegular',
                           color: Colors.black,
-                          fontSize: 14),
+                          fontSize: textSize),
                     ),
                   )
                 ]),
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       '3-5 Business Days',
                       style: TextStyle(
                           fontFamily: 'MontserratRegular',
                           color: Colors.black,
-                          fontSize: 14),
+                          fontSize: textSize),
                     ),
                   )
                 ]),
               ]),
               TableRow(children: [
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       'Smart Wallet',
                       style: TextStyle(
                           fontFamily: 'MontserratRegular',
                           color: Colors.black,
-                          fontSize: 14),
+                          fontSize: textSize),
                     ),
                   )
                 ]),
-                Column(children: const [
+                Column(children: [
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       '2-4 Business Days',
                       style: TextStyle(
                           fontFamily: 'MontserratRegular',
                           color: Colors.black,
-                          fontSize: 14),
+                          fontSize: textSize),
                     ),
                   )
                 ]),

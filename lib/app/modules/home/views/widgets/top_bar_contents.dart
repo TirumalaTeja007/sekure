@@ -45,7 +45,7 @@ class TopBarContents extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'Questrial',
                       fontWeight: FontWeight.bold,
-                      fontSize: 13,
+                      fontSize: 12,
                       color: index == 0 ? Colors.black : Colors.black45),
                 ),
                 const SizedBox(height: 5),
@@ -88,7 +88,7 @@ class TopBarContents extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'Questrial',
                       fontWeight: FontWeight.bold,
-                      fontSize: 13,
+                      fontSize: 12,
                       color: index == 1 ? Colors.black : Colors.black45),
                 ),
                 const SizedBox(height: 5),
@@ -131,7 +131,7 @@ class TopBarContents extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'Questrial',
                       fontWeight: FontWeight.bold,
-                      fontSize: 13,
+                      fontSize: 12,
                       color: index == 2 ? Colors.black : Colors.black45),
                 ),
                 const SizedBox(height: 5),
@@ -174,7 +174,7 @@ class TopBarContents extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'Questrial',
                       fontWeight: FontWeight.bold,
-                      fontSize: 13,
+                      fontSize: 12,
                       color: index == 3 ? Colors.black : Colors.black45),
                 ),
                 const SizedBox(height: 5),
@@ -218,7 +218,7 @@ class TopBarContents extends StatelessWidget {
                     style: TextStyle(
                         fontFamily: 'Questrial',
                         fontWeight: FontWeight.bold,
-                        fontSize: 13,
+                        fontSize: 12,
                         color: Colors.white),
                   ),
                   const SizedBox(height: 5),
@@ -271,7 +271,7 @@ class TopBarContents extends StatelessWidget {
                     animateTrailing: true,
                     borderRadius: BorderRadius.circular(0.0),
                     expandedColor: Colors.white,
-                    elevation: 0,
+                    elevation: 2,
                     key: cardKey,
                     leading: Image.asset('assets/logo/axonify_logo.png',
                         width: 150, height: 60, color: Colors.blue.shade800),

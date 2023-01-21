@@ -22,7 +22,7 @@ class ShippingPolicyView extends GetView<PolicyPageController> {
           SizedBox(
             width: width,
             child: Text(
-              "SHIPPING POLICY",
+              "Shipping Policy",
               style: TextStyle(
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
@@ -34,23 +34,23 @@ class ShippingPolicyView extends GetView<PolicyPageController> {
             ),
           ),
           Container(
-            width: 200,
+            width: 175,
             height: 5,
             decoration: BoxDecoration(
                 color: Colors.black26, borderRadius: BorderRadius.circular(4)),
             margin: const EdgeInsets.symmetric(vertical: 10),
           ),
-          const Text(
-            "Effective date: 2022-11-28",
+          Text(
+            "\nEffective date: 2022-11-28",
             style: TextStyle(
                 fontFamily: 'MontserratRegular',
                 color: Colors.black,
-                fontSize: 16),
+                fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
           ),
           const SizedBox(height: 20),
           SizedBox(
             width: width,
-            child: const Text(
+            child: Text(
               "Axonify Tech Systems (“us”, “we”, or “our”) operates ninedots.axonifytech.com (hereinafter referred to as “Service”)."
               "\n\nWe do not sell products in our website. We provide a continuous service to the customers, a type of payment service through which individuals can pay by adding money to their Smart Wallet."
               "\n\nIn other words, it is a digital technology to pay your bills online instantly without having to pay by cash or use your credit or debit card all the time. It acts like a virtual wallet, which can be preloaded with your preferred amount of money from your bank account or credit or debit cards and used to spend it online"
@@ -58,7 +58,7 @@ class ShippingPolicyView extends GetView<PolicyPageController> {
               style: TextStyle(
                   fontFamily: 'MontserratRegular',
                   color: Colors.black,
-                  fontSize: 16),
+                  fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
             ),
           ),
         ],

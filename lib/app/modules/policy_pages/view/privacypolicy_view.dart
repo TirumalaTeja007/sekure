@@ -14,11 +14,7 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
     final width = screenSize.width < 850
         ? screenSize.width * 0.78
         : screenSize.width * 0.4;
-    double textSize = ResponsiveWidget.isLargeScreen(context)
-        ? 16
-        : ResponsiveWidget.isMediumScreen(context)
-            ? 14
-            : 12;
+    double textSize = ResponsiveWidget.isSmallScreen(context) ? 14 : 16;
     return SizedBox(
       width: width,
       child: Column(
@@ -39,7 +35,7 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
             ),
           ),
           Container(
-            width: 200,
+            width: 175,
             height: 5,
             decoration: BoxDecoration(
                 color: Colors.black26, borderRadius: BorderRadius.circular(4)),
@@ -72,11 +68,7 @@ class PrivacyPolicyView extends GetView<PolicyPageController> {
   }
 
   Widget bulletPoints(BuildContext context, String content) {
-    double textSize = ResponsiveWidget.isLargeScreen(context)
-        ? 16
-        : ResponsiveWidget.isMediumScreen(context)
-            ? 14
-            : 12;
+    double textSize = ResponsiveWidget.isSmallScreen(context) ? 14 : 16;
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Row(

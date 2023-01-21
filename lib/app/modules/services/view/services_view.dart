@@ -100,9 +100,7 @@ class ServicesView extends GetView<ServicesController> {
                 fontFamily: 'MontserratRegular',
                 color: Colors.black45,
                 height: 1.4,
-                fontSize: ResponsiveWidget.isSmallScreen(context)
-                    ? 14
-                    : 16),
+                fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
           ),
           SizedBox(
             width: width,
@@ -120,9 +118,7 @@ class ServicesView extends GetView<ServicesController> {
                   fontFamily: 'MontserratRegular',
                   color: Colors.black,
                   height: 1.4,
-                  fontSize: ResponsiveWidget.isSmallScreen(context)
-                      ? 14
-                      : 16),
+                  fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
             ),
           ),
           Container(
@@ -136,9 +132,7 @@ class ServicesView extends GetView<ServicesController> {
                   fontFamily: 'MontserratBold',
                   color: Colors.black,
                   height: 1,
-                  fontSize: ResponsiveWidget.isSmallScreen(context)
-                      ? 14
-                      : 16),
+                  fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
             ),
           ),
           Container(
@@ -152,9 +146,8 @@ class ServicesView extends GetView<ServicesController> {
                 style: TextStyle(
                     fontFamily: 'MontserratRegular',
                     color: Colors.black,
-                    fontSize: ResponsiveWidget.isSmallScreen(context)
-                        ? 14
-                        : 16),
+                    fontSize:
+                        ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
               ),
             ),
           ),
@@ -269,9 +262,8 @@ class ServicesView extends GetView<ServicesController> {
                     fontFamily: 'MontserratRegular',
                     color: Colors.white,
                     height: 1.4,
-                    fontSize: ResponsiveWidget.isSmallScreen(context)
-                        ? 14
-                        : 16),
+                    fontSize:
+                        ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
               ),
             ),
           ),
@@ -747,10 +739,8 @@ class ServicesView extends GetView<ServicesController> {
                     text: TextSpan(
                       text: title,
                       style: TextStyle(
-                          fontFamily: boldText ? 'MontserratBold' : 'Questrial',
+                          fontFamily: 'MontserratBold',
                           color: color,
-                          fontWeight:
-                              !boldText ? FontWeight.w600 : FontWeight.normal,
                           fontSize: ResponsiveWidget.isLargeScreen(context)
                               ? boldText
                                   ? 26
@@ -776,9 +766,7 @@ class ServicesView extends GetView<ServicesController> {
             style: TextStyle(
                 fontFamily: 'MontserratRegular',
                 color: color,
-                fontSize: ResponsiveWidget.isSmallScreen(context)
-                    ? 14
-                    : 16),
+                fontSize: ResponsiveWidget.isSmallScreen(context) ? 14 : 16),
           ),
         ),
         const SizedBox(height: 25),
