@@ -1,24 +1,27 @@
 import 'package:get/get.dart';
 import 'package:smartsocket/constants/network_constants.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 
 class AuthService extends GetxService {
   static AuthService get to => Get.find();
 
-  final isLoggedIn = false.obs;
+  final _isLoggedIn = false.obs;
 
-  bool get isLoggedInValue => isLoggedIn.value;
+  bool get isLoggedIn => _isLoggedIn.value;
 
   final _authToken = "".obs;
 
   String get authToken => _authToken.value;
 
   void login() {
-    isLoggedIn.value = true;
+    _isLoggedIn.value = true;
   }
 
   void logout() {
-    isLoggedIn.value = false;
+    _isLoggedIn.value = false;
   }
+
+
 
   authenticate(args) async {
     dynamic errorMessage = "";

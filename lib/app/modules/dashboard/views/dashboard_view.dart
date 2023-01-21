@@ -45,20 +45,23 @@ class DashboardView extends GetView<DashboardController> {
         }
         return Scaffold(
           drawer: !ResponsiveWidget.isLargeScreen(context)
-              ? DashboardViewDrawerWidget(index: currentIndex, delegate: delegate)
+              ? DashboardViewDrawerWidget(
+                  index: currentIndex, delegate: delegate)
               : null,
           body: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (ResponsiveWidget.isLargeScreen(context))
-                DashboardViewDrawerWidget(index: currentIndex, delegate: delegate),
+                DashboardViewDrawerWidget(
+                    index: currentIndex, delegate: delegate),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ResponsiveWidget.isLargeScreen(context)
-                          ? DashboardTopBar(controller.tabList[currentIndex], "Admin")
+                          ? DashboardTopBar(
+                              controller.tabList[currentIndex], "Admin")
                           : PreferredSize(
                               preferredSize: Size(screenSize.width, 55),
                               child: AppBar(

@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/app/modules/signup/controller/user_signup_controller.dart';
+import 'package:smartsocket/app/modules/user_registration/controller/user_registration_controller.dart';
+
 import 'package:smartsocket/app/modules/users_management/controllers/users_management_controller.dart';
 import 'package:smartsocket/app/routes/app_pages.dart';
 import 'package:smartsocket/app/widgets/argon_button_widget.dart';
@@ -11,7 +12,7 @@ import 'package:smartsocket/constants/color_constants.dart';
 import 'package:smartsocket/constants/constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
 
-class SignupView extends GetView<UserSignupController> {
+class SignupView extends GetView<UserRegistrationController> {
   SignupView({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
@@ -19,7 +20,7 @@ class SignupView extends GetView<UserSignupController> {
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
   final TextEditingController mobileNumber = TextEditingController();
-  final TextEditingController userType = TextEditingController();
+  final TextEditingController userName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
@@ -83,6 +84,10 @@ class SignupView extends GetView<UserSignupController> {
                           _textFieldWidget(context,
                               fieldType: "Last name",
                               textController: lastName,
+                              screenSize: screenSize),
+                          _textFieldWidget(context,
+                              fieldType: "Username",
+                              textController: userName,
                               screenSize: screenSize),
                           _textFieldWidget(context,
                               fieldType: "Email",
@@ -187,10 +192,10 @@ class SignupView extends GetView<UserSignupController> {
                                           "lastName": lastName.text,
                                           "email": email.text.trim(),
                                           "password": password.text,
-                                          "active": 0,
+                                          "active": 1,
+                                          "roleId": 2,
                                           "phoneNumber": mobileNumber.text,
-                                          "userName":
-                                              "SS_${DateTime.now().microsecond}"
+                                          "userName": userName.text,
                                         });
                                         stopLoader();
                                       }

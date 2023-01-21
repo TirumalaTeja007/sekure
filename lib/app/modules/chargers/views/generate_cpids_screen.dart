@@ -5,6 +5,7 @@ import 'package:smartsocket/app/modules/chargers/controllers/chargers_controller
 import 'package:smartsocket/app/widgets/argon_button_widget.dart';
 import 'package:smartsocket/constants/color_constants.dart';
 import 'package:smartsocket/constants/constants.dart';
+import 'package:smartsocket/constants/network_constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
 import 'package:smartsocket/app/widgets/subheadings.dart';
 
@@ -155,37 +156,49 @@ class GenerateCPIDScreen extends GetView<ChargersController> {
           roundLoadingShape: false,
           splashColor: Colors.grey,
           onTap: (startLoader, stopLoader, btnState) async {
-            if (btnState == ButtonState.Idle &&
-                _formKey.currentState!.validate()) {
-              startLoader();
-              final result = await controller.addCPID({
-                "chargePointID": cpid.text,
-                "chargeBoxSerialNumber": serialNumber.text,
-                "chargePointModel": modelNumber.text,
-                "address": stationAddress.text,
-                "latitude": double.parse(latitude.text),
-                "longitude": double.parse(longitude.text),
-                "efiVersion": efiVersion.text,
-                "evseVersion": evseVersion.text,
-                "vendorId": vendorId.text,
-                "macAddress": macAddress.text,
-              });
-              stopLoader();
-              if (result == "Success") {
-                // callAlertDialog(
-                //     'Success', "CPID is successfully generated!", cpid.text);
-                cpid.clear();
-                serialNumber.clear();
-                modelNumber.clear();
-                stationAddress.clear();
-                latitude.clear();
-                longitude.clear();
-                efiVersion.clear();
-                evseVersion.clear();
-                vendorId.clear();
-                macAddress.clear();
+            // if (btnState == ButtonState.Idle &&
+            //     _formKey.currentState!.validate()) {
+            //   startLoader();
+            //   final result = await controller.addCPID({
+            //     "chargePointID": cpid.text,
+            //     "chargeBoxSerialNumber": serialNumber.text,
+            //     "chargePointModel": modelNumber.text,
+            //     "address": stationAddress.text,
+            //     "latitude": double.parse(latitude.text),
+            //     "longitude": double.parse(longitude.text),
+            //     "efiVersion": efiVersion.text,
+            //     "evseVersion": evseVersion.text,
+            //     "vendorId": vendorId.text,
+            //     "macAddress": macAddress.text,
+            //   });
+            //   stopLoader();
+            //   if (result == "Success") {
+            //     // callAlertDialog(
+            //     //     'Success', "CPID is successfully generated!", cpid.text);
+            //     cpid.clear();
+            //     serialNumber.clear();
+            //     modelNumber.clear();
+            //     stationAddress.clear();
+            //     latitude.clear();
+            //     longitude.clear();
+            //     efiVersion.clear();
+            //     evseVersion.clear();
+            //     vendorId.clear();
+            //     macAddress.clear();
+            //   }
+            // }
+            await GetConnect()
+                .get(addDeviceUrl, headers: basicHeader)
+                .then((response) async {
+              print(response.body);
+              if (!response.hasError) {
+                List devList = response.body["data"];
+                for(int i =0; i< devList.length; i++) {
+
+                }
+
               }
-            }
+            });
           },
           loader: const CupertinoActivityIndicator(),
           child: const Text("Generate",

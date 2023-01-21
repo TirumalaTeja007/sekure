@@ -3,19 +3,16 @@ import 'dart:convert';
 
 import 'package:async/async.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/app/routes/app_pages.dart';
 import 'package:smartsocket/services/auth_service.dart';
 import 'package:smartsocket/utils/local_storage.dart';
 
-class SplashController extends GetxController {
+class SplashService extends GetxService {
   final welcomeStr = ['GetX', 'Rules!'];
   final activeStr = 0.obs;
 
   final memo = AsyncMemoizer<void>();
 
-  @override
-  Future<void> onInit() {
-    super.onInit();
+  Future<void> init() {
     return memo.runOnce(_initFunction);
   }
 
@@ -36,7 +33,6 @@ class SplashController extends GetxController {
         AuthService.to.login();
       }
     }
-    await Future.delayed(const Duration(seconds: 1));
-    Get.toNamed(Routes.login);
+    await Future.delayed(const Duration(seconds: 2));
   }
 }

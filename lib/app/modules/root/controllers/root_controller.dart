@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 
 class RootController extends GetxController {
   //TODO: Implement RootController
 
   final count = 0.obs;
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
   }
 
@@ -16,5 +18,6 @@ class RootController extends GetxController {
 
   @override
   void onClose() {}
+
   void increment() => count.value++;
 }

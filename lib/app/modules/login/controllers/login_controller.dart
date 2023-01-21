@@ -4,6 +4,7 @@ import 'package:smartsocket/api/api_calls.dart';
 import 'package:smartsocket/api/efi_http_exception_handler.dart';
 import 'package:smartsocket/app/routes/app_pages.dart';
 import 'package:smartsocket/constants/network_constants.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 import 'package:smartsocket/services/auth_service.dart';
 import 'package:smartsocket/utils/local_storage.dart';
 import 'package:flutter/material.dart';
@@ -12,35 +13,9 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   RxBool showPassword = false.obs;
 
-  authenticate(BuildContext context, GlobalKey<FormState> formKey,
-      Map<String, dynamic> payload) async {
-    FocusScope.of(context).unfocus();
-
-    final response = await callPostRequest(
-        routeID: "/Login",
-        api: "https://ninedots.axonifytech.com/apple/api/user/login",
-        payload: payload,
-        header: {'Content-Type': 'application/json'});
-
-    if (response.runtimeType != String) {
-      if (response.statusCode == 200) {
-        Map data = jsonDecode(response.body)["data"];
-
-        data["isLoggedIn"] = true;
-
-        IdRepository().saveUserData(jsonEncode(data));
-
-        AuthService.to.login();
-
-        final thenTo = context.params['then'];
-
-        Get.offNamed(thenTo ?? Routes.dashboard);
-      } else {
-        return "Exception";
-      }
-    } else {
-      return "Exception";
-    }
+  @override
+  void onInit() async {
+    super.onInit();
   }
 
   login(args) async {
@@ -72,17 +47,17 @@ class LoginController extends GetxController {
       await GetConnect()
           .get("$userControllerUrl/${args["userName"]}", headers: authHeader())
           .then((response) async {
+        print(response.body);
         if (!response.hasError && response.body["status"] == "true") {
-            Map data = response.body["data"];
+          Map data = response.body["data"];
 
-            data["isLoggedIn"] = true;
+          data["isLoggedIn"] = true;
 
-            await IdRepository().saveUserData(jsonEncode(data));
+          await IdRepository().saveUserData(jsonEncode(data));
 
-            AuthService.to.login();
+          AuthService.to.login();
 
-            Get.offNamed(Routes.dashboard);
-
+          Get.toNamed(Routes.dashboard);
         } else {
           errorMessage = response;
         }

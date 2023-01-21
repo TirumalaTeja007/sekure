@@ -9,6 +9,8 @@ import 'package:smartsocket/app/modules/contact_us/bindings/contact_us_binding.d
 import 'package:smartsocket/app/modules/contact_us/contact_us_view.dart';
 import 'package:smartsocket/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:smartsocket/app/modules/dashboardOverview/views/dashboard_overview.dart';
+import 'package:smartsocket/app/modules/dashboard_splash/binding/splash_binding.dart';
+import 'package:smartsocket/app/modules/dashboard_splash/views/dashboard_splash_view.dart';
 import 'package:smartsocket/app/modules/home/binding/home_binding.dart';
 import 'package:smartsocket/app/modules/home/views/home_view.dart';
 import 'package:smartsocket/app/modules/about_us/aboutus_widget.dart';
@@ -18,7 +20,6 @@ import 'package:smartsocket/app/modules/session_information/binding/session_info
 import 'package:smartsocket/app/modules/session_information/views/session_information_screen.dart';
 import 'package:smartsocket/app/modules/sessions_management/bindings/session_management_binding.dart';
 import 'package:smartsocket/app/modules/sessions_management/views/session_management_screen.dart';
-import 'package:smartsocket/app/modules/signup/bindings/user_signup_binding.dart';
 import 'package:smartsocket/app/modules/tariff_management/bindings/tariff_management_binding.dart';
 import 'package:smartsocket/app/modules/tariff_management/views/tariff_management_screen.dart';
 import 'package:smartsocket/app/modules/tickets_management/bindings/tickets_management_binding.dart';
@@ -28,8 +29,10 @@ import 'package:smartsocket/app/modules/user_dashboard/bindings/user_dashboard_b
 import 'package:smartsocket/app/modules/user_dashboard/views/user_dashboard.dart';
 import 'package:smartsocket/app/modules/user_profile/bindings/user_profile_binding.dart';
 import 'package:smartsocket/app/modules/user_profile/views/user_profile_screen.dart';
+import 'package:smartsocket/app/modules/user_registration/bindings/user_registration_binding.dart';
+import 'package:smartsocket/app/modules/user_registration/view/signup_screen.dart';
 import 'package:smartsocket/app/modules/users_management/bindings/users_management_binding.dart';
-import 'package:smartsocket/app/modules/users_management/views/add_a_user_screen.dart';
+import 'package:smartsocket/app/modules/user_registration/view/add_a_user_screen.dart';
 import 'package:smartsocket/app/modules/users_management/views/end_users_screen.dart';
 import 'package:smartsocket/app/widgets/bottom_bar.dart';
 import '../middleware/auth_middleware.dart';
@@ -47,9 +50,6 @@ import '../modules/policy_pages/view/shipping_policy.dart';
 import '../modules/policy_pages/view/terms_and_conditions.dart';
 import '../modules/root/bindings/root_binding.dart';
 import '../modules/root/views/root_view.dart';
-import '../modules/signup/view/signup_screen.dart';
-import '../modules/splash/binding/splash_binding.dart';
-import '../modules/splash/views/splash_view.dart';
 import '../modules/user_account_settings/bindings/user_account_settings_binding.dart';
 
 part 'app_routes.dart';
@@ -115,7 +115,7 @@ class AppPages {
         ),
         GetPage(
             name: _Paths.dashboardSplash,
-            page: () => const SplashView(),
+            page: () => const DashboardSplashView(),
             bindings: [DashboardSplashBinding()]),
         GetPage(
           middlewares: [EnsureNotAuthedMiddleware()],
@@ -127,7 +127,7 @@ class AppPages {
           middlewares: [EnsureNotAuthedMiddleware()],
           name: _Paths.signup,
           page: () => SignupView(),
-          bindings: [UserSignupBinding()],
+          bindings: [UserRegistrationBinding()],
         ),
         GetPage(
           middlewares: [EnsureNotAuthedMiddleware()],
@@ -170,7 +170,7 @@ class AppPages {
             GetPage(
               name: _Paths.addUsers,
               page: () => AddANewUser(),
-              binding: UsersManagementBinding(),
+              binding: UserRegistrationBinding(),
             ),
             GetPage(
               name: _Paths.endUsersManagement,

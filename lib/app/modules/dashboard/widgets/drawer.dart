@@ -287,13 +287,13 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                 ListTile(
                   dense: false,
                   title: Text(
-                      AuthService.to.isLoggedInValue ? "Logout" : "Login",
+                      AuthService.to.isLoggedIn ? "Logout" : "Login",
                       style: const TextStyle(fontFamily: "MontserratRegular")),
                   leading: Icon(Icons.logout, color: kDrawerIconColor),
                   selected: index == 12 ? true : false,
                   selectedColor: Colors.white,
                   onTap: () {
-                    if (AuthService.to.isLoggedInValue) {
+                    if (AuthService.to.isLoggedIn) {
                       AuthService.to.logout();
                       IdRepository().invalidateUserData();
                       Get.toNamed(Routes.login);

@@ -1,24 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/app/modules/users_management/controllers/users_management_controller.dart';
+import 'package:smartsocket/app/modules/user_registration/controller/user_registration_controller.dart';
 import 'package:smartsocket/app/widgets/argon_button_widget.dart';
+import 'package:smartsocket/app/widgets/dropdown_widget.dart';
 import 'package:smartsocket/app/widgets/subheadings.dart';
 import 'package:smartsocket/constants/color_constants.dart';
 import 'package:smartsocket/constants/constants.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 import 'package:smartsocket/utils/responsive.dart';
 
-class AddANewUser extends GetView<UsersManagementController> {
+class AddANewUser extends GetView<UserRegistrationController> {
   AddANewUser({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController name = TextEditingController();
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
   final TextEditingController mobileNumber = TextEditingController();
-  final TextEditingController userType = TextEditingController();
+  final TextEditingController userName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
-  final TextEditingController confirmPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,18 +70,17 @@ class AddANewUser extends GetView<UsersManagementController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _textFieldWidget(context,
-                      fieldType: "Name", textController: name),
+                      fieldType: "First name", textController: firstName),
+                  _textFieldWidget(context,
+                      fieldType: "Last name", textController: lastName),
+                  _textFieldWidget(context,
+                      fieldType: "Username", textController: userName),
                   _textFieldWidget(context,
                       fieldType: "Email", textController: email),
                   _textFieldWidget(context,
-                      fieldType: "Password", textController: password),
-                  _textFieldWidget(context,
                       fieldType: "Mobile number", textController: mobileNumber),
                   _textFieldWidget(context,
-                      fieldType: "User type", textController: userType),
-                  _textFieldWidget(context,
-                      fieldType: "Confirm password",
-                      textController: confirmPassword),
+                      fieldType: "Password", textController: password),
                   _addUsersButton(context)
                 ],
               ),
@@ -95,11 +96,11 @@ class AddANewUser extends GetView<UsersManagementController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _textFieldWidget(context,
-                      fieldType: "Name", textController: name),
+                      fieldType: "First name", textController: firstName),
                   _textFieldWidget(context,
                       fieldType: "Email", textController: email),
                   _textFieldWidget(context,
-                      fieldType: "Password", textController: password),
+                      fieldType: "Username", textController: userName),
                   _addUsersButton(context)
                 ],
               ),
@@ -109,12 +110,13 @@ class AddANewUser extends GetView<UsersManagementController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _textFieldWidget(context,
+                      fieldType: "Last name", textController: lastName),
+                  _textFieldWidget(context,
                       fieldType: "Mobile number", textController: mobileNumber),
-                  _textFieldWidget(context,
-                      fieldType: "User type", textController: userType),
-                  _textFieldWidget(context,
-                      fieldType: "Confirm password",
-                      textController: confirmPassword),
+                  DropdownWidget(
+                      items: const ["User Role", "Super Admin", "User", "CPO"],
+                      dropDownValue: controller.userRole,
+                      fieldType: "User Role")
                 ],
               ),
             ],
@@ -133,18 +135,27 @@ class AddANewUser extends GetView<UsersManagementController> {
           roundLoadingShape: false,
           splashColor: Colors.grey,
           onTap: (startLoader, stopLoader, btnState) async {
+            FocusScope.of(context).unfocus();
             if (btnState == ButtonState.Idle &&
-                _formKey.currentState!.validate()) {
+                _formKey.currentState!.validate() &&
+                controller.userRole.value != "User Role") {
               startLoader();
               await controller.addAUser({
-                "name": name.text,
+                "firstName": firstName.text,
+                "lastName": lastName.text,
                 "email": email.text.trim(),
-                "password": password.text,
-                "dialCode": "+91",
-                "mobileNumber": mobileNumber.text,
-                "countryCode": "IN"
+                "password": "SS-2023",
+                "active": 1,
+                "phoneNumber": mobileNumber.text,
+                "userName": userName.text,
               });
               stopLoader();
+              firstName.clear();
+              lastName.clear();
+              email.clear();
+              mobileNumber.clear();
+              userName.clear();
+              controller.userRole.value = "User Role";
             }
           },
           loader: const CupertinoActivityIndicator(),
@@ -169,7 +180,7 @@ class AddANewUser extends GetView<UsersManagementController> {
           SizedBox(
             width: kTextFieldWidth(context),
             child: TextFormField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              autovalidateMode: AutovalidateMode.disabled,
               readOnly: false,
               validator: (value) {
                 switch (fieldType) {

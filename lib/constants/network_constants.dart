@@ -20,10 +20,6 @@ const String userControllerUrl = "$rootUrl/api";
 
 const String authenticateUrl = "$rootUrl/authenticate";
 
-const String loginUrl = "$rootUrl/api/login";
-
-const String signUpUrl = "$rootUrl/api/registeruser";
-
 const String allUsersUrl = "$rootUrl/user/getall";
 
 const String allActiveUsersUrl = "$rootUrl/user/all";
@@ -114,7 +110,7 @@ const String getAllDevicesConfig = "$deviceManagementRootUrl/deviceConfig";
 Map<String, String> basicHeader = {'Content-Type': 'application/json; charset=UTF-8'};
 
 Map<String, String> authHeader() => {
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json; charset=UTF-8',
   'Authorization': 'Bearer ${AuthService.to.authToken}'
 };
 

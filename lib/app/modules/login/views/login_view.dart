@@ -14,8 +14,6 @@ import '../controllers/login_controller.dart';
 class LoginView extends GetView<LoginController> {
   final _formKey = GlobalKey<FormState>();
 
-  final RegExp regExp = RegExp('[H0-9]');
-
   final TextEditingController username = TextEditingController();
 
   final TextEditingController password = TextEditingController();
@@ -101,7 +99,7 @@ class LoginView extends GetView<LoginController> {
                                       startLoader();
                                       Map<String, dynamic> payload = {};
                                       payload["password"] = password.text;
-                                      payload["username"] = username.text;
+                                      payload["userName"] = username.text;
                                       await controller.login(payload);
                                       stopLoader();
                                     }

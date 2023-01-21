@@ -49,8 +49,6 @@ abstract class Routes {
 
   static String LOGIN_THEN(String afterSuccessfulLogin) =>
       '$login?then=${Uri.encodeQueryComponent(afterSuccessfulLogin)}';
-
-  static String PRODUCT_DETAILS(String productId) => '$products/$productId';
 }
 
 abstract class _Paths {

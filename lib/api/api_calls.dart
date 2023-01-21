@@ -115,8 +115,6 @@ callGetRequestWithParameters(
         .then((resp) {
       response = resp;
 
-      print(Get.currentRoute);
-
       if (kDebugMode) {
         print(response.contentLength == null ? response : response.body);
       }

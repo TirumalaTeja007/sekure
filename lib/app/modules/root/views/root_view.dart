@@ -13,7 +13,6 @@ class RootView extends GetView<RootController> {
       delegate: Get.nestedKey(null),
       builder: (context) {
         final title = context.location;
-        print(title);
         return Scaffold(
           body: GetRouterOutlet(
             initialRoute: Routes.home,

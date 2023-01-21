@@ -53,7 +53,8 @@ class UsersManagementController extends GetxController {
   addAUser(Map payload) async {
     dynamic errorMessage = "";
 
-    errorMessage = await AuthService.to.authenticate({"userName": "teja96", "password": "123456"});
+    errorMessage = await AuthService.to
+        .authenticate({"userName": "teja96", "password": "123456"});
 
     if (AuthService.to.authToken.isNotEmpty && errorMessage.isEmpty) {
       await GetConnect()
@@ -85,16 +86,22 @@ class UsersManagementController extends GetxController {
     if (response.runtimeType != String) {
       if (jsonDecode(response.body).length != 0) {
         usersList.value = jsonDecode(response.body);
+
         usersList.insert(0, tableHeaders);
+
         await Future.delayed(const Duration(milliseconds: 500));
+
         print(usersList.length);
+
         processing.value = false;
       } else {
         processing.value = false;
+
         errorMessage.value = "No data";
       }
     } else {
       processing.value = false;
+
       errorMessage.value = response;
     }
   }

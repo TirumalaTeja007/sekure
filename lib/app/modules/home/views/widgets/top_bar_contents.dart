@@ -208,7 +208,9 @@ class TopBarContents extends StatelessWidget {
                   ? homeController.isHovering[4] = true
                   : homeController.isHovering[4] = false;
             },
-            onTap: () => Get.toNamed(Routes.dashboardSplash),
+            onTap: () {
+              Get.toNamed(Routes.dashboard);
+            },
             child: Obx(
               () => Column(
                 mainAxisSize: MainAxisSize.min,

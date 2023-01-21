@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 
 class DashboardController extends GetxController {
   final List tabList = [
@@ -17,4 +18,9 @@ class DashboardController extends GetxController {
     "Settings",
     "Logout"
   ];
+
+  @override
+  onInit() async {
+    super.onInit();
+  }
 }

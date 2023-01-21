@@ -6,8 +6,8 @@ import 'package:smartsocket/utils/responsive.dart';
 
 import '../controllers/splash_controller.dart';
 
-class SplashView extends GetView<GetxController> {
-  const SplashView({super.key});
+class DashboardSplashView extends GetView<SplashController> {
+  const DashboardSplashView({super.key});
 
   @override
   Widget build(BuildContext context) {
