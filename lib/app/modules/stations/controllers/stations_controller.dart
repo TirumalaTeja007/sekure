@@ -9,16 +9,16 @@ import 'package:smartsocket/utils/debouncer.dart';
 import 'package:smartsocket/api/api_calls.dart';
 import 'package:smartsocket/utils/local_storage.dart';
 
-class ChargersController extends GetxController {
+class StationsController extends GetxController {
   late LinkedScrollControllerGroup controllers;
 
   late ScrollController bodyController;
 
   RxBool processing = false.obs;
 
-  RxList devicesList = [].obs;
-
   RxString errorMessage = "".obs;
+
+  RxList stationsList = [].obs;
 
   TextEditingController searchController = TextEditingController();
 
@@ -27,13 +27,14 @@ class ChargersController extends GetxController {
   RxString searchedKeyword = "".obs;
 
   final tableHeaders = {
-    "id": "S.No",
-    "name": "Device Name",
-    "serialNumber": "Serial Number",
-    "type": "Model",
-    "macAddress": "MAC Address",
-    "location": "Station Name",
-    "deviceAddress": "Device Address",
+    "addressId": "S.No",
+    "addressName1": "Address Name1",
+    "addressName2": "Address Name2",
+    "addressName3": "Address Name3",
+    "city": "City",
+    "state": "State",
+    "pincode": "Pincode",
+    "locationName": "Location Name",
     "actions": "Actions"
   };
 
@@ -41,7 +42,7 @@ class ChargersController extends GetxController {
   void onInit() async {
     controllers = LinkedScrollControllerGroup();
     bodyController = controllers.addAndGet();
-    fetchAllChargers();
+    fetchAllStations();
     super.onInit();
   }
 
@@ -69,7 +70,7 @@ class ChargersController extends GetxController {
     }
   }
 
-  fetchAllChargers() async {
+  fetchAllStations() async {
     processing.value = true;
 
     String? jsonString = await IdRepository().getUserData();
@@ -81,11 +82,12 @@ class ChargersController extends GetxController {
 
     if (AuthService.to.authToken.isNotEmpty && authResponse.isEmpty) {
       await GetConnect()
-          .get("$rootUrl/deviceapi/getalldevices", headers: authHeader())
+          .get("$rootUrl/addressapi/getalladdresses", headers: authHeader())
           .then((response) async {
         if (!response.hasError && response.body["status"] == "true") {
-          devicesList.value = response.body["data"];
-          devicesList.insert(0, tableHeaders);
+          stationsList.value = response.body["data"];
+          //print("StationsList-$stationsList");
+          stationsList.insert(0, tableHeaders);
           processing.value = false;
         } else {
           processing.value = false;
@@ -95,21 +97,6 @@ class ChargersController extends GetxController {
     } else {
       processing.value = false;
       errorMessage.value = authResponse.body["message"];
-    }
-  }
-
-  getAllDevicesConfiguration() async {
-    final response = await callGetRequestWithoutParameters(
-        routeID: "/ChargersOverview",
-        api: getAllDevicesConfig,
-        header: {'Content-Type': 'application/json; charset=UTF-8'});
-
-    if (response.runtimeType != String && response.statusCode == 200) {
-      return jsonDecode(response.body)["data"].length == 0
-          ? "No data"
-          : jsonDecode(response.body)["data"];
-    } else {
-      return "Exception";
     }
   }
 }

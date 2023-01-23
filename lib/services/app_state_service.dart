@@ -21,7 +21,7 @@ class AppStateService extends GetxService {
     dynamic errorMessage = "";
 
     errorMessage = await AuthService.to
-        .authenticate({"userName": "teja96", "password": "123456"});
+        .authenticate({"userName": "SS-0001", "password": "123456"});
 
     if (AuthService.to.authToken.isNotEmpty && errorMessage.isEmpty) {
       await GetConnect()

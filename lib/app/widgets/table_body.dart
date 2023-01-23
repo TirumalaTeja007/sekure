@@ -7,10 +7,13 @@ import 'package:intl/intl.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:smartsocket/app/routes/app_pages.dart';
 import 'package:smartsocket/app/widgets/nodata_widget.dart';
+import 'package:smartsocket/constants/constants.dart';
 import 'package:smartsocket/utils/local_storage.dart';
 import 'package:smartsocket/utils/responsive.dart';
 import 'package:smartsocket/utils/scroll_behaviour.dart';
 import 'package:smartsocket/app/widgets/table_cell.dart';
+
+import '../../constants/color_constants.dart';
 
 class TableBody extends StatefulWidget {
   final ScrollController scrollController;
@@ -65,76 +68,93 @@ class _TableBodyState extends State<TableBody> {
         await Future.delayed(const Duration(seconds: 2));
       },
       child: widget.cells.isNotEmpty
-          ? Scrollbar(
-              thumbVisibility: true,
-              trackVisibility: true,
-              controller: controller,
-              child: ScrollConfiguration(
-                behavior:
-                    ScrollConfiguration.of(context).copyWith(scrollbars: true),
-                child: SingleChildScrollView(
-                  controller: controller,
-                  scrollDirection: Axis.horizontal,
-                  physics: const ClampingScrollPhysics(),
-                  child: SizedBox(
-                    width: headerKeys.length * cellWidth,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 60,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: headerKeys.length * cellWidth,
-                                child: ListView(
-                                  physics: const AlwaysScrollableScrollPhysics(
-                                      parent: ClampingScrollPhysics()),
-                                  scrollDirection: Axis.horizontal,
-                                  children: List.generate(
-                                      widget.cells[0].values.toList().length,
-                                      (index) {
-                                    return CustomTableCell(
-                                        color: Colors.grey.shade500,
-                                        value: widget.cells[0].values
-                                            .toList()[index],
-                                        valueType: "Header",
-                                        valueIndex: index,
-                                        rowData: widget.cells[0],
-                                        onTap: viewData);
-                                  }),
+          ? Container(
+              margin: EdgeInsets.symmetric(horizontal: cellWidth * 0.5),
+              width: screenSize.width,
+              child: Scrollbar(
+                thumbVisibility: true,
+                trackVisibility: true,
+                controller: controller,
+                child: ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context)
+                      .copyWith(scrollbars: true),
+                  child: SingleChildScrollView(
+                    controller: controller,
+                    scrollDirection: Axis.horizontal,
+                    physics: const ClampingScrollPhysics(),
+                    child: Card(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 60,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: headerKeys.length * cellWidth,
+                                  color: kBgShade,
+                                  child: ListView(
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(
+                                            parent: ClampingScrollPhysics()),
+                                    scrollDirection: Axis.horizontal,
+                                    children: List.generate(
+                                        widget.cells[0].values.toList().length,
+                                        (index) {
+                                      return CustomTableCell(
+                                          color: kPrimaryTextColor,
+                                          value: widget.cells[0].values
+                                              .toList()[index],
+                                          valueType: "Header",
+                                          valueIndex: index,
+                                          rowData: widget.cells[0],
+                                          onTap: viewData);
+                                    }),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: SizedBox(
-                            width: headerKeys.length * cellWidth,
-                            child: ListView(
-                              physics: const AlwaysScrollableScrollPhysics(
-                                  parent: ClampingScrollPhysics()),
-                              children: List.generate(data.length, (y) {
-                                final found = _searchForKeyword(data, y);
-                                return found == true
-                                    ? Row(
-                                        children: List.generate(
-                                            headerKeys.length, (x) {
-                                          return CustomTableCell(
-                                              value: _getData(
-                                                  data, headerKeys, y, x),
-                                              color: Colors.white,
-                                              valueType: "Body",
-                                              valueIndex: x,
-                                              rowData: data[y],
-                                              onTap: viewData);
-                                        }),
-                                      )
-                                    : const SizedBox.shrink();
-                              }),
+                              ],
                             ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: SizedBox(
+                              width: headerKeys.length * cellWidth,
+                              child: ListView(
+                                physics: const AlwaysScrollableScrollPhysics(
+                                    parent: ClampingScrollPhysics()),
+                                children: List.generate(data.length, (y) {
+                                  final found = _searchForKeyword(data, y);
+                                  return found == true
+                                      ? Container(
+                                    color: y.isEven
+                                        ? Colors.white
+                                        : kGrey,
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: List.generate(
+                                                headerKeys.length, (x) {
+                                              return CustomTableCell(
+                                                  value: headerKeys[x] ==
+                                                          "actions"
+                                                      ? "Actions"
+                                                      : _getData(
+                                                          data, headerKeys, y, x),
+                                                  color: Colors.white,
+                                                  valueType: "Body",
+                                                  valueIndex: x,
+                                                  rowData: data[y],
+                                                  onTap: viewData);
+                                            }),
+                                          ),
+                                      )
+                                      : const SizedBox.shrink();
+                                }),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

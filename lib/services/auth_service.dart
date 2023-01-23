@@ -30,6 +30,7 @@ class AuthService extends GetxService {
           .post(authenticateUrl, {"username": args["userName"], "password": args["password"]},
           headers: basicHeader)
           .then((response) {
+            print(response.body);
         if (!response.hasError) {
           _authToken.value = response.body["jwtToken"];
           authToken;

@@ -20,6 +20,9 @@ import 'package:smartsocket/app/modules/session_information/binding/session_info
 import 'package:smartsocket/app/modules/session_information/views/session_information_screen.dart';
 import 'package:smartsocket/app/modules/sessions_management/bindings/session_management_binding.dart';
 import 'package:smartsocket/app/modules/sessions_management/views/session_management_screen.dart';
+import 'package:smartsocket/app/modules/stations/bindings/stations_binding.dart';
+import 'package:smartsocket/app/modules/stations/views/add_sites_view.dart';
+import 'package:smartsocket/app/modules/stations/views/stations_report.dart';
 import 'package:smartsocket/app/modules/tariff_management/bindings/tariff_management_binding.dart';
 import 'package:smartsocket/app/modules/tariff_management/views/tariff_management_screen.dart';
 import 'package:smartsocket/app/modules/tickets_management/bindings/tickets_management_binding.dart';
@@ -156,6 +159,16 @@ class AppPages {
               name: _Paths.chargersReports,
               page: () => const ChargersReportsScreen(),
               binding: ChargersBinding(),
+            ),
+            GetPage(
+              name: _Paths.addSites,
+              page: () => AddSitesView(),
+              binding: StationsBinding(),
+            ),
+            GetPage(
+              name: _Paths.stationsReports,
+              page: () => const StationsReportView(),
+              binding: StationsBinding(),
             ),
             GetPage(
               name: _Paths.tariffManagement,

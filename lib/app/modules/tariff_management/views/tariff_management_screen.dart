@@ -102,6 +102,7 @@ class TariffManagementScreen extends GetView<TariffManagementController> {
                   fontFamily: 'MontserratRegular',
                   color: kPrimaryTextColor,
                   fontSize: 14)),
+          const SizedBox(width: 20),
           PopupMenuButton(
             constraints: const BoxConstraints.expand(width: 100, height: 200),
             icon: const Icon(Icons.filter_list, color: Color(0xff6cfc2c)),

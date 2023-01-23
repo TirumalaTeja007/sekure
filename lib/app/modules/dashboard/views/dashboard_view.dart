@@ -28,6 +28,12 @@ class DashboardView extends GetView<DashboardController> {
         if (currentLocation.startsWith(Routes.chargersReports) == true) {
           currentIndex = 2;
         }
+        if (currentLocation.startsWith(Routes.addSites) == true) {
+          currentIndex = 3;
+        }
+        if (currentLocation.startsWith(Routes.stationsReports) == true) {
+          currentIndex = 4;
+        }
         if (currentLocation.startsWith(Routes.sessionsManagement) == true) {
           currentIndex = 5;
         }

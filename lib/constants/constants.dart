@@ -21,12 +21,19 @@ extension StringCasingExtension on String {
 
 const kDrawerWidth = 304;
 
-kFilterButtonWidth(BuildContext context) {
-  return ResponsiveWidget.isSmallScreen(context) ? 100 : 125;
+kSearchFieldWidth(BuildContext context) {
+  final width = MediaQuery.of(context).size.width;
+  return ResponsiveWidget.isSmallScreen(context) ? 150 : 200;
 }
 
-kSearchFieldWidth(BuildContext context) {
+kFilterButtonWidth(BuildContext context) {
+  final width = MediaQuery.of(context).size.width;
   return ResponsiveWidget.isSmallScreen(context) ? 150 : 200;
+}
+
+kCellWidth(BuildContext context) {
+  final width = MediaQuery.of(context).size.width;
+  return width < 650 ? 135 : 175;
 }
 
 kTextFieldWidth(BuildContext context) {

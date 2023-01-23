@@ -18,8 +18,6 @@ class NoDataWidget extends StatelessWidget {
             child: Text(
                 data.runtimeType != String || data == "No data"
                     ? "No data available"
-                    : data.contains("Exception")
-                    ? data
                     : "Error",
                 style: const TextStyle(
                     fontSize: 16,
@@ -32,16 +30,8 @@ class NoDataWidget extends StatelessWidget {
               Text(
                   data.runtimeType != String || data == "No data"
                       ? "No records are found for the requested action. Try changing the "
-                      "filters or create some data."
-                      : data == "SocketException"
-                      ? "We apologize for the inconvenience. A connection attempt failed while"
-                  "trying to process your request. OS Error: Connection refused."
-                      : data == "TimeoutException"
-                      ? "We apologize for the inconvenience. The connection has timed out i.e.,"
-                      " the server is taking too long to respond."
-                      "\nPlease try again in a few moments."
-                      : "We apologize for the inconvenience. We are unable to perform the"
-                  "requested action at this moment.",
+                          "filters or create some data."
+                      : data,
                   style: const TextStyle(
                       fontSize: 14,
                       color: kPrimaryTextColorShade,

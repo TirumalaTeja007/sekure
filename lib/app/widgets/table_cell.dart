@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartsocket/constants/color_constants.dart';
 
-double cellWidth = 175;
-
 class CustomTableCell extends StatelessWidget {
   final String value;
   final Color color;
@@ -26,64 +24,51 @@ class CustomTableCell extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     return Container(
       width: screenSize.width < 650 ? 135 : 175,
-      decoration: BoxDecoration(
-          color: Colors.white, border: Border.all(color: kPrimaryTextColor, width: 0.15)),
-      height: 60,
       alignment: Alignment.center,
-      child: valueIndex == 0 && valueType == "Body"
-          ? Stack(
+      child: value == "Actions" && valueType == "Body"
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          value ?? '',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: screenSize.width < 650 ? 14 : 16.0,
-                            fontFamily: valueType == "Header"
-                                ? 'MontserratBold'
-                                : 'MontserratRegular',
-                          ),
-                        ),
-                      ],
+                InkWell(
+                  onTap: () => onTap(rowData, valueType),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    child: const Tooltip(
+                      message: "View info",
+                      child: Icon(Icons.info, color: kBoxShadowColor),
                     ),
-                  ],
+                  ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () => onTap(rowData, valueType),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            child: const Tooltip(
-                              message: "View info",
-                              child: Icon(Icons.info, color: kBoxShadowColor),
-                            ),
-                          ),
-                        ),
-                      ],
+                InkWell(
+                  onTap: () => onTap(rowData, valueType),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    child: const Tooltip(
+                      message: "Edit record",
+                      child: Icon(Icons.edit_note_rounded, color: kGreen),
                     ),
-                  ],
-                )
+                  ),
+                ),
+                InkWell(
+                  onTap: () => onTap(rowData, valueType),
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    child: const Tooltip(
+                      message: "Delete record",
+                      child: Icon(Icons.delete, color: kRed),
+                    ),
+                  ),
+                ),
               ],
             )
           : Text(
               value ?? '',
               style: TextStyle(
-                fontSize: screenSize.width < 650 ? 14 : 16.0,
-                fontFamily: valueType == "Header"
-                    ? 'MontserratBold'
-                    : 'MontserratRegular',
-              ),
+                  fontSize: screenSize.width < 650 ? 14 : 16.0,
+                  fontFamily: valueType == "Header"
+                      ? 'MontserratBold'
+                      : 'MontserratRegular',
+                  color: valueType == "Header" ? Colors.white : Colors.black),
             ),
     );
   }

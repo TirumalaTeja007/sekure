@@ -21,7 +21,6 @@ class UserDashboardScreen extends GetView<UserDashboardController> {
         final delegate = context.navigation;
         final currentLocation = context.location;
         var currentIndex = 0;
-        print(screenSize);
         if (currentLocation.startsWith(Routes.userSessionHistory) == true) {
           currentIndex = 1;
         }

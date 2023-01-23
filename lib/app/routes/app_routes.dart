@@ -24,6 +24,8 @@ abstract class Routes {
   static const dashboardOverview = _Paths.dashboard + _Paths.dashboardOverview;
   static const generateCPIDs = _Paths.dashboard + _Paths.generateCPIDs;
   static const chargersReports = _Paths.dashboard + _Paths.chargersReports;
+  static const stationsReports = _Paths.dashboard + _Paths.stationsReports;
+  static const addSites = _Paths.dashboard + _Paths.addSites;
   static const tariffManagement = _Paths.dashboard + _Paths.tariffManagement;
   static const sessionsManagement = _Paths.dashboard + _Paths.sessionsManagement;
   static const addUsers = _Paths.dashboard + _Paths.addUsers;
@@ -71,6 +73,8 @@ abstract class _Paths {
   static const dashboard = '/dashboard';
   static const dashboardOverview = '/dashboardOverview';
   static const dashboardSplash = '/dashboardSplash';
+  static const addSites = '/addSites';
+  static const stationsReports = '/stationsReports';
   static const generateCPIDs = '/generateCPIDs';
   static const chargersReports = '/chargersReports';
   static const tariffManagement = '/tariffManagement';

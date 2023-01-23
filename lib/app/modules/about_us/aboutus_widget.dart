@@ -10,7 +10,6 @@ class AboutUsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    print(screenSize);
     double horizontalPadding = ResponsiveWidget.isLargeScreen(context)
         ? screenSize.width * 0.11
         : screenSize.width * 0.075;

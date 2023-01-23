@@ -114,7 +114,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                       children: [
                         const SizedBox(height: 10),
                         ElevatedButton(
-                          onPressed: () => {},
+                          onPressed: () => delegate.toNamed(Routes.addSites),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: index == 3
                                   ? kDrawerUnselectedTextColor
@@ -131,7 +131,8 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () => {},
+                          onPressed: () =>
+                              delegate.toNamed(Routes.stationsReports),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: index == 4
                                   ? kDrawerUnselectedTextColor
@@ -286,8 +287,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                 // ),
                 ListTile(
                   dense: false,
-                  title: Text(
-                      AuthService.to.isLoggedIn ? "Logout" : "Login",
+                  title: Text(AuthService.to.isLoggedIn ? "Logout" : "Login",
                       style: const TextStyle(fontFamily: "MontserratRegular")),
                   leading: Icon(Icons.logout, color: kDrawerIconColor),
                   selected: index == 12 ? true : false,
