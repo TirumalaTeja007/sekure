@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:smartsocket/api/efi_http_exception_handler.dart';
 import 'package:smartsocket/app/routes/app_pages.dart';
 import 'package:smartsocket/constants/network_constants.dart';
 import 'package:smartsocket/services/auth_service.dart';
+import 'package:smartsocket/utils/local_storage.dart';
 
 class UserRegistrationController extends GetxController {
   RxBool showPassword = false.obs;

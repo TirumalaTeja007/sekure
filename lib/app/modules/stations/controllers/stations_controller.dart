@@ -26,6 +26,20 @@ class StationsController extends GetxController {
 
   RxString searchedKeyword = "".obs;
 
+  RxString startDateRange = "".obs;
+
+  RxString endDateRange = "".obs;
+
+  RxString selectedDateRange = "Last 7 days".obs;
+
+  RxString sortByStatus = "All".obs;
+
+  RxString defaultSortByValue = "None".obs;
+
+  RxString sortByNetworkStatus = "All".obs;
+
+  RxString sortBySessionStatus = "All".obs;
+
   final tableHeaders = {
     "addressId": "S.No",
     "addressName1": "Address Name1",

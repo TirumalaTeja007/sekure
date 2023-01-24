@@ -51,6 +51,8 @@ class LoginController extends GetxController {
         if (!response.hasError && response.body["status"] == "true") {
           Map data = response.body["data"];
 
+          data["password"] = args["password"];
+
           data["isLoggedIn"] = true;
 
           await IdRepository().saveUserData(jsonEncode(data));

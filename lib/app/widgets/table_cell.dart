@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:smartsocket/constants/color_constants.dart';
+import 'package:smartsocket/constants/constants.dart';
+
+import '../../utils/responsive.dart';
 
 class CustomTableCell extends StatelessWidget {
   final String value;
@@ -23,7 +27,7 @@ class CustomTableCell extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Container(
-      width: screenSize.width < 650 ? 135 : 175,
+      width: kCellWidth(context),
       alignment: Alignment.center,
       child: value == "Actions" && valueType == "Body"
           ? Row(
@@ -33,9 +37,13 @@ class CustomTableCell extends StatelessWidget {
                   onTap: () => onTap(rowData, valueType),
                   child: Container(
                     padding: const EdgeInsets.all(5.0),
-                    child: const Tooltip(
+                    child: Tooltip(
                       message: "View info",
-                      child: Icon(Icons.info, color: kBoxShadowColor),
+                      child: Icon(MdiIcons.information,
+                          color: Colors.blue,
+                          size: ResponsiveWidget.isSmallScreen(context)
+                              ? 18
+                              : 22),
                     ),
                   ),
                 ),
@@ -43,9 +51,13 @@ class CustomTableCell extends StatelessWidget {
                   onTap: () => onTap(rowData, valueType),
                   child: Container(
                     padding: const EdgeInsets.all(5.0),
-                    child: const Tooltip(
+                    child: Tooltip(
                       message: "Edit record",
-                      child: Icon(Icons.edit_note_rounded, color: kGreen),
+                      child: Icon(MdiIcons.textBoxEdit,
+                          color: kGreen,
+                          size: ResponsiveWidget.isSmallScreen(context)
+                              ? 18
+                              : 22),
                     ),
                   ),
                 ),
@@ -53,9 +65,13 @@ class CustomTableCell extends StatelessWidget {
                   onTap: () => onTap(rowData, valueType),
                   child: Container(
                     padding: const EdgeInsets.all(5.0),
-                    child: const Tooltip(
+                    child: Tooltip(
                       message: "Delete record",
-                      child: Icon(Icons.delete, color: kRed),
+                      child: Icon(MdiIcons.delete,
+                          color: kRed,
+                          size: ResponsiveWidget.isSmallScreen(context)
+                              ? 18
+                              : 22),
                     ),
                   ),
                 ),
@@ -64,7 +80,10 @@ class CustomTableCell extends StatelessWidget {
           : Text(
               value ?? '',
               style: TextStyle(
-                  fontSize: screenSize.width < 650 ? 14 : 16.0,
+                  fontSize: ResponsiveWidget.isLargeScreen(
+                      context)
+                      ? 14
+                      : 12,
                   fontFamily: valueType == "Header"
                       ? 'MontserratBold'
                       : 'MontserratRegular',

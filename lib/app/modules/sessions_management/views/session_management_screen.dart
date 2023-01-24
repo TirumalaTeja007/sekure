@@ -64,7 +64,7 @@ class SessionManagementScreen extends GetView<SessionManagementController> {
                             controller.errorMessage.value.isEmpty
                         ? TableBody(
                             scrollController: controller.bodyController,
-                            cells: controller.transactions,
+                            cells: controller.sessionInfo,
                             refresh: controller.getUserSessionHistory,
                             searchedKeyword:
                                 controller.searchedKeyword.value,

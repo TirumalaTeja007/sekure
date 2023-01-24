@@ -21,22 +21,51 @@ extension StringCasingExtension on String {
 
 const kDrawerWidth = 304;
 
-kSearchFieldWidth(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
-  return ResponsiveWidget.isSmallScreen(context) ? 150 : 200;
-}
-
 kFilterButtonWidth(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
-  return ResponsiveWidget.isSmallScreen(context) ? 150 : 200;
+  return ResponsiveWidget.isLargeScreen(context) ? 160 : 130;
 }
 
 kCellWidth(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
-  return width < 650 ? 135 : 175;
+  return ResponsiveWidget.isLargeScreen(context) ? 160 : 100;
 }
 
 kTextFieldWidth(BuildContext context) {
   final width = MediaQuery.of(context).size.width;
   return ResponsiveWidget.isSmallScreen(context) ? width * 0.7 : 250;
 }
+
+final devicesSortByFiltersList = [
+  "None",
+  "Created Time",
+  "Serial Number",
+  "Device Name",
+  "Station Name"
+];
+
+final deviceStatusFiltersList = [
+  "All",
+  "Available",
+  "Unavailable",
+  "Preparing",
+  "Charging"
+];
+
+final deviceNetworkStatusFiltersList = ["All", "Online", "Offline"];
+
+final sessionStatusFiltersList = ["All", "Ongoing", "Completed", "Failed"];
+
+final stationsStatusFiltersList = ["All", "Functional", "Non-Functional"];
+
+final paymentsStatusFiltersList = ["All", "Initiated", "Success", "Failed"];
+
+final usersStatusFiltersList = ["All", "Active", "Inactive"];
+
+final ticketsStatusFiltersList = ["All", "Resolved", "Created", "In-Progress"];
+
+final dateRangeFiltersList = [
+  "Last 7 days",
+  "Last 30 days",
+  "Last 90 days",
+  "All time",
+  "Custom Date"
+];

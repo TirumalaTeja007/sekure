@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:smartsocket/constants/network_constants.dart';
 import 'package:smartsocket/services/auth_service.dart';
@@ -25,6 +26,20 @@ class ChargersController extends GetxController {
   Debouncer searchDebouncer = Debouncer(milliseconds: 300);
 
   RxString searchedKeyword = "".obs;
+
+  RxString startDateRange = "".obs;
+
+  RxString endDateRange = "".obs;
+
+  RxString selectedDateRange = "Last 7 days".obs;
+
+  RxString sortByStatus = "All".obs;
+
+  RxString defaultSortByValue = "None".obs;
+
+  RxString sortByNetworkStatus = "All".obs;
+
+  RxString sortBySessionStatus = "All".obs;
 
   final tableHeaders = {
     "id": "S.No",

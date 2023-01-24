@@ -58,7 +58,6 @@ class _TableBodyState extends State<TableBody> {
     var screenSize = MediaQuery.of(context).size;
     List headerKeys = widget.cells[0].keys.toList();
     List data = widget.cells.sublist(1);
-    double cellWidth = screenSize.width < 650 ? 135 : 175;
     return RefreshIndicator(
       notificationPredicate: (ScrollNotification notification) {
         return notification.depth == 0 || notification.depth == 1;
@@ -69,7 +68,10 @@ class _TableBodyState extends State<TableBody> {
       },
       child: widget.cells.isNotEmpty
           ? Container(
-              margin: EdgeInsets.symmetric(horizontal: cellWidth * 0.5),
+              margin: EdgeInsets.symmetric(
+                  horizontal: ResponsiveWidget.isLargeScreen(context)
+                      ? 50
+                      : 30),
               width: screenSize.width,
               child: Scrollbar(
                 thumbVisibility: true,
@@ -89,10 +91,10 @@ class _TableBodyState extends State<TableBody> {
                           SizedBox(
                             height: 60,
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  width: headerKeys.length * cellWidth,
+                                  width: headerKeys.length.toDouble() * kCellWidth(context),
                                   color: kBgShade,
                                   child: ListView(
                                     physics:
@@ -118,7 +120,7 @@ class _TableBodyState extends State<TableBody> {
                           ),
                           Expanded(
                             child: SizedBox(
-                              width: headerKeys.length * cellWidth,
+                              width: headerKeys.length.toDouble() * kCellWidth(context),
                               child: ListView(
                                 physics: const AlwaysScrollableScrollPhysics(
                                     parent: ClampingScrollPhysics()),
@@ -126,20 +128,21 @@ class _TableBodyState extends State<TableBody> {
                                   final found = _searchForKeyword(data, y);
                                   return found == true
                                       ? Container(
-                                    color: y.isEven
-                                        ? Colors.white
-                                        : kGrey,
-                                        child: Row(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0),
+                                          color:
+                                              y.isEven ? Colors.white : kGrey,
+                                          child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                MainAxisAlignment.start,
                                             children: List.generate(
                                                 headerKeys.length, (x) {
                                               return CustomTableCell(
-                                                  value: headerKeys[x] ==
-                                                          "actions"
-                                                      ? "Actions"
-                                                      : _getData(
-                                                          data, headerKeys, y, x),
+                                                  value:
+                                                      headerKeys[x] == "actions"
+                                                          ? "Actions"
+                                                          : _getData(data,
+                                                              headerKeys, y, x),
                                                   color: Colors.white,
                                                   valueType: "Body",
                                                   valueIndex: x,
@@ -147,7 +150,7 @@ class _TableBodyState extends State<TableBody> {
                                                   onTap: viewData);
                                             }),
                                           ),
-                                      )
+                                        )
                                       : const SizedBox.shrink();
                                 }),
                               ),

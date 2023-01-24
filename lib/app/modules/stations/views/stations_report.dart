@@ -10,6 +10,9 @@ import 'package:smartsocket/constants/constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
 import 'package:smartsocket/utils/scroll_behaviour.dart';
 
+import '../../../widgets/date_range.dart';
+import '../../../widgets/popup_menu.dart';
+
 class StationsReportView extends GetView<StationsController> {
   const StationsReportView({super.key});
 
@@ -23,28 +26,61 @@ class StationsReportView extends GetView<StationsController> {
 
   Widget body(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    double availableWidth = screenSize.width -
-        (ResponsiveWidget.isLargeScreen(context) ? kDrawerWidth : 0.0) -
-        (controller.tableHeaders.length * kCellWidth(context));
+    final List<Widget> filtersChildren = [
+      SearchTextFieldWidget(controller.searchController,
+          controller.searchedKeyword, controller.searchDebouncer),
+      PopupMenuWidget(
+          deviceStatusFiltersList, controller.sortByStatus, "Status"),
+      PopupMenuWidget(deviceNetworkStatusFiltersList,
+          controller.sortByNetworkStatus, "Network Status"),
+      DateRangeWidget(controller.startDateRange, controller.endDateRange,
+          controller.selectedDateRange)
+    ];
     return Column(
       children: [
         Padding(
           padding: EdgeInsets.only(
               top: ResponsiveWidget.isSmallScreen(context) ? 30 : 50,
-              bottom: 20,
-              right: availableWidth < kCellWidth(context)
-                  ? kCellWidth(context) * 0.5
-                  : availableWidth * 0.5 + 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SearchTextFieldWidget(controller.searchController,
-                  controller.searchedKeyword, controller.searchDebouncer),
-              const SizedBox(width: 20),
-              filterWidget(context, screenSize),
-            ],
-          ),
+              bottom: ResponsiveWidget.isSmallScreen(context) ? 20 : 35,
+              left: ResponsiveWidget.isLargeScreen(context) ? 50 : 30),
+          child: screenSize.width > 1570
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: filtersChildren,
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: ResponsiveWidget.isLargeScreen(context) &&
+                              screenSize.width > 1150
+                          ? filtersChildren.sublist(0, 4)
+                          : ResponsiveWidget.isMediumScreen(context) &&
+                                  screenSize.width > 700
+                              ? filtersChildren.sublist(0, 4)
+                              : ResponsiveWidget.isSmallScreen(context)
+                                  ? filtersChildren.sublist(0, 2)
+                                  : filtersChildren.sublist(0, 3),
+                    ),
+                    SizedBox(height: ResponsiveWidget.isSmallScreen(context) ? 10: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: ResponsiveWidget.isSmallScreen(context)
+                          ? filtersChildren.sublist(2, 4)
+                          : ResponsiveWidget.isMediumScreen(context) &&
+                                      screenSize.width < 700 ||
+                                  ResponsiveWidget.isLargeScreen(context) &&
+                                      screenSize.width < 1150
+                              ? filtersChildren.sublist(3, 5)
+                              : filtersChildren.sublist(4),
+                    ),
+                  ],
+                ),
         ),
         Expanded(
           child: ScrollConfiguration(
