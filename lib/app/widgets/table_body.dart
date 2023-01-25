@@ -69,9 +69,8 @@ class _TableBodyState extends State<TableBody> {
       child: widget.cells.isNotEmpty
           ? Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: ResponsiveWidget.isLargeScreen(context)
-                      ? 50
-                      : 30),
+                  horizontal:
+                      ResponsiveWidget.isLargeScreen(context) ? 50 : 30),
               width: screenSize.width,
               child: Scrollbar(
                 thumbVisibility: true,
@@ -84,80 +83,83 @@ class _TableBodyState extends State<TableBody> {
                     controller: controller,
                     scrollDirection: Axis.horizontal,
                     physics: const ClampingScrollPhysics(),
-                    child: Card(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 60,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: headerKeys.length.toDouble() * kCellWidth(context),
-                                  color: kBgShade,
-                                  child: ListView(
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(
-                                            parent: ClampingScrollPhysics()),
-                                    scrollDirection: Axis.horizontal,
-                                    children: List.generate(
-                                        widget.cells[0].values.toList().length,
-                                        (index) {
-                                      return CustomTableCell(
-                                          color: kPrimaryTextColor,
-                                          value: widget.cells[0].values
-                                              .toList()[index],
-                                          valueType: "Header",
-                                          valueIndex: index,
-                                          rowData: widget.cells[0],
-                                          onTap: viewData);
-                                    }),
-                                  ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 60,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: headerKeys.length.toDouble() *
+                                    kCellWidth(context),
+                                decoration: const BoxDecoration(
+                                     border: Border(
+                                        bottom: BorderSide(
+                                            color: kBgColor, width: 2))),
+                                child: ListView(
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(
+                                          parent: ClampingScrollPhysics()),
+                                  scrollDirection: Axis.horizontal,
+                                  children: List.generate(
+                                      widget.cells[0].values.toList().length,
+                                      (index) {
+                                    return CustomTableCell(
+                                        color: kPrimaryTextColor,
+                                        value:
+                                            " ${widget.cells[0].values.toList()[index]} ",
+                                        valueType: "Header",
+                                        valueIndex: index,
+                                        rowData: widget.cells[0],
+                                        onTap: viewData);
+                                  }),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: SizedBox(
-                              width: headerKeys.length.toDouble() * kCellWidth(context),
-                              child: ListView(
-                                physics: const AlwaysScrollableScrollPhysics(
-                                    parent: ClampingScrollPhysics()),
-                                children: List.generate(data.length, (y) {
-                                  final found = _searchForKeyword(data, y);
-                                  return found == true
-                                      ? Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 8.0),
-                                          color:
-                                              y.isEven ? Colors.white : kGrey,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: List.generate(
-                                                headerKeys.length, (x) {
-                                              return CustomTableCell(
-                                                  value:
-                                                      headerKeys[x] == "actions"
-                                                          ? "Actions"
-                                                          : _getData(data,
-                                                              headerKeys, y, x),
-                                                  color: Colors.white,
-                                                  valueType: "Body",
-                                                  valueIndex: x,
-                                                  rowData: data[y],
-                                                  onTap: viewData);
-                                            }),
-                                          ),
-                                        )
-                                      : const SizedBox.shrink();
-                                }),
                               ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: SizedBox(
+                            width: headerKeys.length.toDouble() *
+                                kCellWidth(context),
+                            child: ListView(
+                              physics: const AlwaysScrollableScrollPhysics(
+                                  parent: ClampingScrollPhysics()),
+                              children: List.generate(data.length, (y) {
+                                final found = _searchForKeyword(data, y);
+                                return found == true
+                                    ? Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8.0),
+                                        color:
+                                            y.isOdd ? Colors.white : kGrey,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: List.generate(
+                                              headerKeys.length, (x) {
+                                            return CustomTableCell(
+                                                value:
+                                                    headerKeys[x] == "actions"
+                                                        ? "Actions"
+                                                        : _getData(data,
+                                                            headerKeys, y, x),
+                                                color: Colors.white,
+                                                valueType: "Body",
+                                                valueIndex: x,
+                                                rowData: data[y],
+                                                onTap: viewData);
+                                          }),
+                                        ),
+                                      )
+                                    : const SizedBox.shrink();
+                              }),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -170,14 +172,14 @@ class _TableBodyState extends State<TableBody> {
   viewData(Map data, String valueType) {
     if (valueType == "Body") {
       switch (widget.infoType) {
-        case "EndUsersManagement":
+        case "UsersReports":
           data["userType"] = "User";
           idRepo.saveArguments('userInfoArgs', jsonEncode(data));
           Get.toNamed(Routes.userDashboard);
           break;
-        case "ChargersReports":
+        case "ChargersOverview":
           break;
-        case "TariffManagement":
+        case "Payments":
           break;
         case "TicketsManagement":
           break;

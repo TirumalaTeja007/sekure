@@ -8,7 +8,7 @@ import 'package:smartsocket/utils/debouncer.dart';
 import 'package:smartsocket/api/api_calls.dart';
 import 'package:smartsocket/utils/local_storage.dart';
 
-class TariffManagementController extends GetxController {
+class PaymentsController extends GetxController {
   late LinkedScrollControllerGroup controllers;
 
   late ScrollController bodyController;
@@ -24,6 +24,14 @@ class TariffManagementController extends GetxController {
   Debouncer searchDebouncer = Debouncer(milliseconds: 300);
 
   RxString searchedKeyword = "".obs;
+
+  RxString startDateRange = "".obs;
+
+  RxString endDateRange = "".obs;
+
+  RxString selectedDateRange = "Last 7 days".obs;
+
+  RxString sortByStatus = "None".obs;
 
   final idRepo = IdRepository();
 

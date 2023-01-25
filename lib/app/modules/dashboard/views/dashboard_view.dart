@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/dashboard/widgets/drawer.dart';
 import 'package:smartsocket/app/modules/dashboard/widgets/topbar.dart';
 import 'package:smartsocket/constants/color_constants.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 import 'package:smartsocket/services/auth_service.dart';
 
 import '../../../../utils/responsive.dart';
@@ -19,31 +20,31 @@ class DashboardView extends GetView<DashboardController> {
       routerDelegate: Get.nestedKey(Routes.dashboard),
       builder: (context) {
         final delegate = context.navigation;
-        //This router outlet handles the appbar and the bottom navigation bar
+        AppStateService.to.delegate = delegate;
         final currentLocation = context.location;
         var currentIndex = 0;
-        if (currentLocation.startsWith(Routes.generateCPIDs) == true) {
+        if (currentLocation.startsWith(Routes.stationsOverview) == true) {
           currentIndex = 1;
         }
-        if (currentLocation.startsWith(Routes.chargersReports) == true) {
+        if (currentLocation.startsWith(Routes.addStations) == true) {
           currentIndex = 2;
         }
-        if (currentLocation.startsWith(Routes.addSites) == true) {
+        if (currentLocation.startsWith(Routes.chargersOverview) == true) {
           currentIndex = 3;
         }
-        if (currentLocation.startsWith(Routes.stationsReports) == true) {
+        if (currentLocation.startsWith(Routes.addChargers) == true) {
           currentIndex = 4;
         }
         if (currentLocation.startsWith(Routes.sessionsManagement) == true) {
           currentIndex = 5;
         }
-        if (currentLocation.startsWith(Routes.tariffManagement) == true) {
+        if (currentLocation.startsWith(Routes.payments) == true) {
           currentIndex = 6;
         }
         if (currentLocation.startsWith(Routes.addUsers) == true) {
           currentIndex = 7;
         }
-        if (currentLocation.startsWith(Routes.endUsersManagement) == true) {
+        if (currentLocation.startsWith(Routes.usersReports) == true) {
           currentIndex = 8;
         }
         if (currentLocation.startsWith(Routes.ticketsManagement) == true) {
@@ -71,6 +72,7 @@ class DashboardView extends GetView<DashboardController> {
                           : PreferredSize(
                               preferredSize: Size(screenSize.width, 55),
                               child: AppBar(
+                                elevation: 1,
                                 backgroundColor: Colors.white,
                                 title: Text(controller.tabList[currentIndex],
                                     style: const TextStyle(
@@ -83,6 +85,7 @@ class DashboardView extends GetView<DashboardController> {
                                       radius: 20,
                                       backgroundImage: AssetImage(
                                           "assets/images/aboutUs.png")),
+                                  SizedBox(width: 20),
                                 ],
                               )),
                       SizedBox(

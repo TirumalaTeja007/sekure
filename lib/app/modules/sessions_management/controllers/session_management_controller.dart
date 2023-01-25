@@ -26,25 +26,31 @@ class SessionManagementController extends GetxController {
 
   RxString searchedKeyword = "".obs;
 
+  RxString sortByStatus = "All".obs;
+
+  RxString defaultSortByValue = "None".obs;
+
+  RxString startDateRange = "".obs;
+
+  RxString endDateRange = "".obs;
+
+  RxString selectedDateRange = "Last 7 days".obs;
+
   final idRepo = IdRepository();
 
   static const tableHeaders = {
     "id": "ID",
-    "userName": "Username",
-    'chargePointId': "Charge Point ID",
+    "deviceName": "Device Name",
     "sessionId": "Session ID",
-    "sessionStatusEnum": "Session Status",
-    "chargingDuration": "Charging Duration",
+    "duration": "Duration",
+    "meterValue": "Meter Value",
+    "status": "Status",
+    "stopDateTime": "Stop Date Time",
+    "startDateTime": "Start Date Time",
+    "stopReason": "Stop Reason",
     "timeLimit": "Time Limit",
-    "startDateTime": "Start Time",
-    "endDateTime": "End Time",
-    "energyConsumed": "Energy Consumed",
-    "sessionTypeEnum": "Session Type",
-    "stopChargeReason": "Stop Charge Reason",
-    "createdTime": "Created Time",
-    "createdBy": "Created By",
-    "updatedTime": "Updated Time",
-    "updatedBy": "Updated By",
+    "userName": "Username",
+    "actions": "Actions",
   };
 
   @override
@@ -72,7 +78,7 @@ class SessionManagementController extends GetxController {
 
     if (AuthService.to.authToken.isNotEmpty && authResponse.isEmpty) {
       await GetConnect()
-          .get("$rootUrl/sessioninfoapi/getsessionbystatus",
+          .get("$rootUrl/sessioninfoapi/getsessionbystatus/1",
               headers: authHeader())
           .then((response) async {
         if (!response.hasError && response.body["status"] == "true") {

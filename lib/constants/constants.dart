@@ -22,16 +22,20 @@ extension StringCasingExtension on String {
 const kDrawerWidth = 304;
 
 kFilterButtonWidth(BuildContext context) {
-  return ResponsiveWidget.isLargeScreen(context) ? 160 : 130;
+  return ResponsiveWidget.isSmallScreen(context) ? 135 : 155;
+}
+
+kSearchFieldWidth(BuildContext context) {
+  return ResponsiveWidget.isSmallScreen(context) ? 150 : 230;
 }
 
 kCellWidth(BuildContext context) {
-  return ResponsiveWidget.isLargeScreen(context) ? 160 : 100;
+  return ResponsiveWidget.isSmallScreen(context) ? 100 : 140;
 }
 
 kTextFieldWidth(BuildContext context) {
   final width = MediaQuery.of(context).size.width;
-  return ResponsiveWidget.isSmallScreen(context) ? width * 0.7 : 250;
+  return ResponsiveWidget.isSmallScreen(context) ? width * 0.45 : 250;
 }
 
 final devicesSortByFiltersList = [
@@ -39,6 +43,14 @@ final devicesSortByFiltersList = [
   "Created Time",
   "Serial Number",
   "Device Name",
+  "Station Name"
+];
+
+final stationsSortByFiltersList = [
+  "None",
+  "Created Time",
+  "Updated Time",
+  "City Name",
   "Station Name"
 ];
 
@@ -67,5 +79,5 @@ final dateRangeFiltersList = [
   "Last 30 days",
   "Last 90 days",
   "All time",
-  "Custom Date"
+  "Custom Range"
 ];

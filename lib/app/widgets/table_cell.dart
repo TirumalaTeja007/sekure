@@ -61,33 +61,38 @@ class CustomTableCell extends StatelessWidget {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () => onTap(rowData, valueType),
-                  child: Container(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Tooltip(
-                      message: "Delete record",
-                      child: Icon(MdiIcons.delete,
-                          color: kRed,
-                          size: ResponsiveWidget.isSmallScreen(context)
-                              ? 18
-                              : 22),
-                    ),
+                // InkWell(
+                //   onTap: () => onTap(rowData, valueType),
+                //   child: Container(
+                //     padding: const EdgeInsets.all(5.0),
+                //     child: Tooltip(
+                //       message: "Delete record",
+                //       child: Icon(MdiIcons.delete,
+                //           color: kRed,
+                //           size: ResponsiveWidget.isSmallScreen(context)
+                //               ? 18
+                //               : 22),
+                //     ),
+                //   ),
+                // ),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    value ?? '',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize:
+                            ResponsiveWidget.isSmallScreen(context) ? 12 : 14,
+                        fontFamily: valueType == "Header"
+                            ? 'MontserratBold'
+                            : 'MontserratRegular',
+                        color: valueType == "Header" ? kBgShade : Colors.black),
                   ),
                 ),
               ],
-            )
-          : Text(
-              value ?? '',
-              style: TextStyle(
-                  fontSize: ResponsiveWidget.isLargeScreen(
-                      context)
-                      ? 14
-                      : 12,
-                  fontFamily: valueType == "Header"
-                      ? 'MontserratBold'
-                      : 'MontserratRegular',
-                  color: valueType == "Header" ? Colors.white : Colors.black),
             ),
     );
   }

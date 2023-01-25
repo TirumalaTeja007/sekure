@@ -9,6 +9,8 @@ import 'package:smartsocket/utils/debouncer.dart';
 import 'package:smartsocket/api/api_calls.dart';
 import 'package:smartsocket/utils/local_storage.dart';
 
+import '../../../../services/app_state_service.dart';
+
 class StationsController extends GetxController {
   late LinkedScrollControllerGroup controllers;
 
@@ -32,13 +34,7 @@ class StationsController extends GetxController {
 
   RxString selectedDateRange = "Last 7 days".obs;
 
-  RxString sortByStatus = "All".obs;
-
   RxString defaultSortByValue = "None".obs;
-
-  RxString sortByNetworkStatus = "All".obs;
-
-  RxString sortBySessionStatus = "All".obs;
 
   final tableHeaders = {
     "addressId": "S.No",
@@ -52,11 +48,16 @@ class StationsController extends GetxController {
     "actions": "Actions"
   };
 
+  Map args = {};
+
   @override
   void onInit() async {
-    controllers = LinkedScrollControllerGroup();
-    bodyController = controllers.addAndGet();
-    fetchAllStations();
+    if (AppStateService.to.delegate.pageSettings!.path ==
+        "/dashboard/stationsOverview") {
+      controllers = LinkedScrollControllerGroup();
+      bodyController = controllers.addAndGet();
+      fetchAllStations();
+    }
     super.onInit();
   }
 

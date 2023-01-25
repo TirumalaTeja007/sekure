@@ -22,7 +22,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 48),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 36),
             child: Image.asset(
               "assets/logo/axonify_logo.png",
               height: 60,
@@ -46,114 +46,31 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                 ),
                 ListTile(
                   dense: false,
-                  title: const Padding(
-                    padding: EdgeInsets.only(top: 14.0),
-                    child: Text("Chargers Overview",
-                        style: TextStyle(fontFamily: "MontserratRegular")),
-                  ),
-                  leading: Icon(MdiIcons.evPlugType1, color: kDrawerIconColor),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          delegate.toNamed(Routes.generateCPIDs);
-                          //  Navigator.of(context).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: index == 1
-                                ? kDrawerUnselectedTextColor
-                                : kPrimaryTextColor),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Generate CPID's",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontFamily: "MontserratRegular",
-                                  color: index == 1
-                                      ? Colors.white
-                                      : Colors.white54)),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          delegate.toNamed(Routes.chargersReports);
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: index == 2
-                                ? kDrawerUnselectedTextColor
-                                : kPrimaryTextColor),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Reports",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontFamily: "MontserratRegular",
-                                  color: index == 2
-                                      ? Colors.white
-                                      : Colors.white54)),
-                        ),
-                      ),
-                    ],
-                  ),
+                  title: const Text("Stations",
+                      style: TextStyle(fontFamily: "MontserratRegular")),
+                  leading: Icon(MdiIcons.evStation, color: kDrawerIconColor),
+                  selected: [1, 2].contains(index) ? true : false,
                   selectedColor: Colors.white,
-                  selected: [1, 2].contains(index),
+                  onTap: () {
+                    delegate.toNamed(Routes.stationsOverview);
+                    //   Navigator.of(context).pop();
+                  },
                 ),
                 ListTile(
-                    dense: false,
-                    title: const Padding(
-                      padding: EdgeInsets.only(top: 14.0),
-                      child: Text("Stations Overview",
-                          style: TextStyle(fontFamily: "MontserratRegular")),
-                    ),
-                    leading: Icon(MdiIcons.evStation, color: kDrawerIconColor),
-                    selected: [3, 4].contains(index) ? true : false,
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () => delegate.toNamed(Routes.addSites),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: index == 3
-                                  ? kDrawerUnselectedTextColor
-                                  : kPrimaryTextColor),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("Add New Sites",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontFamily: "MontserratRegular",
-                                    color: index == 3
-                                        ? Colors.white
-                                        : Colors.white54)),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () =>
-                              delegate.toNamed(Routes.stationsReports),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: index == 4
-                                  ? kDrawerUnselectedTextColor
-                                  : kPrimaryTextColor),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("Reports",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontFamily: "MontserratRegular",
-                                    color: index == 4
-                                        ? Colors.white
-                                        : Colors.white54)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    selectedColor: Colors.white),
+                  dense: false,
+                  title: const Text("Chargers",
+                      style: TextStyle(fontFamily: "MontserratRegular")),
+                  leading: Icon(MdiIcons.evPlugType1, color: kDrawerIconColor),
+                  selected: [3, 4].contains(index) ? true : false,
+                  selectedColor: Colors.white,
+                  onTap: () {
+                    delegate.toNamed(Routes.chargersOverview);
+                    //   Navigator.of(context).pop();
+                  },
+                ),
                 ListTile(
                   dense: false,
-                  title: const Text("Session Management",
+                  title: const Text("Session Info",
                       style: TextStyle(fontFamily: "MontserratRegular")),
                   leading: Icon(MdiIcons.battery20Bluetooth,
                       color: kDrawerIconColor),
@@ -165,20 +82,20 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                 ),
                 ListTile(
                   dense: false,
-                  title: const Text("Tariff Management",
+                  title: const Text("Payments",
                       style: TextStyle(fontFamily: "MontserratRegular")),
                   leading: Icon(MdiIcons.wallet, color: kDrawerIconColor),
                   selected: index == 6 ? true : false,
                   selectedColor: Colors.white,
                   onTap: () {
-                    delegate.toNamed(Routes.tariffManagement);
+                    delegate.toNamed(Routes.payments);
                   },
                 ),
                 ListTile(
                     dense: false,
                     title: const Padding(
                       padding: EdgeInsets.only(top: 14.0),
-                      child: Text("User Management",
+                      child: Text("Users Overview",
                           style: TextStyle(fontFamily: "MontserratRegular")),
                     ),
                     leading:
@@ -197,7 +114,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                                   : kPrimaryTextColor),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("Add New Users",
+                            child: Text("Add Users",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontFamily: "MontserratRegular",
@@ -208,7 +125,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            delegate.toNamed(Routes.endUsersManagement);
+                            delegate.toNamed(Routes.usersReports);
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: index == 8
@@ -216,7 +133,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                                   : kPrimaryTextColor),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("End Users",
+                            child: Text("Reports",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontFamily: "MontserratRegular",
@@ -225,50 +142,16 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                                         : Colors.white54)),
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () => {},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: index == 9
-                                  ? kDrawerUnselectedTextColor
-                                  : kPrimaryTextColor),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("Station Admins",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontFamily: "MontserratRegular",
-                                    color: index == 9
-                                        ? Colors.white
-                                        : Colors.white54)),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () => {},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: index == 10
-                                  ? kDrawerUnselectedTextColor
-                                  : kPrimaryTextColor),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("Super Admins",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontFamily: "MontserratRegular",
-                                    color: index == 10
-                                        ? Colors.white
-                                        : Colors.white54)),
-                          ),
-                        ),
                       ],
                     ),
-                    selected: [7, 8, 9, 10].contains(index) ? true : false,
+                    selected: [7, 8].contains(index) ? true : false,
                     selectedColor: Colors.white),
                 ListTile(
                   dense: false,
-                  title: const Text("Tickets Management",
+                  title: const Text("Customer Support",
                       style: TextStyle(fontFamily: "MontserratRegular")),
                   leading: Icon(MdiIcons.ticket, color: kDrawerIconColor),
-                  selected: index == 11 ? true : false,
+                  selected: index == 9 ? true : false,
                   selectedColor: Colors.white,
                   onTap: () {
                     delegate.toNamed(Routes.ticketsManagement);
@@ -290,7 +173,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                   title: Text(AuthService.to.isLoggedIn ? "Logout" : "Login",
                       style: const TextStyle(fontFamily: "MontserratRegular")),
                   leading: Icon(Icons.logout, color: kDrawerIconColor),
-                  selected: index == 12 ? true : false,
+                  selected: index == 10 ? true : false,
                   selectedColor: Colors.white,
                   onTap: () {
                     if (AuthService.to.isLoggedIn) {

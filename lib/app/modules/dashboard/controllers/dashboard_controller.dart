@@ -4,17 +4,17 @@ import 'package:smartsocket/services/app_state_service.dart';
 class DashboardController extends GetxController {
   final List tabList = [
     "Dashboard",
-    "Generate CPID's",
-    "Chargers Report",
-    "Add New Sites",
-    "Stations Report",
-    "Session Management",
-    "Tariff Management",
-    'Add New Users',
+    "Stations Overview",
+    "Add Stations",
+    "Chargers Overview",
+    "Add Devices",
+    "Session Info",
+    "Payments",
+    'Add Users',
     "End Users",
     "Station Admins",
     "Super Admins",
-    "Tickets Management",
+    "Customer Support",
     "Settings",
     "Logout"
   ];

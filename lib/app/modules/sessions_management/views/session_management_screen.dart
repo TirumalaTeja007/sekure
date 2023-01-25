@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/sessions_management/controllers/session_management_controller.dart';
+import 'package:smartsocket/app/widgets/date_range.dart';
 import 'package:smartsocket/app/widgets/nodata_widget.dart';
+import 'package:smartsocket/app/widgets/popup_menu.dart';
 import 'package:smartsocket/app/widgets/search_textfield.dart';
 import 'package:smartsocket/app/widgets/table_body.dart';
 import 'package:smartsocket/constants/color_constants.dart';
@@ -11,9 +13,8 @@ import 'package:smartsocket/utils/responsive.dart';
 import 'package:smartsocket/utils/scroll_behaviour.dart';
 
 class SessionManagementScreen extends GetView<SessionManagementController> {
-  const SessionManagementScreen({Key? key, required this.userType})
+  const SessionManagementScreen({Key? key})
       : super(key: key);
-  final String userType;
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +36,21 @@ class SessionManagementScreen extends GetView<SessionManagementController> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-              top: ResponsiveWidget.isSmallScreen(context) ? 30 : 50,
-              bottom: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+              top: 30,
+              bottom: 20,
+              left: ResponsiveWidget.isLargeScreen(context) ? 50 : 30),
+          child: SizedBox(
+            width: ResponsiveWidget.isLargeScreen(context)
+                ? screenSize.width - kDrawerWidth - 50
+                : screenSize.width - 30,
+            child: Wrap(direction: Axis.horizontal, children: [
               SearchTextFieldWidget(controller.searchController,
                   controller.searchedKeyword, controller.searchDebouncer),
-              const SizedBox(width: 20),
-              filterWidget(context, screenSize),
-              const SizedBox(width: 20),
-              filterWidget(context, screenSize),
-              SizedBox(
-                  width: ResponsiveWidget.isSmallScreen(context) ? 20 : 40),
-            ],
+              PopupMenuWidget(sessionStatusFiltersList, controller.sortByStatus,
+                  "Session Status"),
+              DateRangeWidget(controller.startDateRange,
+                  controller.endDateRange, controller.selectedDateRange)
+            ]),
           ),
         ),
         Expanded(
@@ -66,8 +67,7 @@ class SessionManagementScreen extends GetView<SessionManagementController> {
                             scrollController: controller.bodyController,
                             cells: controller.sessionInfo,
                             refresh: controller.getUserSessionHistory,
-                            searchedKeyword:
-                                controller.searchedKeyword.value,
+                            searchedKeyword: controller.searchedKeyword.value,
                             infoType: "SessionManagement")
                         : controller.errorMessage.value.isNotEmpty
                             ? NoDataWidget(controller.errorMessage.value)
@@ -79,50 +79,6 @@ class SessionManagementScreen extends GetView<SessionManagementController> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget filterWidget(context, Size screenSize) {
-    return Container(
-      height: 50,
-      width: kFilterButtonWidth(context),
-      alignment: Alignment.center,
-      margin: const EdgeInsets.only(bottom: 15),
-      decoration: BoxDecoration(
-          color: kGrey,
-          boxShadow: const [BoxShadow(color: kBoxShadowColor, blurRadius: 4)],
-          borderRadius: BorderRadius.circular(8.0)),
-      padding: const EdgeInsets.only(left: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text("Filter",
-              style: TextStyle(
-                  fontFamily: 'MontserratRegular',
-                  color: kPrimaryTextColor,
-                  fontSize: 14)),
-          PopupMenuButton(
-            constraints: const BoxConstraints.expand(width: 100, height: 200),
-            icon: const Icon(Icons.filter_list, color: Color(0xff6cfc2c)),
-            onSelected: (value) {},
-            offset: const Offset(0.0, 200),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0)),
-            itemBuilder: (ctx) {
-              return ["filters"].toList().map((element) {
-                return PopupMenuItem(
-                  value: element,
-                  child: const Text("Filter",
-                      style: TextStyle(
-                          fontFamily: 'MontserratRegular',
-                          color: kPrimaryTextColor,
-                          fontSize: 14)),
-                );
-              }).toList();
-            },
-          ),
-        ],
-      ),
     );
   }
 }

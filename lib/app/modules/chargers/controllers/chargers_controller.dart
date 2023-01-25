@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:smartsocket/constants/network_constants.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 import 'package:smartsocket/services/auth_service.dart';
 import 'package:smartsocket/utils/debouncer.dart';
 import 'package:smartsocket/api/api_calls.dart';
@@ -27,12 +28,6 @@ class ChargersController extends GetxController {
 
   RxString searchedKeyword = "".obs;
 
-  RxString startDateRange = "".obs;
-
-  RxString endDateRange = "".obs;
-
-  RxString selectedDateRange = "Last 7 days".obs;
-
   RxString sortByStatus = "All".obs;
 
   RxString defaultSortByValue = "None".obs;
@@ -54,9 +49,12 @@ class ChargersController extends GetxController {
 
   @override
   void onInit() async {
-    controllers = LinkedScrollControllerGroup();
-    bodyController = controllers.addAndGet();
-    fetchAllChargers();
+    if (AppStateService.to.delegate.pageSettings!.path ==
+        "/dashboard/chargersOverview") {
+      controllers = LinkedScrollControllerGroup();
+      bodyController = controllers.addAndGet();
+      fetchAllChargers();
+    }
     super.onInit();
   }
 

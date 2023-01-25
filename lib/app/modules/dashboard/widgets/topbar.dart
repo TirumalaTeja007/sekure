@@ -4,7 +4,8 @@ import 'package:smartsocket/utils/responsive.dart';
 import '../../../../constants/color_constants.dart';
 
 class DashboardTopBar extends StatelessWidget {
-  const DashboardTopBar(this.title, this.userType, {Key? key}) : super(key: key);
+  const DashboardTopBar(this.title, this.userType, {Key? key})
+      : super(key: key);
   final String title;
   final String userType;
 
@@ -12,7 +13,8 @@ class DashboardTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 55,
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: EdgeInsets.symmetric(
+          horizontal: ResponsiveWidget.isLargeScreen(context) ? 50 : 30),
       decoration: const BoxDecoration(
           color: Colors.white,
           boxShadow: [BoxShadow(color: kBoxShadowColor, blurRadius: 4)]),

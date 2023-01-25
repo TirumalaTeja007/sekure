@@ -11,9 +11,8 @@ import 'package:smartsocket/app/widgets/search_textfield.dart';
 import 'package:smartsocket/app/widgets/table_body.dart';
 
 class TicketsManagementScreen extends GetView<TicketsManagementController> {
-  const TicketsManagementScreen({Key? key, required this.userType})
+  const TicketsManagementScreen({Key? key})
       : super(key: key);
-  final String userType;
 
   @override
   Widget build(BuildContext context) {

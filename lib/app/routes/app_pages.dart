@@ -3,8 +3,8 @@ import 'package:flutter/src/widgets/basic.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/about_us/about-us_view.dart';
 import 'package:smartsocket/app/modules/chargers/bindings/chargers_binding.dart';
-import 'package:smartsocket/app/modules/chargers/views/chargers_reports_screen.dart';
-import 'package:smartsocket/app/modules/chargers/views/generate_cpids_screen.dart';
+import 'package:smartsocket/app/modules/chargers/views/chargers_overview.dart';
+import 'package:smartsocket/app/modules/chargers/views/add_chargers.dart';
 import 'package:smartsocket/app/modules/contact_us/bindings/contact_us_binding.dart';
 import 'package:smartsocket/app/modules/contact_us/contact_us_view.dart';
 import 'package:smartsocket/app/modules/dashboard/bindings/dashboard_binding.dart';
@@ -21,8 +21,8 @@ import 'package:smartsocket/app/modules/session_information/views/session_inform
 import 'package:smartsocket/app/modules/sessions_management/bindings/session_management_binding.dart';
 import 'package:smartsocket/app/modules/sessions_management/views/session_management_screen.dart';
 import 'package:smartsocket/app/modules/stations/bindings/stations_binding.dart';
-import 'package:smartsocket/app/modules/stations/views/add_sites_view.dart';
-import 'package:smartsocket/app/modules/stations/views/stations_report.dart';
+import 'package:smartsocket/app/modules/stations/views/add_station_view.dart';
+import 'package:smartsocket/app/modules/stations/views/stations_overview.dart';
 import 'package:smartsocket/app/modules/tariff_management/bindings/tariff_management_binding.dart';
 import 'package:smartsocket/app/modules/tariff_management/views/tariff_management_screen.dart';
 import 'package:smartsocket/app/modules/tickets_management/bindings/tickets_management_binding.dart';
@@ -151,33 +151,33 @@ class AppPages {
               binding: DashboardOverviewBinding(),
             ),
             GetPage(
-              name: _Paths.generateCPIDs,
-              page: () => GenerateCPIDScreen(),
+              name: _Paths.addChargers,
+              page: () => AddChargersView(),
               binding: ChargersBinding(),
             ),
             GetPage(
-              name: _Paths.chargersReports,
-              page: () => const ChargersReportsScreen(),
+              name: _Paths.chargersOverview,
+              page: () => const ChargersOverview(),
               binding: ChargersBinding(),
             ),
             GetPage(
-              name: _Paths.addSites,
-              page: () => AddSitesView(),
+              name: _Paths.addStations,
+              page: () => AddStationsView(),
               binding: StationsBinding(),
             ),
             GetPage(
-              name: _Paths.stationsReports,
-              page: () => const StationsReportView(),
+              name: _Paths.stationsOverview,
+              page: () => const StationsOverview(),
               binding: StationsBinding(),
             ),
             GetPage(
-              name: _Paths.tariffManagement,
-              page: () => const TariffManagementScreen(userType: "Admin"),
-              binding: TariffManagementBinding(),
+              name: _Paths.payments,
+              page: () => const PaymentsView(),
+              binding: PaymentsBinding(),
             ),
             GetPage(
               name: _Paths.sessionsManagement,
-              page: () => const SessionManagementScreen(userType: "Admin"),
+              page: () => const SessionManagementScreen(),
               binding: SessionManagementBinding(),
             ),
             GetPage(
@@ -186,13 +186,13 @@ class AppPages {
               binding: UserRegistrationBinding(),
             ),
             GetPage(
-              name: _Paths.endUsersManagement,
-              page: () => EndUsersManagement(),
+              name: _Paths.usersReports,
+              page: () => UsersReportsView(),
               binding: UsersManagementBinding(),
             ),
             GetPage(
               name: _Paths.ticketsManagement,
-              page: () => const TicketsManagementScreen(userType: "Admin"),
+              page: () => const TicketsManagementScreen(),
               binding: TicketsManagementBinding(),
             ),
           ],
@@ -219,17 +219,17 @@ class AppPages {
               ),
               GetPage(
                 name: _Paths.userSessionHistory,
-                page: () => const SessionManagementScreen(userType: "User"),
+                page: () => const SessionManagementScreen(),
                 binding: SessionManagementBinding(),
               ),
               GetPage(
                 name: _Paths.userTransactionHistory,
-                page: () => const TariffManagementScreen(userType: "User"),
-                binding: TariffManagementBinding(),
+                page: () => const PaymentsView(),
+                binding: PaymentsBinding(),
               ),
               GetPage(
                 name: _Paths.userTickets,
-                page: () => const TicketsManagementScreen(userType: "User"),
+                page: () => const TicketsManagementScreen(),
                 binding: TicketsManagementBinding(),
               ),
             ]),

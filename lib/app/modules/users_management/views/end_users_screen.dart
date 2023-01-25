@@ -10,8 +10,8 @@ import 'package:smartsocket/app/widgets/nodata_widget.dart';
 import 'package:smartsocket/app/widgets/search_textfield.dart';
 import 'package:smartsocket/app/widgets/table_body.dart';
 
-class EndUsersManagement extends GetView<UsersManagementController> {
-  EndUsersManagement({Key? key}) : super(key: key);
+class UsersReportsView extends GetView<UsersManagementController> {
+  UsersReportsView({Key? key}) : super(key: key);
 
   final TextEditingController search = TextEditingController();
 
@@ -67,7 +67,7 @@ class EndUsersManagement extends GetView<UsersManagementController> {
                             cells: controller.usersList,
                             refresh: controller.getAllUsers,
                             searchedKeyword: controller.searchedKeyword.value,
-                            infoType: "EndUsersManagement")
+                            infoType: "UsersReports")
                         : controller.errorMessage.value.isNotEmpty
                             ? NoDataWidget(controller.errorMessage.value)
                             : const CupertinoActivityIndicator(),
