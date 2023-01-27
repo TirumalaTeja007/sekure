@@ -81,3 +81,5 @@ final dateRangeFiltersList = [
   "All time",
   "Custom Range"
 ];
+
+final userRoleFiltersList = ["All", "User", "CPO", "Super Admin"];

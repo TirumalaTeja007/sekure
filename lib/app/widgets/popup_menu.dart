@@ -42,14 +42,16 @@ class PopupMenuWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Obx(
-                    () => Text(selectedItem.value,
-                        style: TextStyle(
-                            fontFamily: 'MontserratRegular',
-                            color: kPrimaryTextColor,
-                            fontSize: ResponsiveWidget.isSmallScreen(
-                                context)
-                                ? 11
-                                : 13)),
+                    () => Expanded(
+                      child: Text(selectedItem.value,
+                          style: TextStyle(
+                              fontFamily: 'MontserratRegular',
+                              color: kPrimaryTextColor,
+                              fontSize: ResponsiveWidget.isSmallScreen(
+                                  context)
+                                  ? 11
+                                  : 13)),
+                    ),
                   ),
                   PopupMenuButton(
                     constraints: BoxConstraints.expand(

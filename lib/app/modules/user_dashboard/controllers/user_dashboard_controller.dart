@@ -7,12 +7,14 @@ import 'package:smartsocket/constants/network_constants.dart';
 import 'package:smartsocket/models/user_model.dart';
 import 'package:smartsocket/utils/local_storage.dart';
 
+import '../../../../services/auth_service.dart';
+
 class UserDashboardController extends GetxController {
   final tabList = [
-    "Overview",
-    "Session History",
-    "Payment History",
-    "Tickets Raised",
+    "User Dashboard",
+    "User Session History",
+    "User Payment History",
+    "User Support Tickets",
     "User Settings"
   ];
   late LinkedScrollControllerGroup controllers;
@@ -23,17 +25,19 @@ class UserDashboardController extends GetxController {
 
   RxBool processing = false.obs;
 
-  UserData userData = UserData(
-      id: 0,
-      name: "name",
-      userName: "userName",
-      password: "password",
-      email: "email",
-      profilePicture: "profilePicture",
-      countryCallingCode: "countryCallingCode",
-      countryCode: "countryCode",
-      mobileNumber: "mobileNumber",
-      isLoggedIn: true);
+  Rx<UserData> userData = UserData(
+          userId: 0,
+          firstName: "firstName",
+          lastName: "lastName",
+          userName: "userName",
+          email: "email",
+          profilePicture: "profilePicture",
+          countryCallingCode: "countryCallingCode",
+          countryCode: "countryCode",
+          phoneNumber: "phoneNumber",
+          role: "role",
+          isLoggedIn: true)
+      .obs;
 
   @override
   onInit() async {
@@ -45,23 +49,18 @@ class UserDashboardController extends GetxController {
 
   getUserInfo() async {
     processing.value = true;
+
     if (idRepo.isStackedArgsPresent('userInfoArgs')) {
       String? jsonString = await idRepo.getStackedArgs('userInfoArgs');
-      userData = UserData.fromMap(jsonDecode(jsonString!));
+      userData.value = UserData.fromMap(jsonDecode(jsonString!));
     } else {
       String? jsonString = await idRepo.getUserData();
-      userData = UserData.fromMap(jsonDecode(jsonString!));
+      userData.value = UserData.fromMap(jsonDecode(jsonString!));
     }
-    final response = await callGetRequestWithoutParameters(
-        routeID: "/UserInfo",
-        api: "$userByUsernameUrl/${userData.userName}",
-        header: basicHeader);
-    if (response.runtimeType != String) {
-      if (jsonDecode(response.body).length != 0) {
-        userData = UserData.fromMap(jsonDecode(response.body));
-      }
-    }
+
     update();
     processing.value = false;
   }
+
+  onTapTabButtons() {}
 }

@@ -29,6 +29,7 @@ class CustomTableCell extends StatelessWidget {
     return Container(
       width: kCellWidth(context),
       alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: value == "Actions" && valueType == "Body"
           ? Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1,20 +1,27 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/app/modules/forgot_password/controller/forgot_password_controller.dart';
+import 'package:smartsocket/app/modules/signup/controller/signup_controller.dart';
 import 'package:smartsocket/app/routes/app_pages.dart';
 import 'package:smartsocket/app/widgets/argon_button_widget.dart';
+import 'package:smartsocket/app/widgets/subheadings.dart';
 import 'package:smartsocket/constants/color_constants.dart';
+import 'package:smartsocket/constants/constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
 
-class ForgotPasswordView extends GetView<ForgotPasswordController> {
-  ForgotPasswordView({Key? key}) : super(key: key);
+class SignupView extends GetView<SignupController> {
+  SignupView({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
+  final TextEditingController userName = TextEditingController();
+  final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
-  final TextEditingController otp = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +65,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                                 left: ResponsiveWidget.isSmallScreen(context)
                                     ? screenSize.width * 0.05
                                     : 50),
-                            child: Text("Forgot Password ",
+                            child: Text("Register",
                                 style: TextStyle(
                                     fontFamily: 'MontserratMedium',
                                     color: kPrimaryTextColor,
@@ -69,19 +76,102 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           ),
                           const SizedBox(height: 30),
                           _textFieldWidget(context,
+                              fieldType: "First name",
+                              textController: firstName,
+                              screenSize: screenSize),
+                          _textFieldWidget(context,
+                              fieldType: "Last name",
+                              textController: lastName,
+                              screenSize: screenSize),
+                          _textFieldWidget(context,
+                              fieldType: "Username",
+                              textController: userName,
+                              screenSize: screenSize),
+                          _textFieldWidget(context,
+                              fieldType: "Email",
+                              textController: email,
+                              screenSize: screenSize),
+                          _textFieldWidget(context,
                               fieldType: "Mobile number",
                               textController: phoneNumber,
                               screenSize: screenSize),
                           _textFieldWidget(context,
-                              fieldType: "OTP",
-                              textController: otp,
+                              fieldType: "Password",
+                              textController: password,
                               screenSize: screenSize),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Obx(
+                                () => Checkbox(
+                                  checkColor: Colors.white,
+                                  activeColor: Colors.blue.shade800,
+                                  visualDensity: VisualDensity.compact,
+                                  value: controller.agreedToTerms.value,
+                                  onChanged: (value) {
+                                    controller.agreedToTerms.value =
+                                        value as bool;
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: screenSize.width < 350
+                                    ? screenSize.width * 0.7 - 40
+                                    : 260,
+                                child: RichText(
+                                  textAlign: TextAlign.start,
+                                  text: TextSpan(
+                                    text: "I have read and agree to the ",
+                                    style: const TextStyle(
+                                        fontFamily: "MontserratRegular",
+                                        decoration: TextDecoration.none,
+                                        color: kPrimaryTextColor),
+                                    children: [
+                                      TextSpan(
+                                        text: "\nTerms of Use",
+                                        style: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            fontFamily: "MontserratRegular",
+                                            color: Colors.green.shade800),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Get.toNamed(
+                                                Routes.termsAndConditions);
+                                          },
+                                      ),
+                                      const TextSpan(
+                                        text: " and ",
+                                        style: TextStyle(
+                                            decoration: TextDecoration.none,
+                                            fontFamily: "MontserratRegular",
+                                            color: kPrimaryTextColor),
+                                      ),
+                                      TextSpan(
+                                        text: "Privacy Policy",
+                                        style: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            fontFamily: "MontserratRegular",
+                                            color: Colors.green.shade800),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Get.toNamed(Routes.privacyPolicy);
+                                          },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(bottom: 25, top: 5),
+                                    const EdgeInsets.only(bottom: 25, top: 30),
                                 child: ArgonButtonWidget(
                                     height: 50,
                                     width: 175,
@@ -95,6 +185,16 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                                       if (btnState == ButtonState.Idle &&
                                           _formKey.currentState!.validate()) {
                                         startLoader();
+                                        await controller.addAUser({
+                                          "firstName": firstName.text,
+                                          "lastName": lastName.text,
+                                          "email": email.text.trim(),
+                                          "password": password.text,
+                                          "active": 1,
+                                          "roleId": 2,
+                                          "phoneNumber": phoneNumber.text,
+                                          "userName": userName.text,
+                                        });
                                         stopLoader();
                                       }
                                     },
@@ -111,7 +211,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text("Remember your password?",
+                              const Text("Already have an account?",
                                   style: TextStyle(
                                     color: kPrimaryTextColor,
                                     fontFamily: 'MontserratRegular',
@@ -144,7 +244,6 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
       {required String fieldType,
       required TextEditingController textController,
       required Size screenSize}) {
-    double width = screenSize.width < 350 ? screenSize.width * 0.7 : 300;
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: Row(
@@ -152,7 +251,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: fieldType.contains("OTP") ? width - 120.0 : width,
+            width: screenSize.width < 350 ? screenSize.width * 0.7 : 300,
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               readOnly: false,
@@ -165,11 +264,21 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                       return "Password should contain at-least 6 characters";
                     }
                     break;
-                  case "OTP":
+                  case "First name":
                     if (value!.isEmpty) {
-                      return "OTP should not be empty";
-                    } else if (value.length < 4) {
-                      return "OTP should must contain 4 characters";
+                      return "First name should not be empty";
+                    }
+                    break;
+                  case "Last name":
+                    if (value!.isEmpty) {
+                      return "Last name should not be empty";
+                    }
+                    break;
+                  case "Email":
+                    if (value!.isEmpty) {
+                      return "Name should not be empty";
+                    } else if (!value.isEmail) {
+                      return "Invalid email address";
                     }
                     break;
                   case "Mobile number":
@@ -223,42 +332,6 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
               controller: textController,
             ),
           ),
-          if (fieldType.contains("OTP"))
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: ArgonButtonWidget(
-                  height: 50,
-                  width: 110,
-                  minWidth: 110,
-                  borderRadius: 8.0,
-                  color: kGrey,
-                  roundLoadingShape: false,
-                  splashColor: Colors.grey,
-                  onTap: (startLoader, stopLoader, btnState) async {
-                    if (btnState == ButtonState.Idle &&
-                        phoneNumber.text.isNotEmpty &&
-                        phoneNumber.text.isPhoneNumber) {
-                      startLoader();
-                      controller.otpReceived.value =
-                          !controller.otpReceived.value;
-                      stopLoader();
-                    }
-                  },
-                  loader: const CupertinoActivityIndicator(),
-                  child: Obx(
-                    () => Text(
-                        controller.otpReceived.value == true
-                            ? "Resend"
-                            : "Get OTP",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontFamily: 'MontserratRegular',
-                            color: Colors.black,
-                            fontSize: 16)),
-                  )),
-            )
-          else
-            const SizedBox.shrink()
         ],
       ),
     );

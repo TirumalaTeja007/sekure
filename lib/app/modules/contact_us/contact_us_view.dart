@@ -15,7 +15,7 @@ class ContactUsView extends GetView<ContactUsController> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController firstName = TextEditingController();
-  final TextEditingController mobileNumber = TextEditingController();
+  final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController lastName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController description = TextEditingController();
@@ -248,7 +248,7 @@ class ContactUsView extends GetView<ContactUsController> {
                               width: width * 0.45),
                           _textFieldWidget(context,
                               fieldType: "Mobile number",
-                              textController: mobileNumber,
+                              textController: phoneNumber,
                               width: width * 0.45),
                         ],
                       ),

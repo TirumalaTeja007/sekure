@@ -77,7 +77,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                   selected: index == 5 ? true : false,
                   selectedColor: Colors.white,
                   onTap: () {
-                    delegate.toNamed(Routes.sessionsManagement);
+                    delegate.toNamed(Routes.sessionInfo);
                   },
                 ),
                 ListTile(
@@ -92,60 +92,16 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                    dense: false,
-                    title: const Padding(
-                      padding: EdgeInsets.only(top: 14.0),
-                      child: Text("Users Overview",
-                          style: TextStyle(fontFamily: "MontserratRegular")),
-                    ),
-                    leading:
-                        Icon(MdiIcons.accountGroup, color: kDrawerIconColor),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () {
-                            delegate.toNamed(Routes.addUsers);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: index == 7
-                                  ? kDrawerUnselectedTextColor
-                                  : kPrimaryTextColor),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("Add Users",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontFamily: "MontserratRegular",
-                                    color: index == 7
-                                        ? Colors.white
-                                        : Colors.white54)),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            delegate.toNamed(Routes.usersReports);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: index == 8
-                                  ? kDrawerUnselectedTextColor
-                                  : kPrimaryTextColor),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("Reports",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontFamily: "MontserratRegular",
-                                    color: index == 8
-                                        ? Colors.white
-                                        : Colors.white54)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    selected: [7, 8].contains(index) ? true : false,
-                    selectedColor: Colors.white),
+                  dense: false,
+                  title: const Text("Users",
+                      style: TextStyle(fontFamily: "MontserratRegular")),
+                  leading: Icon(MdiIcons.accountGroup, color: kDrawerIconColor),
+                  selected: [7, 8, 9].contains(index) ? true : false,
+                  selectedColor: Colors.white,
+                  onTap: () {
+                    delegate.toNamed(Routes.usersOverview);
+                  },
+                ),
                 ListTile(
                   dense: false,
                   title: const Text("Customer Support",
@@ -154,7 +110,7 @@ class DashboardViewDrawerWidget extends StatelessWidget {
                   selected: index == 9 ? true : false,
                   selectedColor: Colors.white,
                   onTap: () {
-                    delegate.toNamed(Routes.ticketsManagement);
+                    delegate.toNamed(Routes.supportTickets);
                   },
                 ),
                 // ListTile(

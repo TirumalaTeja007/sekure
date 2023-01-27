@@ -27,11 +27,11 @@ abstract class Routes {
   static const stationsOverview = _Paths.dashboard + _Paths.stationsOverview;
   static const addStations = _Paths.dashboard + _Paths.addStations;
   static const payments = _Paths.dashboard + _Paths.payments;
-  static const sessionsManagement = _Paths.dashboard + _Paths.sessionsManagement;
+  static const sessionInfo = _Paths.dashboard + _Paths.sessionInfo;
   static const addUsers = _Paths.dashboard + _Paths.addUsers;
-  static const usersReports = _Paths.dashboard + _Paths.usersReports;
+  static const usersOverview = _Paths.dashboard + _Paths.usersOverview;
   static const individualUserData = _Paths.dashboard + _Paths.individualUserData;
-  static const ticketsManagement = _Paths.dashboard + _Paths.ticketsManagement;
+  static const supportTickets = _Paths.dashboard + _Paths.supportTickets;
   static const userDashboard = _Paths.userDashboard;
   static const userProfile = _Paths.userDashboard + _Paths.userProfile;
   static const userSessionHistory =
@@ -79,9 +79,9 @@ abstract class _Paths {
   static const chargersOverview = '/chargersOverview';
   static const payments = '/payments';
   static const addUsers = '/addUsers';
-  static const usersReports = '/usersReports';
-  static const ticketsManagement = '/ticketsManagement';
-  static const sessionsManagement = '/sessionsManagement';
+  static const usersOverview = '/usersOverview';
+  static const supportTickets = '/supportTickets';
+  static const sessionInfo = '/sessionInfo';
   static const individualUserData = '/individualUserData';
   static const userProfile = '/userProfile';
   static const userDashboard = '/userDashboard';

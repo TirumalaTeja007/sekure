@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:smartsocket/services/app_state_service.dart';
 
 class DashboardController extends GetxController {
   final List tabList = [
@@ -10,10 +9,9 @@ class DashboardController extends GetxController {
     "Add Devices",
     "Session Info",
     "Payments",
-    'Add Users',
-    "End Users",
-    "Station Admins",
-    "Super Admins",
+    'Users Overview',
+    "Add Users",
+    'User Information',
     "Customer Support",
     "Settings",
     "Logout"

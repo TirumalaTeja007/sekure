@@ -1,50 +1,58 @@
 class UserData {
-  late int id;
-  late String name;
+  late int userId;
+  late String firstName;
+  late String lastName;
   late String userName;
-  late String password;
   late String email;
   late String countryCallingCode;
   late String countryCode;
-  late String mobileNumber;
+  late String phoneNumber;
   late String profilePicture;
+  late String role;
   late bool isLoggedIn;
 
   UserData(
-      {required this.id,
-      required this.name,
+      {required this.userId,
+      required this.firstName,
+      required this.lastName,
       required this.userName,
-      required this.password,
       required this.email,
       required this.profilePicture,
       required this.countryCallingCode,
       required this.countryCode,
-      required this.mobileNumber,
+      required this.role,
+      required this.phoneNumber,
       required this.isLoggedIn});
 
-  factory UserData.fromMap(json) => UserData(
-      id: json["id"],
-      name: json["name"],
-      email: json["email"],
-      userName: json["userName"],
-      profilePicture: json["profilePicture"] ?? "",
-      password: json["password"],
-      countryCode: json["countryCode"] ?? "IN",
-      countryCallingCode: json["dialCode"],
-      mobileNumber: json["mobileNumber"],
-      isLoggedIn: true);
+  factory UserData.fromMap(json) {
+    return UserData(
+        userId: json["userId"].runtimeType == int
+            ? json["userId"]
+            : int.parse(json["userId"]),
+        lastName: json["lastName"],
+        firstName: json["firstName"],
+        email: json["email"],
+        userName: json["userName"],
+        profilePicture: json["profilePicture"] ?? "",
+        countryCode: json["countryCode"] ?? "IN",
+        countryCallingCode: json["dialCode"] ?? "+91 ",
+        phoneNumber: json["phoneNumber"],
+        role: json["role"],
+        isLoggedIn: true);
+  }
 
   Map<String, dynamic> toJson(Map<String, dynamic> data) {
-    data['id'] = id;
+    data['userId'] = userId;
     data['email'] = email;
     data["userName"] = userName;
-    data["password"] = password;
     data["profilePicture"] = profilePicture;
-    data["name"] = name;
+    data["firstName"] = firstName;
+    data["lastName"] = lastName;
     data['dialCode'] = countryCallingCode;
     data['countryCode'] = countryCode;
-    data['mobileNumber'] = mobileNumber;
+    data['phoneNumber'] = phoneNumber;
     data['isLoggedIn'] = isLoggedIn;
+    data['role'] = role;
     return data;
   }
 }

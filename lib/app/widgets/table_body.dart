@@ -172,8 +172,8 @@ class _TableBodyState extends State<TableBody> {
   viewData(Map data, String valueType) {
     if (valueType == "Body") {
       switch (widget.infoType) {
-        case "UsersReports":
-          data["userType"] = "User";
+        case "UsersOverview":
+          data["role"] = "User";
           idRepo.saveArguments('userInfoArgs', jsonEncode(data));
           Get.toNamed(Routes.userDashboard);
           break;
@@ -181,9 +181,9 @@ class _TableBodyState extends State<TableBody> {
           break;
         case "Payments":
           break;
-        case "TicketsManagement":
+        case "SupportTickets":
           break;
-        case "SessionManagement":
+        case "SessionInfo":
           idRepo.saveArguments('sessionInfoArgs', jsonEncode(data));
           Get.toNamed(Routes.sessionInformation);
           break;

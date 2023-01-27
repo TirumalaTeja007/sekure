@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/user_dashboard/widgets/user_dashboard_drawer.dart';
 import 'package:smartsocket/app/modules/user_dashboard/widgets/user_profile_info.dart';
 import 'package:smartsocket/app/modules/dashboard/widgets/topbar.dart';
+import 'package:smartsocket/app/widgets/table_cell.dart';
+import 'package:smartsocket/constants/constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
+import 'package:smartsocket/utils/scroll_behaviour.dart';
 import '../../../../constants/color_constants.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/user_dashboard_controller.dart';
@@ -62,13 +65,11 @@ class UserDashboardScreen extends GetView<UserDashboardController> {
                         backgroundColor: Colors.white,
                         elevation: 1,
                         title: Padding(
-                          padding: const EdgeInsets.only(left: 30.0),
-                          child: Text(
-                              ResponsiveWidget.isLargeScreen(context)
-                                  ? "User Dashboard - ${controller.tabList[currentIndex]}"
-                                  : currentIndex == 0
-                                      ? "User Dashboard"
-                                      : controller.tabList[currentIndex],
+                          padding: EdgeInsets.only(
+                              left: ResponsiveWidget.isLargeScreen(context)
+                                  ? 50.0
+                                  : 0.0),
+                          child: Text(controller.tabList[currentIndex],
                               style: TextStyle(
                                   fontFamily: 'MontserratBold',
                                   color: kPrimaryTextColor,
@@ -79,15 +80,20 @@ class UserDashboardScreen extends GetView<UserDashboardController> {
                         ),
                         actions: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 30.0),
+                            padding: EdgeInsets.only(
+                                right: ResponsiveWidget.isLargeScreen(context)
+                                    ? 50.0
+                                    : 30.0, top: ResponsiveWidget.isLargeScreen(context)
+                                ? 5 : 15, bottom: ResponsiveWidget.isLargeScreen(context)
+                                ? 5 : 15),
                             child: Image.asset(
-                              "assets/logo/axonify_logo.png",
+                              "assets/logo/ax_logo2.png",
                               height: ResponsiveWidget.isSmallScreen(context)
-                                  ? 25
-                                  : 45,
-                              color: kPrimaryTextColor,
+                                  ? 15
+                                  : 30,
+                              color: Colors.blue.shade900,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

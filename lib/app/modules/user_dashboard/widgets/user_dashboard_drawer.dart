@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:smartsocket/app/modules/user_dashboard/controllers/user_dashboard_controller.dart';
 import 'package:smartsocket/constants/color_constants.dart';
+import 'package:smartsocket/services/app_state_service.dart';
 
 import '../../../routes/app_pages.dart';
 
@@ -24,7 +25,7 @@ class UserDashboardDrawer extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 32, 16, 48),
+            padding: const EdgeInsets.fromLTRB(16, 32, 16, 36),
             child: Column(
               children: [
                 Image.asset(
@@ -34,13 +35,11 @@ class UserDashboardDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Obx(
-                  () => controller.processing.value == false
-                      ? Text(controller.userData.userName,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'MontserratBold',
-                              color: Colors.white))
-                      : const CupertinoActivityIndicator(),
+                  () => Text(controller.userData.value.userName,
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'MontserratBold',
+                          color: Colors.white)),
                 ),
               ],
             ),
@@ -83,7 +82,7 @@ class UserDashboardDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   dense: false,
-                  title: const Text("Raised Tickets",
+                  title: const Text("Support Tickets",
                       style: TextStyle(fontFamily: "MontserratRegular")),
                   leading: Icon(MdiIcons.ticket, color: kDrawerIconColor),
                   selected: index == 3 ? true : false,
@@ -94,7 +93,7 @@ class UserDashboardDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   dense: false,
-                  title: const Text("Account Settings",
+                  title: const Text("Settings",
                       style: TextStyle(fontFamily: "MontserratRegular")),
                   leading:
                       Icon(MdiIcons.accountSettings, color: kDrawerIconColor),
@@ -104,25 +103,20 @@ class UserDashboardDrawer extends StatelessWidget {
                     delegate.toNamed(Routes.userAccountSettings);
                   },
                 ),
+
               ],
             ),
           ),
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
-            child: InkWell(
-              onTap: () {
-                controller.idRepo.invalidateAllData();
-                delegate.toNamed(Routes.dashboard);
-              },
-              child: const CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.white,
-                child:
-                    Icon(Icons.arrow_back_outlined, color: kPrimaryTextColor),
-              ),
-            ),
-          )
+          ListTile(
+            dense: false,
+            title: const Icon(MdiIcons.arrowLeftBoldCircle, color: Colors.white),
+            selected: index == 5 ? true : false,
+            selectedColor: Colors.white,
+            onTap: () {
+              Get.toNamed(Routes.usersOverview);
+            },
+          ),
         ],
       ),
     );

@@ -14,7 +14,7 @@ class ContactUsWidget extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController firstName = TextEditingController();
-  final TextEditingController mobileNumber = TextEditingController();
+  final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController lastName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController description = TextEditingController();
@@ -126,7 +126,7 @@ class ContactUsWidget extends StatelessWidget {
                   SizedBox(width: width * 0.1),
                   _textFieldWidget(context,
                       fieldType: "Mobile number",
-                      textController: mobileNumber,
+                      textController: phoneNumber,
                       width: width * 0.45),
                 ],
               ),

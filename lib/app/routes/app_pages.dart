@@ -7,6 +7,8 @@ import 'package:smartsocket/app/modules/chargers/views/chargers_overview.dart';
 import 'package:smartsocket/app/modules/chargers/views/add_chargers.dart';
 import 'package:smartsocket/app/modules/contact_us/bindings/contact_us_binding.dart';
 import 'package:smartsocket/app/modules/contact_us/contact_us_view.dart';
+import 'package:smartsocket/app/modules/customer_support/bindings/customer_support_binding.dart';
+import 'package:smartsocket/app/modules/customer_support/views/support_tickets_view.dart';
 import 'package:smartsocket/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:smartsocket/app/modules/dashboardOverview/views/dashboard_overview.dart';
 import 'package:smartsocket/app/modules/dashboard_splash/binding/splash_binding.dart';
@@ -14,29 +16,27 @@ import 'package:smartsocket/app/modules/dashboard_splash/views/dashboard_splash_
 import 'package:smartsocket/app/modules/home/binding/home_binding.dart';
 import 'package:smartsocket/app/modules/home/views/home_view.dart';
 import 'package:smartsocket/app/modules/about_us/aboutus_widget.dart';
+import 'package:smartsocket/app/modules/payments/views/payments_view.dart';
 import 'package:smartsocket/app/modules/services/binding/services_binding.dart';
 import 'package:smartsocket/app/modules/services/view/services_view.dart';
 import 'package:smartsocket/app/modules/session_information/binding/session_information_binding.dart';
 import 'package:smartsocket/app/modules/session_information/views/session_information_screen.dart';
-import 'package:smartsocket/app/modules/sessions_management/bindings/session_management_binding.dart';
-import 'package:smartsocket/app/modules/sessions_management/views/session_management_screen.dart';
+import 'package:smartsocket/app/modules/session_info/bindings/session_info_binding.dart';
+import 'package:smartsocket/app/modules/session_info/views/session_info_view.dart';
+import 'package:smartsocket/app/modules/signup/bindings/signup_binding.dart';
+import 'package:smartsocket/app/modules/signup/view/signup_screen.dart';
 import 'package:smartsocket/app/modules/stations/bindings/stations_binding.dart';
 import 'package:smartsocket/app/modules/stations/views/add_station_view.dart';
 import 'package:smartsocket/app/modules/stations/views/stations_overview.dart';
-import 'package:smartsocket/app/modules/tariff_management/bindings/tariff_management_binding.dart';
-import 'package:smartsocket/app/modules/tariff_management/views/tariff_management_screen.dart';
-import 'package:smartsocket/app/modules/tickets_management/bindings/tickets_management_binding.dart';
-import 'package:smartsocket/app/modules/tickets_management/views/tickets_management_screen.dart';
+import 'package:smartsocket/app/modules/payments/bindings/payments_binding.dart';
 import 'package:smartsocket/app/modules/user_account_settings/views/user_account_settings_screen.dart';
 import 'package:smartsocket/app/modules/user_dashboard/bindings/user_dashboard_binding.dart';
 import 'package:smartsocket/app/modules/user_dashboard/views/user_dashboard.dart';
 import 'package:smartsocket/app/modules/user_profile/bindings/user_profile_binding.dart';
 import 'package:smartsocket/app/modules/user_profile/views/user_profile_screen.dart';
-import 'package:smartsocket/app/modules/user_registration/bindings/user_registration_binding.dart';
-import 'package:smartsocket/app/modules/user_registration/view/signup_screen.dart';
-import 'package:smartsocket/app/modules/users_management/bindings/users_management_binding.dart';
-import 'package:smartsocket/app/modules/user_registration/view/add_a_user_screen.dart';
-import 'package:smartsocket/app/modules/users_management/views/end_users_screen.dart';
+import 'package:smartsocket/app/modules/users/bindings/users_binding.dart';
+import 'package:smartsocket/app/modules/users/views/add_a_user_screen.dart';
+import 'package:smartsocket/app/modules/users/views/users_overview.dart';
 import 'package:smartsocket/app/widgets/bottom_bar.dart';
 import '../middleware/auth_middleware.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
@@ -130,7 +130,7 @@ class AppPages {
           middlewares: [EnsureNotAuthedMiddleware()],
           name: _Paths.signup,
           page: () => SignupView(),
-          bindings: [UserRegistrationBinding()],
+          bindings: [SignupBinding()],
         ),
         GetPage(
           middlewares: [EnsureNotAuthedMiddleware()],
@@ -176,24 +176,24 @@ class AppPages {
               binding: PaymentsBinding(),
             ),
             GetPage(
-              name: _Paths.sessionsManagement,
-              page: () => const SessionManagementScreen(),
-              binding: SessionManagementBinding(),
+              name: _Paths.sessionInfo,
+              page: () => const SessionInfoView(),
+              binding: SessionInfoBinding(),
             ),
             GetPage(
               name: _Paths.addUsers,
               page: () => AddANewUser(),
-              binding: UserRegistrationBinding(),
+              binding: UsersBinding(),
             ),
             GetPage(
-              name: _Paths.usersReports,
-              page: () => UsersReportsView(),
-              binding: UsersManagementBinding(),
+              name: _Paths.usersOverview,
+              page: () => UsersOverview(),
+              binding: UsersBinding(),
             ),
             GetPage(
-              name: _Paths.ticketsManagement,
-              page: () => const TicketsManagementScreen(),
-              binding: TicketsManagementBinding(),
+              name: _Paths.supportTickets,
+              page: () => const SupportTicketsView(),
+              binding: CustomerSupportBinding(),
             ),
           ],
         ),
@@ -219,8 +219,8 @@ class AppPages {
               ),
               GetPage(
                 name: _Paths.userSessionHistory,
-                page: () => const SessionManagementScreen(),
-                binding: SessionManagementBinding(),
+                page: () => const SessionInfoView(),
+                binding: SessionInfoBinding(),
               ),
               GetPage(
                 name: _Paths.userTransactionHistory,
@@ -229,8 +229,8 @@ class AppPages {
               ),
               GetPage(
                 name: _Paths.userTickets,
-                page: () => const TicketsManagementScreen(),
-                binding: TicketsManagementBinding(),
+                page: () => const SupportTicketsView(),
+                binding: CustomerSupportBinding(),
               ),
             ]),
         GetPage(

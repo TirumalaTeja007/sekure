@@ -51,62 +51,62 @@ class ChargersOverview extends GetView<ChargersController> {
         Row(
           children: [
             Container(
-                margin: EdgeInsets.only(
-                    top: 30,
-                    bottom: 20,
-                    left: horizontalPadding,
-                    right: horizontalPadding),
-                width: usableWidth,
-                child: Wrap(
-                  direction: Axis.horizontal,
-                  spacing: 0.0,
-                  children: [
-                    SearchTextFieldWidget(controller.searchController,
-                        controller.searchedKeyword, controller.searchDebouncer),
-                    PopupMenuWidget(deviceStatusFiltersList,
-                        controller.sortByStatus, "Status"),
-                    PopupMenuWidget(deviceNetworkStatusFiltersList,
-                        controller.sortByNetworkStatus, "Network Status"),
-                    SizedBox(width: leftPadding),
-                    SizedBox(
-                      width: kFilterButtonWidth(context),
-                      child: Card(
-                        elevation: 1,
-                        color: Colors.green.shade900,
-                        margin: EdgeInsets.only(
-                            top: ResponsiveWidget.isSmallScreen(context)
-                                ? 22
-                                : 25),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: InkWell(
-                          onTap: () => AppStateService.to.delegate
-                              .toNamed(Routes.addChargers),
-                          child: SizedBox(
-                            height: 40,
-                            width: kFilterButtonWidth(context),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                const Icon(MdiIcons.evPlugType1,
-                                    color: Colors.white),
-                                Text("Add chargers",
-                                    style: TextStyle(
-                                        fontFamily: 'MontserratRegular',
-                                        color: Colors.white,
-                                        fontSize:
-                                            ResponsiveWidget.isSmallScreen(
-                                                    context)
-                                                ? 12
-                                                : 14)),
-                              ],
-                            ),
+              margin: EdgeInsets.only(
+                  top: 30,
+                  bottom: 20,
+                  left: horizontalPadding,
+                  right: horizontalPadding),
+              width: usableWidth,
+              child: Wrap(
+                direction: Axis.horizontal,
+                spacing: 0.0,
+                children: [
+                  SearchTextFieldWidget(controller.searchController,
+                      controller.searchedKeyword, controller.searchDebouncer),
+                  PopupMenuWidget(deviceStatusFiltersList,
+                      controller.sortByStatus, "Status"),
+                  PopupMenuWidget(deviceNetworkStatusFiltersList,
+                      controller.sortByNetworkStatus, "Network Status"),
+                  SizedBox(width: leftPadding),
+                  SizedBox(
+                    width: kFilterButtonWidth(context),
+                    child: Card(
+                      elevation: 1,
+                      color: Colors.green.shade900,
+                      margin: EdgeInsets.only(
+                          top: ResponsiveWidget.isSmallScreen(context)
+                              ? 22
+                              : 25),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      child: InkWell(
+                        onTap: () => AppStateService.to.delegate
+                            .toNamed(Routes.addChargers),
+                        child: SizedBox(
+                          height: 40,
+                          width: kFilterButtonWidth(context),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const Icon(MdiIcons.evPlugType1,
+                                  color: Colors.white),
+                              Text("Add chargers",
+                                  style: TextStyle(
+                                      fontFamily: 'MontserratRegular',
+                                      color: Colors.white,
+                                      fontSize: ResponsiveWidget.isSmallScreen(
+                                              context)
+                                          ? 12
+                                          : 14)),
+                            ],
                           ),
                         ),
                       ),
                     ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
         Expanded(

@@ -2,22 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:smartsocket/app/modules/stations/controllers/stations_controller.dart';
+import 'package:smartsocket/app/modules/users/controllers/users_controller.dart';
 import 'package:smartsocket/app/widgets/nodata_widget.dart';
 import 'package:smartsocket/app/widgets/search_textfield.dart';
 import 'package:smartsocket/app/widgets/table_body.dart';
-import 'package:smartsocket/constants/color_constants.dart';
 import 'package:smartsocket/constants/constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
 import 'package:smartsocket/utils/scroll_behaviour.dart';
 
 import '../../../../services/app_state_service.dart';
 import '../../../routes/app_pages.dart';
-import '../../../widgets/date_range.dart';
 import '../../../widgets/popup_menu.dart';
 
-class StationsOverview extends GetView<StationsController> {
-  const StationsOverview({super.key});
+class UsersOverview extends GetView<UsersController> {
+  UsersOverview({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +56,8 @@ class StationsOverview extends GetView<StationsController> {
                   children: [
                     SearchTextFieldWidget(controller.searchController,
                         controller.searchedKeyword, controller.searchDebouncer),
-                    PopupMenuWidget(stationsSortByFiltersList,
-                        controller.defaultSortByValue, "Sort By"),
+                    PopupMenuWidget(userRoleFiltersList, controller.sortByRole,
+                        "User Roles"),
                   ]),
               SizedBox(
                 width: kFilterButtonWidth(context),
@@ -72,23 +70,22 @@ class StationsOverview extends GetView<StationsController> {
                       borderRadius: BorderRadius.circular(8.0)),
                   child: InkWell(
                     onTap: () =>
-                        AppStateService.to.delegate.toNamed(Routes.addStations),
+                        AppStateService.to.delegate.toNamed(Routes.addUsers),
                     child: SizedBox(
                       height: 40,
                       width: kFilterButtonWidth(context),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const Icon(MdiIcons.evStation, color: Colors.white),
-                          Text("Add stations",
+                          const Icon(MdiIcons.account, color: Colors.white),
+                          Text("Add users",
                               style: TextStyle(
                                   fontFamily: 'MontserratRegular',
                                   color: Colors.white,
                                   fontSize:
-                                  ResponsiveWidget.isSmallScreen(
-                                      context)
-                                      ? 12
-                                      : 14)),
+                                      ResponsiveWidget.isSmallScreen(context)
+                                          ? 12
+                                          : 14)),
                         ],
                       ),
                     ),
@@ -110,10 +107,10 @@ class StationsOverview extends GetView<StationsController> {
                             controller.errorMessage.value.isEmpty
                         ? TableBody(
                             scrollController: controller.bodyController,
-                            cells: controller.stationsList,
-                            refresh: controller.fetchAllStations,
+                            cells: controller.usersList,
+                            refresh: controller.fetchAllUsers,
                             searchedKeyword: controller.searchedKeyword.value,
-                            infoType: "StationsReport")
+                            infoType: "UsersOverview")
                         : controller.errorMessage.value.isNotEmpty
                             ? NoDataWidget(controller.errorMessage.value)
                             : const CupertinoActivityIndicator(),

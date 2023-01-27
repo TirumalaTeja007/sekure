@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:smartsocket/models/user_model.dart';
 import 'package:smartsocket/utils/responsive.dart';
 
 import '../../../../constants/color_constants.dart';
@@ -14,16 +15,16 @@ class UserProfileInfo extends StatelessWidget {
     Key? key,
     required this.userData,
   }) : super(key: key);
-  final Map userData;
+  final UserData userData;
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     List<Widget> widgetList = [
       Container(
-        width: ResponsiveWidget.isSmallScreen(context) ? 100 : 150,
-        height: ResponsiveWidget.isSmallScreen(context) ? 100 : 150,
-        margin: const EdgeInsets.only(bottom: 16),
+        width: ResponsiveWidget.isSmallScreen(context) ? 150 : 175,
+        height: ResponsiveWidget.isSmallScreen(context) ? 150 : 175,
+        margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: const [BoxShadow(color: kBoxShadowColor, blurRadius: 4)],
@@ -41,30 +42,31 @@ class UserProfileInfo extends StatelessWidget {
             ListTile(
               dense: true,
               leading: const Icon(MdiIcons.account, color: Colors.green),
-              title: Text(userData["name"],
+              title: Text("${userData.firstName} ${userData.lastName}",
                   style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontFamily: 'MontserratRegular',
                       color: kPrimaryTextColor)),
             ),
             ListTile(
               dense: true,
               leading: const Icon(MdiIcons.email, color: Colors.green),
-              title: Text(userData["email"],
+              title: Text(userData.email.toString(),
                   style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontFamily: 'MontserratRegular',
                       color: kPrimaryTextColor)),
             ),
             ListTile(
               dense: true,
               leading: const Icon(MdiIcons.phone, color: Colors.green),
-              title: Text(userData["mobileNumber"],
+              title: Text(userData.phoneNumber.toString(),
                   style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontFamily: 'MontserratRegular',
                       color: kPrimaryTextColor)),
             ),
+            const SizedBox(height: 15),
           ],
         ),
       )
@@ -72,9 +74,9 @@ class UserProfileInfo extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 30.0, left: 30),
       child: SizedBox(
-        width: ResponsiveWidget.isSmallScreen(context)
-            ? screenSize.width
-            : screenSize.width - 304,
+        width: ResponsiveWidget.isLargeScreen(context)
+            ? screenSize.width - 304
+            : screenSize.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
