@@ -2,121 +2,40 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:smartsocket/api/api_calls.dart';
+import 'package:smartsocket/app/modules/user_profile/controller/user_profile_controller.dart';
+import 'package:smartsocket/app/widgets/efi_http_error_message_widget.dart';
 import 'package:smartsocket/app/widgets/piecchart.dart';
 import 'package:smartsocket/constants/color_constants.dart';
-import 'package:smartsocket/constants/network_constants.dart';
-import 'package:smartsocket/models/chart_data_model.dart';
 import 'package:smartsocket/utils/responsive.dart';
-import 'package:smartsocket/app/widgets/efi_http_error_message_widget.dart';
-
 import 'dot.dart';
 
-class SessionChartWidget extends StatefulWidget {
-  const SessionChartWidget(this.refreshSessionsChart, this.args, {Key? key})
+class SessionChartWidget extends StatelessWidget {
+  const SessionChartWidget(this.fetchSessionInfoState, this.sessionInfoResponse,
+      this.fetchSessionInfo,
+      {Key? key})
       : super(key: key);
-  final RxBool refreshSessionsChart;
-  final Map args;
-
-  @override
-  State<SessionChartWidget> createState() => _SessionChartWidgetState();
-}
-
-class _SessionChartWidgetState extends State<SessionChartWidget> {
-  List<ChartData> sessionsChartData = <ChartData>[];
-  String errorMsg = "";
-  bool processing = false;
-
-  @override
-  initState() {
-    super.initState();
-    streamAllTranxInfo();
-  }
-
-  streamAllTranxInfo() async {
-    setState(() {
-      processing = true;
-      errorMsg = "";
-      sessionsChartData = [];
-    });
-    await Future.delayed(const Duration(seconds: 1));
-    final response = await callGetRequestWithoutParameters(
-        routeID: "/TransactionHistory",
-        api: widget.args["type"] == "ALL"
-            ? getAllTranxUrl
-            : "$tranxByUserNameUrl/${widget.args["userName"]}",
-        header: {'Content-Type': 'application/json; charset=UTF-8'});
-
-    print(response);
-
-    if (response.runtimeType != String && response.statusCode == 200) {
-      List sessionsInfo = jsonDecode(response.body)["data"];
-      int ongoingCount = 0,
-          completedCount = 0,
-          pendingCount = 0,
-          miscellaneousCount = 0;
-      for (var x in sessionsInfo) {
-        if (x["startDateTime"].runtimeType != Null) {
-          int startTime = DateTime.parse(x["startDateTime"])
-              .toLocal()
-              .millisecondsSinceEpoch;
-          int epochTime = DateTime.now().millisecondsSinceEpoch;
-          if (x["sessionStatusEnum"] == "START" &&
-              startTime - epochTime > 86400000) {
-            ongoingCount++;
-          } else if (x["sessionStatusEnum"] == "START" &&
-              startTime - epochTime <= 86400000) {
-            pendingCount++;
-          } else if (x["sessionStatusEnum"] == "STOP" &&
-              x["stopChargeReason"] == "Charging completed") {
-            completedCount++;
-          } else {
-            miscellaneousCount++;
-          }
-        }
-      }
-      sessionsChartData.add(ChartData(
-          'Sessions', sessionsInfo.length.toDouble(), Colors.orange, "90%"));
-      ongoingCount != 0
-          ? sessionsChartData.add(
-              ChartData('Ongoing', ongoingCount.toDouble(), kSuccess, "90%"))
-          : "";
-      completedCount != 0
-          ? sessionsChartData.add(
-              ChartData('Completed', completedCount.toDouble(), kInfo, "90%"))
-          : "";
-      pendingCount != 0
-          ? sessionsChartData
-              .add(ChartData('Pending', pendingCount.toDouble(), kRed, "90%"))
-          : "";
-      miscellaneousCount != 0
-          ? sessionsChartData.add(ChartData(
-              'Miscellaneous', miscellaneousCount.toDouble(), kWarning, "90%"))
-          : "";
-      print(sessionsChartData);
-    } else {
-      jsonDecode(response.body)["data"] == []
-          ? errorMsg = "No data"
-          : errorMsg = 'Exception';
-    }
-    print(errorMsg);
-    processing = false;
-    setState(() {});
-  }
+  final Rx<MessageProcessingState> fetchSessionInfoState;
+  final RxMap sessionInfoResponse;
+  final Function() fetchSessionInfo;
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    double width = ResponsiveWidget.isLargeScreen(context)
+        ? (screenSize.width - 304) < 850
+            ? screenSize.width - 369
+            : (screenSize.width - 384) * 0.4
+        : screenSize.width > 850
+            ? (screenSize.width - 60) * 0.465
+            : screenSize.width - 30;
     return SizedBox(
-      width: (ResponsiveWidget.isLargeScreen(context) &&
-                  screenSize.width - 304 < 1000) ||
-              screenSize.width < 1000
-          ? screenSize.width
-          : 500,
+      width: width,
+      height: 500,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        margin: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Column(
           children: [
             ListTile(
@@ -133,81 +52,78 @@ class _SessionChartWidgetState extends State<SessionChartWidget> {
               trailing: IconButton(
                   icon:
                       const Icon(Icons.refresh, color: kPrimaryTextColorShade),
-                  onPressed: () => streamAllTranxInfo()),
+                  onPressed: () => fetchSessionInfo()),
             ),
-            Container(
+            Expanded(
+              child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(4)),
                 padding: const EdgeInsets.only(top: 30),
-                child: processing == true
-                    ? errorMsg.isEmpty && sessionsChartData.isNotEmpty
-                        ? Column(
-                            children: [
-                              PieChartWidget(sessionsChartData),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
-                                child: screenSize.width >= 500
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          hintText("Completed", kInfo),
-                                          hintText("Ongoing", kSuccess),
-                                          hintText("Pending", kRed),
-                                          hintText("Miscellaneous", kWarning),
-                                        ],
-                                      )
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              hintText("Completed", kInfo),
-                                              hintText("Ongoing", kSuccess),
-                                            ],
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              hintText("Pending", kRed),
-                                              hintText(
-                                                  "Miscellaneous", kWarning),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                height: 380,
+                child: Obx(
+                  () => fetchSessionInfoState.value ==
+                          MessageProcessingState.completed
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(
+                              height: 280,
+                              child: PieChartWidget(
+                                  sessionInfoResponse.value["data"],
+                                  "sessionInfo"),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 20.0),
+                              child: SizedBox(
+                                width: width,
+                                child: Wrap(
+                                  direction: Axis.horizontal,
+                                  alignment: WrapAlignment.center,
+                                  spacing: 5.0,
+                                  children: [
+                                    hintText("Completed", kInfo, width),
+                                    hintText("Ongoing", kSuccess, width),
+                                    hintText("Pending", kRed, width),
+                                    hintText("Miscellaneous", kWarning, width),
+                                  ],
+                                ),
                               ),
-                            ],
-                          )
-                        : EfiHttpErrorMessageWidget(errorMsg)
-                    : const Center(child: CupertinoActivityIndicator())),
+                            ),
+                          ],
+                        )
+                      : fetchSessionInfoState.value ==
+                              MessageProcessingState.failed
+                          ? EfiHttpErrorMessageWidget(
+                              sessionInfoResponse["errorInfo"])
+                          : const CupertinoActivityIndicator(),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  hintText(String title, Color color) {
-    return Row(
-      children: [
-        Dot(color: color),
-        Padding(
-          padding: const EdgeInsets.only(right: 10.0),
-          child: Text(
-            title,
-            style: const TextStyle(
-                fontFamily: 'MontserratRegular',
-                color: kPrimaryTextColorShade,
-                fontSize: 12),
+  hintText(String title, Color color, double width) {
+    return SizedBox(
+      width: width * 0.2,
+      child: Row(
+        children: [
+          Dot(color: color),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                  fontFamily: 'MontserratRegular',
+                  color: kPrimaryTextColorShade,
+                  fontSize: 12),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

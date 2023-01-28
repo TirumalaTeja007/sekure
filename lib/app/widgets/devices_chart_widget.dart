@@ -64,97 +64,97 @@ class DevicesChartWidget extends StatelessWidget {
               ),
               trailing: const Icon(Icons.more_vert, color: kPrimaryTextColorShade),
             ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(4)),
-              padding: const EdgeInsets.only(top: 30),
-              child: StreamBuilder(
-                stream: streamAllDevicesInfo(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data.runtimeType != String &&
-                          snapshot.data!.length != 0) {
-                        double available = 0;
-                        double unavailable = 0;
-                        double inProgress = 0;
-                        double charging = 0;
-                        for (var dev in snapshot.data) {
-                          dev["status"] == "AVAILABLE"
-                              ? available++
-                              : dev["status"] == "CHARGING"
-                                  ? charging++
-                                  : dev["status"] == "IN_PROGRESS"
-                                      ? inProgress++
-                                      : unavailable++;
-                        }
-                        List<ChartData> devicesChartData = [];
-                        devicesChartData.add(ChartData('Devices',
-                            snapshot.data.length, Colors.orange, "90%"));
-                        devicesChartData.add(ChartData('Available',
-                            available.toDouble(), kSuccess, "90%"));
-                        devicesChartData.add(ChartData('Unavailable',
-                            unavailable.toDouble(), kRed, "90%"));
-                        devicesChartData.add(ChartData('In-progress',
-                            inProgress.toDouble(), kInfo, "90%"));
-                        devicesChartData.add(ChartData('Charging',
-                            charging.toDouble(), Colors.green.shade800, "90%"));
-                        return Column(
-                          children: [
-                            PieChartWidget(devicesChartData),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 20.0),
-                              child: screenSize.width >= 500
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        hintText("Available", kSuccess),
-                                        hintText("Unavailable", kRed),
-                                        hintText(
-                                            "Charging", Colors.green.shade800),
-                                        hintText("In-progress", kInfo),
-                                      ],
-                                    )
-                                  : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            hintText("Available", kSuccess),
-                                            hintText("Unavailable", kRed),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            hintText("Charging",
-                                                Colors.green.shade800),
-                                            hintText("In-progress", kInfo),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                            ),
-                          ],
-                        );
-                      } else {
-                        return EfiHttpErrorMessageWidget(snapshot.data);
-                      }
-                    } else {
-                      return const EfiHttpErrorMessageWidget([]);
-                    }
-                  } else {
-                    return const Center(child: CupertinoActivityIndicator());
-                  }
-                },
-              ),
-            ),
+            // Container(
+            //   decoration: BoxDecoration(
+            //       color: Colors.white, borderRadius: BorderRadius.circular(4)),
+            //   padding: const EdgeInsets.only(top: 30),
+            //   child: StreamBuilder(
+            //     stream: streamAllDevicesInfo(),
+            //     builder: (BuildContext context, AsyncSnapshot snapshot) {
+            //       if (snapshot.connectionState == ConnectionState.done) {
+            //         if (snapshot.hasData) {
+            //           if (snapshot.data.runtimeType != String &&
+            //               snapshot.data!.length != 0) {
+            //             double available = 0;
+            //             double unavailable = 0;
+            //             double inProgress = 0;
+            //             double charging = 0;
+            //             for (var dev in snapshot.data) {
+            //               dev["status"] == "AVAILABLE"
+            //                   ? available++
+            //                   : dev["status"] == "CHARGING"
+            //                       ? charging++
+            //                       : dev["status"] == "IN_PROGRESS"
+            //                           ? inProgress++
+            //                           : unavailable++;
+            //             }
+            //             List<ChartData> devicesChartData = [];
+            //             devicesChartData.add(ChartData('Devices',
+            //                 snapshot.data.length, Colors.orange, "90%"));
+            //             devicesChartData.add(ChartData('Available',
+            //                 available.toDouble(), kSuccess, "90%"));
+            //             devicesChartData.add(ChartData('Unavailable',
+            //                 unavailable.toDouble(), kRed, "90%"));
+            //             devicesChartData.add(ChartData('In-progress',
+            //                 inProgress.toDouble(), kInfo, "90%"));
+            //             devicesChartData.add(ChartData('Charging',
+            //                 charging.toDouble(), Colors.green.shade800, "90%"));
+            //             return Column(
+            //               children: [
+            //                 PieChartWidget(devicesChartData),
+            //                 Padding(
+            //                   padding:
+            //                       const EdgeInsets.symmetric(vertical: 20.0),
+            //                   child: screenSize.width >= 500
+            //                       ? Row(
+            //                           mainAxisAlignment:
+            //                               MainAxisAlignment.center,
+            //                           children: [
+            //                             hintText("Available", kSuccess),
+            //                             hintText("Unavailable", kRed),
+            //                             hintText(
+            //                                 "Charging", Colors.green.shade800),
+            //                             hintText("In-progress", kInfo),
+            //                           ],
+            //                         )
+            //                       : Row(
+            //                           mainAxisAlignment:
+            //                               MainAxisAlignment.center,
+            //                           children: [
+            //                             Column(
+            //                               crossAxisAlignment:
+            //                                   CrossAxisAlignment.start,
+            //                               children: [
+            //                                 hintText("Available", kSuccess),
+            //                                 hintText("Unavailable", kRed),
+            //                               ],
+            //                             ),
+            //                             Column(
+            //                               crossAxisAlignment:
+            //                                   CrossAxisAlignment.start,
+            //                               children: [
+            //                                 hintText("Charging",
+            //                                     Colors.green.shade800),
+            //                                 hintText("In-progress", kInfo),
+            //                               ],
+            //                             ),
+            //                           ],
+            //                         ),
+            //                 ),
+            //               ],
+            //             );
+            //           } else {
+            //             return EfiHttpErrorMessageWidget(snapshot.data);
+            //           }
+            //         } else {
+            //           return const EfiHttpErrorMessageWidget([]);
+            //         }
+            //       } else {
+            //         return const Center(child: CupertinoActivityIndicator());
+            //       }
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

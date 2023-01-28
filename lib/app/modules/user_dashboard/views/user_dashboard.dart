@@ -2,12 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartsocket/app/modules/user_dashboard/widgets/user_dashboard_drawer.dart';
-import 'package:smartsocket/app/modules/user_dashboard/widgets/user_profile_info.dart';
-import 'package:smartsocket/app/modules/dashboard/widgets/topbar.dart';
-import 'package:smartsocket/app/widgets/table_cell.dart';
-import 'package:smartsocket/constants/constants.dart';
 import 'package:smartsocket/utils/responsive.dart';
-import 'package:smartsocket/utils/scroll_behaviour.dart';
+
 import '../../../../constants/color_constants.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/user_dashboard_controller.dart';
@@ -99,18 +95,14 @@ class UserDashboardScreen extends GetView<UserDashboardController> {
                     ),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: screenSize.height - 70,
-                              child: GetRouterOutlet(
-                                initialRoute: Routes.userProfile,
-                                anchorRoute: Routes.userDashboard,
-                                //delegate: Get.nestedKey(Routes.HOME),
-                                // key: Get.nestedKey(Routes.HOME),
-                              ),
-                            ),
-                          ],
+                        child: SizedBox(
+                          height: screenSize.height - 70,
+                          child: GetRouterOutlet(
+                            initialRoute: Routes.userProfile,
+                            anchorRoute: Routes.userDashboard,
+                            //delegate: Get.nestedKey(Routes.HOME),
+                            // key: Get.nestedKey(Routes.HOME),
+                          ),
                         ),
                       ),
                     ),

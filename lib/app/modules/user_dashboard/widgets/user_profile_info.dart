@@ -71,17 +71,14 @@ class UserProfileInfo extends StatelessWidget {
         ),
       )
     ];
-    return Padding(
-      padding: const EdgeInsets.only(top: 30.0, left: 30),
-      child: SizedBox(
-        width: ResponsiveWidget.isLargeScreen(context)
-            ? screenSize.width - 304
-            : screenSize.width,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: widgetList,
-        ),
+    return SizedBox(
+      width: ResponsiveWidget.isLargeScreen(context)
+          ? screenSize.width - 304
+          : screenSize.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: widgetList,
       ),
     );
   }

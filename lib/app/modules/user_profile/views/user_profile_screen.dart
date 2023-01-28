@@ -16,8 +16,7 @@ class UserProfileScreen extends GetView<UserProfileController> {
     var screenSize = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: ResponsiveWidget.isLargeScreen(context) ? 30.0 : 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
         child: Obx(
           () => controller.fetchUserInfoState.value ==
                   MessageProcessingState.completed
@@ -32,19 +31,20 @@ class UserProfileScreen extends GetView<UserProfileController> {
                       children: [
                         SizedBox(
                           width: ResponsiveWidget.isLargeScreen(context)
-                              ? screenSize.width - 380
-                              : screenSize.width - 30,
+                              ? (screenSize.width - 304) < 1000
+                                  ? screenSize.width - 369
+                                  : screenSize.width - 384
+                              : screenSize.width - 60,
                           child: Wrap(
                             direction: Axis.horizontal,
-                            spacing: 0.0,
+                            spacing: 30.0,
+                            runSpacing: 20.0,
                             children: [
                               UserWalletBalanceWidget(controller),
                               SessionChartWidget(
-                                  controller.refreshSessionsChart, {
-                                "type": "INDIVIDUAL",
-                                "userName": controller
-                                    .userInfoResponse.value["userName"]
-                              }),
+                                  controller.fetchSessionInfoState,
+                                  controller.sessionInfoResponse,
+                                  controller.fetchUserSessionInfo)
                             ],
                           ),
                         ),

@@ -7,7 +7,7 @@ class Dot extends StatelessWidget {
   const Dot({
     Key? key,
     this.color,
-    this.size = 16,
+    this.size = 14,
   }) : super(key: key);
 
   @override

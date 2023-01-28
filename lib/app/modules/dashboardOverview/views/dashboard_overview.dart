@@ -14,129 +14,83 @@ class DashboardOverview extends GetView<DashboardOverviewController> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    double width = ResponsiveWidget.isLargeScreen(context)
+        ? (screenSize.width - 334)
+        : screenSize.width - 30;
     return SingleChildScrollView(
-      child: (ResponsiveWidget.isLargeScreen(context) &&
-                  screenSize.width - 304 < 1000) ||
-              screenSize.width < 1000
-          ? Column(
+      child: Row(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: 15),
+            width: width,
+            child: Wrap(
+              direction: Axis.vertical,
+              spacing: 15,
               children: [
-                headerScrollWidget(context, screenSize),
-                SessionChartWidget(
-                    controller.refreshSessionsChart, controller.args),
-                DevicesChartWidget(
-                    controller.refreshDevicesChart, controller.args),
-                const Padding(
-                  padding: EdgeInsets.only(right: 30.0),
-                  child: LineChartWidget(),
-                ),
-                const SizedBox(height: 20),
-              ],
-            )
-          : Column(
-              children: [
-                headerScrollWidget(context, screenSize),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        LineChartWidget(),
-                      ],
-                    ),
-                    Column(
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, left: 30),
+                  child: SizedBox(
+                    width: width - 30,
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 15,
+                      runSpacing: 15,
                       children: [
-                        SessionChartWidget(
-                            controller.refreshSessionsChart, controller.args),
-                        DevicesChartWidget(
-                            controller.refreshDevicesChart, controller.args),
-                        const SizedBox(height: 30)
+                        header(context, "ACTIVE USERS", "152",
+                            MdiIcons.accountGroup),
+                        header(context, "OPERABLE DEVICES", "546",
+                            MdiIcons.evPlugType1),
+                        header(context, "CHARGING STATIONS", "26",
+                            MdiIcons.evStation),
+                        header(
+                            context, "OPERATING CITIES", "14", MdiIcons.city),
                       ],
                     ),
-                  ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: SizedBox(
+                    width: width - 30,
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 25,
+                      runSpacing: 15,
+                      children: [
+                        const LineChartWidget(),
+                        SessionChartWidget(
+                            controller.fetchSessionInfoState,
+                            controller.sessionInfoResponse,
+                            controller.fetchSessionInfo)
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget headerScrollWidget(context, Size screenSize) {
-    final width = ResponsiveWidget.isLargeScreen(context)
-        ? (screenSize.width - 304)
-        : screenSize.width;
-    return screenSize.width < 1000 && screenSize.width > 600 ||
-            (ResponsiveWidget.isLargeScreen(context) &&
-                (screenSize.width - 304) < 950)
-        ? Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 50.0),
-                child: Row(
-                  children: [
-                    header(30, "ACTIVE USERS", "152", MdiIcons.accountGroup,
-                        width * 0.5),
-                    header(0, "OPERABLE DEVICES", "546", MdiIcons.evPlugType1,
-                        width * 0.5),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: Row(
-                  children: [
-                    header(30, "FUNCTIONAL STATIONS", "26", MdiIcons.evStation,
-                        width * 0.5),
-                    header(0, "OPERATING CITIES", "14", MdiIcons.city,
-                        width * 0.5),
-                  ],
-                ),
-              ),
-            ],
-          )
-        : screenSize.width < 600
-            ? Padding(
-                padding: const EdgeInsets.only(top: 50.0),
-                child: Column(
-                  children: [
-                    header(30, "ACTIVE USERS", "152", MdiIcons.accountGroup,
-                        width),
-                    const SizedBox(height: 30),
-                    header(30, "OPERABLE DEVICES", "546", MdiIcons.evPlugType1,
-                        width),
-                    const SizedBox(height: 30),
-                    header(30, "FUNCTIONAL STATIONS", "26", MdiIcons.evStation,
-                        width),
-                    const SizedBox(height: 30),
-                    header(30, "OPERATING CITIES", "14", MdiIcons.city, width),
-                  ],
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.only(top: 50.0),
-                child: Row(
-                  children: [
-                    header(30, "ACTIVE USERS", "152", MdiIcons.accountGroup,
-                        width * 0.25),
-                    header(0, "OPERABLE DEVICES", "546", MdiIcons.evPlugType1,
-                        width * 0.25),
-                    header(0, "FUNCTIONAL STATIONS", "26", MdiIcons.evStation,
-                        width * 0.25),
-                    header(0, "OPERATING CITIES", "14", MdiIcons.city,
-                        width * 0.25),
-                  ],
-                ),
-              );
-  }
-
-  Widget header(double leftMargin, String title, String value, IconData icon,
-      double width) {
+  Widget header(
+      BuildContext context, String title, String value, IconData icon) {
+    var screenSize = MediaQuery.of(context).size;
+    double width = ResponsiveWidget.isLargeScreen(context)
+        ? (screenSize.width - 304) < 900
+            ? (screenSize.width - 380) * 0.5
+            : (screenSize.width - 410) * 0.25
+        : ResponsiveWidget.isMediumScreen(context) ||
+                (ResponsiveWidget.isSmallScreen(context) &&
+                    screenSize.width > 500)
+            ? (screenSize.width - 75) * 0.5
+            : screenSize.width - 30;
     return SizedBox(
       width: width,
       child: Card(
         color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        margin: EdgeInsets.fromLTRB(leftMargin, 0, 30, 0),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
           child: Row(
@@ -159,7 +113,7 @@ class DashboardOverview extends GetView<DashboardOverviewController> {
                           fontSize: 20)),
                 ],
               ),
-              Icon(icon, color: Colors.grey.shade300, size: 40),
+              Icon(icon, color: Colors.grey.shade300, size: 35),
             ],
           ),
         ),

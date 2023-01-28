@@ -39,3 +39,5 @@ const kBoxShadowColor = Colors.black12;
 const kTableBorderColor = Colors.black26;
 
 const kPrimaryTextColorShade = Colors.black45;
+
+List colorIndications = [const Color(0xffFFA500), kSuccess, kInfo, kDanger, kWarning];

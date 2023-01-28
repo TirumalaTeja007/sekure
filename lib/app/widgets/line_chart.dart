@@ -21,18 +21,19 @@ class LineChartWidgetState extends State<LineChartWidget> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    double width = ResponsiveWidget.isLargeScreen(context)
+        ? (screenSize.width - 304) < 850
+            ? screenSize.width - 379
+            : (screenSize.width - 394) * 0.6
+        : screenSize.width > 850
+            ? (screenSize.width - 60) * 0.5
+            : screenSize.width - 30;
     return SizedBox(
-      width: (ResponsiveWidget.isLargeScreen(context) &&
-                  screenSize.width - 304 < 1000) ||
-              screenSize.width < 1000
-          ? screenSize.width
-          : ResponsiveWidget.isMediumScreen(context)
-              ? screenSize.width - 504
-              : screenSize.width - 804,
+      width: width,
       height: 500,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        margin: const EdgeInsets.only(top: 30, left: 30),
+        margin: const EdgeInsets.only(top: 10, left: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -85,9 +86,7 @@ class LineChartWidgetState extends State<LineChartWidget> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(right: 16, left: 6),
-                child: LineChart(
-                  mainData(context),
-                ),
+                child: LineChart(mainData(context)),
               ),
             ),
             const SizedBox(height: 10),

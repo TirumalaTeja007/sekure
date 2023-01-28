@@ -20,15 +20,19 @@ class UserWalletBalanceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    double width = ResponsiveWidget.isLargeScreen(context)
+        ? (screenSize.width - 304) < 850
+            ? screenSize.width - 369
+            : (screenSize.width - 384) * 0.4
+        : screenSize.width > 850
+            ? (screenSize.width - 60) * 0.465
+            : screenSize.width - 60;
+    print(width);
     return SizedBox(
-      width: (ResponsiveWidget.isLargeScreen(context) &&
-                  screenSize.width - 304 < 1000) ||
-              screenSize.width < 1000
-          ? screenSize.width
-          : 500,
+      width: width,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        margin: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Column(
           children: [
             ListTile(
@@ -40,7 +44,7 @@ class UserWalletBalanceWidget extends StatelessWidget {
                     fontFamily: 'MontserratBold',
                     color: kPrimaryTextColor,
                     fontSize:
-                        ResponsiveWidget.isLargeScreen(context) ? 20 : 16),
+                        ResponsiveWidget.isSmallScreen(context) ? 18 : 20),
               ),
               trailing: IconButton(
                   icon:

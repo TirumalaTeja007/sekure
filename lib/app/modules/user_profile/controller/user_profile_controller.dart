@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartsocket/models/chart_data_model.dart';
 import 'package:smartsocket/utils/local_storage.dart';
 
+import '../../../../constants/color_constants.dart';
 import '../../../../constants/network_constants.dart';
 import '../../../../models/user_model.dart';
 import '../../../../services/auth_service.dart';
@@ -43,7 +46,8 @@ class UserProfileController extends GetxController {
 
   RxMap userInfoResponse = {"errorInfo": "N/A"}.obs;
 
-  RxMap sessionInfoResponse = {"errorInfo": "N/A"}.obs;
+  RxMap<dynamic, dynamic> sessionInfoResponse = {"errorInfo": "N/A"}.obs;
+
 
   @override
   void onInit() async {
@@ -140,30 +144,97 @@ class UserProfileController extends GetxController {
   fetchUserSessionInfo() async {
     fetchSessionInfoState.value = MessageProcessingState.processing;
 
+    late UserData userData;
+
+    if (idRepo.isStackedArgsPresent('userInfoArgs')) {
+      String? jsonString = await idRepo.getStackedArgs('userInfoArgs');
+      userData = UserData.fromMap(jsonDecode(jsonString!));
+    } else {
+      String? jsonString = await idRepo.getUserData();
+      userData = UserData.fromMap(jsonDecode(jsonString!));
+    }
+
     dynamic authResponse = await AuthService.to
         .authenticate({"userName": "SS-0001", "password": "123456"});
 
     if (AuthService.to.authToken.isNotEmpty && authResponse.isEmpty) {
       await GetConnect()
-          .get("$walletBalanceUrl/SS-8598", headers: basicHeader)
+          .get("$tranxByUserNameUrl/SS-8598",
+              headers: basicHeader)
           .then((response) async {
         if (!response.hasError) {
-          Map data = response.body;
+          List data = response.body["data"];
 
-          sessionInfoResponse.value["totalWalletAmount"] =
-              data["totalWalletAmount"].toStringAsFixed(2);
+          int ongoingCount = 0,
+              completedCount = 0,
+              pendingCount = 0,
+              miscellaneousCount = 0;
 
-          sessionInfoResponse.value["updatedTime"] = data["updatedTime"];
+          for (var x in data) {
+            if (x["startDateTime"].runtimeType != Null) {
+              int startTime = DateTime.parse(x["startDateTime"])
+                  .toLocal()
+                  .millisecondsSinceEpoch;
+              int epochTime = DateTime.now().millisecondsSinceEpoch;
+              if (x["sessionStatusEnum"] == "START" &&
+                  startTime - epochTime > 86400000) {
+                ongoingCount++;
+              } else if (x["sessionStatusEnum"] == "START" &&
+                  startTime - epochTime <= 86400000) {
+                pendingCount++;
+              } else if (x["sessionStatusEnum"] == "STOP" &&
+                  x["stopChargeReason"] == "Charging completed") {
+                completedCount++;
+              } else {
+                miscellaneousCount++;
+              }
+            }
+          }
+
+          sessionInfoResponse["data"] = jsonEncode({
+            "sessionInfo": [
+              {
+                "name": "Total",
+                "value": data.length.toDouble(),
+                "color": 0,
+                "radius": "90%"
+              },
+              {
+                "name": "Ongoing",
+                "value": ongoingCount.toDouble(),
+                "color": 1,
+                "radius": "90%"
+              },
+              {
+                "name": "Completed",
+                "value": completedCount.toDouble(),
+                "color": 2,
+                "radius": "90%"
+              },
+              {
+                "name": "Pending",
+                "value": pendingCount.toDouble(),
+                "color": 3,
+                "radius": "90%"
+              },
+              {
+                "name": "Miscellaneous",
+                "value": miscellaneousCount.toDouble(),
+                "color": 4,
+                "radius": "90%"
+              },
+            ]
+          });
 
           fetchSessionInfoState.value = MessageProcessingState.completed;
         } else {
-          sessionInfoResponse["errorInfo"] =
+          sessionInfoResponse.value["errorInfo"] =
               response.body["message"] ?? "No Data";
           fetchSessionInfoState.value = MessageProcessingState.failed;
         }
       });
     } else {
-      sessionInfoResponse["errorInfo"] =
+      sessionInfoResponse.value["errorInfo"] =
           authResponse.body["message"] ?? "No Data";
       fetchSessionInfoState.value = MessageProcessingState.failed;
     }
