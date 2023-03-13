@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartsocket/constants/color_constants.dart';
+import 'package:sekure/constants/color_constants.dart';
 
 class NoDataWidget extends StatelessWidget {
   const NoDataWidget(this.data, {Key? key}) : super(key: key);

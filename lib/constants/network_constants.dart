@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:smartsocket/services/auth_service.dart';
+import 'package:sekure/services/auth_service.dart';
 
 const String secret = "5c55QGEdvE6HXoM4MFL72G5S";
 
@@ -14,7 +14,7 @@ const String ordersRootUrl = "https://api.razorpay.com/v1/orders";
 
 const String paymentRootUrl = "https://api.razorpay.com/v1/payments";
 
-const String rootUrl = "http://3.108.130.244/smartsocketapis";
+const String rootUrl = "http://3.108.130.244/sekureapis";
 
 const String userControllerUrl = "$rootUrl/api";
 

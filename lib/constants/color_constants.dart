@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-const kGreen = Colors.green;
+Color kGreen = const Color(0xff19673a);
+
+const Color kLightGrey = Color(0xfff4f4f7);
 
 const kGrey = Color(0xFFf4f4f7);
 
@@ -39,5 +41,3 @@ const kBoxShadowColor = Colors.black12;
 const kTableBorderColor = Colors.black26;
 
 const kPrimaryTextColorShade = Colors.black45;
-
-List colorIndications = [const Color(0xffFFA500), kSuccess, kInfo, kDanger, kWarning];

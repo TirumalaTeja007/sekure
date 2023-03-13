@@ -1,6 +1,11 @@
-import 'package:smartsocket/utils/responsive.dart';
+import 'package:sekure/utils/responsive.dart';
 import 'package:flutter/cupertino.dart';
-
+const kUserRepoToken = 'sekure_user_repo';
+const kUserDataId = 'sekure_user_data';
+const kPickUpMarkerId = 'Pickup';
+const kAppLogo = "assets/images/logo/app_logo.png";
+const kSedanCarImage = "assets/images/sedan.png";
+const kSedanCarLineImage = "assets/images/sedan_car_line_image.png";
 const double costPerKwhINR = 6;
 
 const double kwhConsumedPerHour = 3;
@@ -36,6 +41,17 @@ kCellWidth(BuildContext context) {
 kTextFieldWidth(BuildContext context) {
   final width = MediaQuery.of(context).size.width;
   return ResponsiveWidget.isSmallScreen(context) ? width * 0.45 : 250;
+}
+
+kLineChartWidth(BuildContext context) {
+  final screenSize = MediaQuery.of(context).size;
+  return ResponsiveWidget.isLargeScreen(context)
+      ? (screenSize.width - 304) < 1000
+          ? screenSize.width - 369
+          : (screenSize.width - 384) * 0.65
+      : screenSize.width > 900
+          ? (screenSize.width - 90) * 0.5
+          : screenSize.width - 50;
 }
 
 final devicesSortByFiltersList = [

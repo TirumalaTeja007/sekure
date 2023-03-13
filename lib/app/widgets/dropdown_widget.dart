@@ -2,10 +2,10 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/constants/color_constants.dart';
-import 'package:smartsocket/constants/constants.dart';
-import 'package:smartsocket/services/app_state_service.dart';
-import 'package:smartsocket/utils/responsive.dart';
+import 'package:sekure/constants/color_constants.dart';
+import 'package:sekure/constants/constants.dart';
+import 'package:sekure/services/app_state_service.dart';
+import 'package:sekure/utils/responsive.dart';
 
 class DropdownWidget extends StatelessWidget {
   const DropdownWidget(

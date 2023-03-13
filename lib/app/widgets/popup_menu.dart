@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/constants/constants.dart';
-import 'package:smartsocket/utils/debouncer.dart';
-import 'package:smartsocket/utils/responsive.dart';
-import 'package:smartsocket/constants/color_constants.dart';
+import 'package:sekure/constants/constants.dart';
+import 'package:sekure/utils/debouncer.dart';
+import 'package:sekure/utils/responsive.dart';
+import 'package:sekure/constants/color_constants.dart';
 
 class PopupMenuWidget extends StatelessWidget {
   const PopupMenuWidget(this.itemsList, this.selectedItem, this.title,

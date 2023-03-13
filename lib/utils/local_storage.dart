@@ -1,37 +1,19 @@
-import 'dart:html';
+import 'package:get_storage/get_storage.dart';
+import 'package:sekure/constants/constants.dart';
 
-class IdRepository {
-  final Storage _localStorage = window.localStorage;
+class LocalStorage {
+  GetStorage userStorage = GetStorage(kUserRepoToken);
 
-  Future saveUserData(String id) async {
-    _localStorage['userData'] = id;
+  addUserData(Map data) async => await userStorage.write(kUserDataId, data);
+
+  getUserData() async => await userStorage.read(kUserDataId);
+
+  userDataPresent() async => userStorage.hasData(kUserDataId);
+
+  isUserRegistered() async {
+    Map userData = await userDataPresent() ? userStorage.read(kUserDataId) : {};
+    return userData.isNotEmpty ? userData.containsKey('auth_token') : false;
   }
 
-  Future saveArguments(String id, String data) async {
-    _localStorage[id] = data;
-  }
-
-  Future<String?> getUserData() async => _localStorage['userData'];
-
-  Future<String?> getStackedArgs(String id) async => _localStorage[id];
-
-  bool isUserDataPresent() => _localStorage.containsKey('userData');
-
-  bool isStackedArgsPresent(String id) => _localStorage.containsKey(id);
-
-  Future invalidateUserData() async {
-    _localStorage.remove('userData');
-  }
-
-  Future invalidateStackedArgs(String id) async {
-    _localStorage.remove(id);
-  }
-
-  Future invalidateAllData() async {
-    _localStorage.remove("userInfoArgs");
-    _localStorage.remove("sessionInfoArgs");
-    _localStorage.remove("paymentInfoArgs");
-    _localStorage.remove("ticketInfoArgs");
-    _localStorage.remove("deviceInfoArgs");
-  }
+  deleteUserData() async => await userStorage.erase();
 }

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:smartsocket/constants/network_constants.dart';
-import 'package:smartsocket/services/auth_service.dart';
+import 'package:sekure/constants/network_constants.dart';
+import 'package:sekure/services/auth_service.dart';
 
 class AppStateService extends GetxService {
   static AppStateService get to => Get.find();

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:smartsocket/utils/local_storage.dart';
+import 'package:sekure/utils/local_storage.dart';
 
 import '../../services/auth_service.dart';
 import '../routes/app_pages.dart';

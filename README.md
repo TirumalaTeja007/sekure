@@ -1,4 +1,4 @@
-# smartsocket
+# sekure
 
 A new Flutter project.
 

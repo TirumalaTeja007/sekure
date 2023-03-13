@@ -1,13 +1,10 @@
-import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/app/modules/home/views/widgets/top_bar_contents.dart';
-import 'package:smartsocket/app/routes/app_pages.dart';
-import 'package:smartsocket/constants/color_constants.dart';
-import 'package:smartsocket/services/app_state_service.dart';
-import '../../../../utils/responsive.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:sekure/app/routes/app_pages.dart';
+import 'package:sekure/services/app_state_service.dart';
+
 import '../../../../utils/scroll_behaviour.dart';
-import '../../../widgets/bottom_bar.dart';
 import '../controller/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -24,35 +21,65 @@ class HomeView extends GetView<HomeController> {
         var currentIndex = 0;
         AppStateService.to.setDelegate(delegate);
         controller.changeScrollPosition();
-        if (currentLocation.startsWith(Routes.privacyPolicy) == true) {
-          currentIndex = 6;
-        }
-        if (currentLocation.startsWith(Routes.refundPolicy) == true) {
-          currentIndex = 7;
-        }
-        if (currentLocation.startsWith(Routes.termsAndConditions) == true) {
-          currentIndex = 8;
-        }
-        if (currentLocation.startsWith(Routes.shippingPolicy) == true) {
-          currentIndex = 9;
-        }
-        if (currentLocation.startsWith(Routes.services) == true) {
+        if (currentLocation.startsWith(Routes.chat) == true) {
           currentIndex = 1;
         }
-        if (currentLocation.startsWith(Routes.aboutUs) == true) {
+        if (currentLocation.startsWith(Routes.myBookings) == true) {
           currentIndex = 2;
         }
-        if (currentLocation.startsWith(Routes.contactUs) == true) {
+        if (currentLocation.startsWith(Routes.settings) == true) {
           currentIndex = 3;
         }
         return Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: PreferredSize(
-              preferredSize: Size(screenSize.width, 350),
-              child: TopBarContents(
-                  index: currentIndex,
-                  delegate: delegate,
-                  homeController: controller)),
+          bottomNavigationBar: SalomonBottomBar(
+            currentIndex: currentIndex,
+            onTap: (i) {
+              switch(i) {
+                case 0:
+                  delegate.toNamed(Routes.services);
+                  break;
+                case 1:
+                  delegate.toNamed(Routes.chat);
+                  break;
+                case 2:
+                  delegate.toNamed(Routes.myBookings);
+                  break;
+                case 3:
+                  delegate.toNamed(Routes.settings);
+                  break;
+              }
+            },
+            items: [
+              /// Home
+              SalomonBottomBarItem(
+                icon: Icon(Icons.home),
+                title: Text("Home"),
+                selectedColor: Colors.purple,
+              ),
+
+              /// Likes
+              SalomonBottomBarItem(
+                icon: Icon(Icons.favorite_border),
+                title: Text("Likes"),
+                selectedColor: Colors.pink,
+              ),
+
+              /// Search
+              SalomonBottomBarItem(
+                icon: Icon(Icons.search),
+                title: Text("Search"),
+                selectedColor: Colors.orange,
+              ),
+
+              /// Profile
+              SalomonBottomBarItem(
+                icon: Icon(Icons.person),
+                title: Text("Profile"),
+                selectedColor: Colors.teal,
+              ),
+            ],
+          ),
           body: ScrollConfiguration(
             behavior: ScrollConfiguration.of(context).copyWith(
                 scrollbars: false,
@@ -67,7 +94,7 @@ class HomeView extends GetView<HomeController> {
                 SizedBox(
                   height: screenSize.height,
                   child: GetRouterOutlet(
-                    initialRoute: Routes.index,
+                    initialRoute: Routes.services,
                     anchorRoute: Routes.home,
                     //delegate: Get.nestedKey(Routes.HOME),
                     // key: Get.nestedKey(Routes.HOME),

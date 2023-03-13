@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:async/async.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/services/auth_service.dart';
-import 'package:smartsocket/utils/local_storage.dart';
+import 'package:sekure/services/auth_service.dart';
+import 'package:sekure/utils/local_storage.dart';
 
 class SplashService extends GetxService {
   final welcomeStr = ['GetX', 'Rules!'];
@@ -21,18 +21,6 @@ class SplashService extends GetxService {
   }
 
   Future<void> _initFunction() async {
-    bool isFound = IdRepository().isUserDataPresent();
-    if (!isFound) {
-      AuthService.to.logout();
-    } else {
-      String? jsonString = await IdRepository().getUserData();
-      Map userData = jsonDecode(jsonString!);
-      if (!userData["isLoggedIn"]) {
-        AuthService.to.logout();
-      } else if (userData["isLoggedIn"]) {
-        AuthService.to.login();
-      }
-    }
-    await Future.delayed(const Duration(seconds: 2));
+   await Future.delayed(const Duration(seconds: 2));
   }
 }

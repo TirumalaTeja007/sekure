@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:smartsocket/services/app_state_service.dart';
+import 'package:sekure/services/app_state_service.dart';
 
 class RootController extends GetxController {
   //TODO: Implement RootController

@@ -1,18 +1,24 @@
 
-import 'package:smartsocket/constants/color_constants.dart';
-import 'package:smartsocket/services/app_state_service.dart';
-import 'package:smartsocket/services/auth_service.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:sekure/app/modules/splash/views/splash_view.dart';
+import 'package:sekure/constants/color_constants.dart';
+import 'package:sekure/constants/constants.dart';
+import 'package:sekure/services/app_state_service.dart';
+import 'package:sekure/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartsocket/services/splash_service.dart';
-import 'app/modules/splash/home_splash_view.dart';
+import 'package:sekure/services/splash_service.dart';
 import 'app/routes/app_pages.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await GetStorage(kUserRepoToken).initStorage;
+
   runApp(
     GetMaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Smart Socket',
+      title: 'SeKure',
       supportedLocales: const [Locale('en', 'US')],
       binds: [
         Bind.put(SplashService()),
@@ -28,7 +34,7 @@ void main() {
             if (snapshot.connectionState == ConnectionState.done) {
               return child ?? const SizedBox.shrink();
             }
-            return const HomeSplashView();
+            return const SplashView();
           },
         );
       },
@@ -39,7 +45,7 @@ void main() {
             elevation: 0,
             color: Colors.transparent,
             iconTheme: IconThemeData(color: kPrimaryTextColor)),
-        drawerTheme: const DrawerThemeData(backgroundColor: kPrimaryTextColor),
+        drawerTheme: const DrawerThemeData(backgroundColor: kBgShade),
         navigationRailTheme: const NavigationRailThemeData(
           backgroundColor: kPrimaryTextColor,
           unselectedIconTheme: IconThemeData(color: Colors.grey),

@@ -55,8 +55,7 @@ callAlertDialog(String title, String message, String middleText) {
                 Text("Close",
                     style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: kGreen))
+                        fontWeight: FontWeight.bold)),
               ],
             ),
           )

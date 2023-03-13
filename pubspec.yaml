@@ -1,4 +1,4 @@
-name: smartsocket
+name: sekure
 description: A new Flutter project.
 
 publish_to: 'none'
@@ -28,6 +28,11 @@ dependencies:
   expansion_tile_card:
   dropdown_button2:
   loading_indicator: ^3.1.0
+  change_app_package_name: ^1.1.0
+  get_storage:
+  salomon_bottom_bar: ^3.3.1
+  intl_phone_field:
+  line_icons:
 
   flutter:
     sdk: flutter
@@ -41,30 +46,21 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/logo/
-    - assets/svg/
     - assets/images/
-    - assets/clientele_logos/
+    - assets/images/logo/
+    - assets/images/lineIcons/
+    - assets/images/detailedIcons/
 
   fonts:
     - family: Questrial
       fonts:
         - asset: assets/fonts/Questrial-Regular.ttf
-    - family: MontserratExtraBold
-      fonts:
-        - asset: assets/fonts/Montserrat-ExtraBold.ttf
     - family: MontserratBold
       fonts:
         - asset: assets/fonts/Montserrat-Bold.ttf
-    - family: MontserratLight
-      fonts:
-        - asset: assets/fonts/Montserrat-Light.ttf
     - family: MontserratMedium
       fonts:
         - asset: assets/fonts/Montserrat-Medium.ttf
-    - family: MontserratSemiBold
-      fonts:
-        - asset: assets/fonts/Montserrat-SemiBold.ttf
     - family: MontserratRegular
       fonts:
         - asset: assets/fonts/Montserrat-Regular.ttf

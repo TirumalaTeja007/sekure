@@ -4,7 +4,7 @@ import 'dart:ui' show lerpDouble;
 
 enum ButtonState { Busy, Idle }
 
-class ArgonButtonWidget extends StatefulWidget {
+class ArgonButton extends StatefulWidget {
   final double height;
   final double width;
   final double minWidth;
@@ -36,7 +36,7 @@ class ArgonButtonWidget extends StatefulWidget {
   final Color? disabledColor;
   final Color? disabledTextColor;
 
-  ArgonButtonWidget({required this.height,
+  ArgonButton({required this.height,
     required this.width,
     this.minWidth: 0,
     this.loader,
@@ -73,10 +73,10 @@ class ArgonButtonWidget extends StatefulWidget {
         assert(clipBehavior != null);
 
   @override
-  _ArgonButtonWidgetState createState() => _ArgonButtonWidgetState();
+  _ArgonButtonState createState() => _ArgonButtonState();
 }
 
-class _ArgonButtonWidgetState extends State<ArgonButtonWidget>
+class _ArgonButtonState extends State<ArgonButton>
     with TickerProviderStateMixin {
   double? loaderWidth;
 

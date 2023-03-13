@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:smartsocket/constants/network_constants.dart';
-import 'package:smartsocket/services/app_state_service.dart';
+import 'package:sekure/constants/network_constants.dart';
+import 'package:sekure/services/app_state_service.dart';
 
 class AuthService extends GetxService {
   static AuthService get to => Get.find();
@@ -20,8 +20,6 @@ class AuthService extends GetxService {
   void logout() {
     _isLoggedIn.value = false;
   }
-
-
 
   authenticate(args) async {
     dynamic errorMessage = "";
